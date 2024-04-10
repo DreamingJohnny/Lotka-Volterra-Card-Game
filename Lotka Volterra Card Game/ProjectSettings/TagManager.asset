@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: TableTop
+    uniqueID: 2384081587
+    locked: 0
+  - name: TableMat
+    uniqueID: 3148708179
+    locked: 0
+  - name: OnTable
+    uniqueID: 177309743
+    locked: 0
+  - name: Tokens
+    uniqueID: 3914886155
+    locked: 0
+  - name: CardHand
+    uniqueID: 2613388815
+    locked: 0
+  - name: Overlay
+    uniqueID: 2335101747
+    locked: 0
