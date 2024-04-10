@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aebbec82db3a2574d9475655c07bf8dd, type: 3}
-  m_Name: OutpostCard
+  m_Name: Improvised Gym
   m_EditorClassIdentifier: 
   rarity: 0
   ideology: 0
   daycycle: 0
   cardID: 
-  cardName: Staff Clerk
-  developmentCost: 8
-  resourceCost: 6
-  hourCost: 3
-  upkeepCost: 2
+  cardName: Improvised Gym
+  developmentCost: 4
+  resourceCost: -1
+  hourCost: -1
+  upkeepCost: 1
   illustration: {fileID: 0}
-  cardType: 0
-  cardEffect: 
-  scavengeValue: 5
-  interveneValue: 2
-  developmentValue: 13
+  cardType: 5
+  cardEffect: Occupy Loading Dock. Occupying Unit may not be Deployed. If you do
+    not remove this Unit in the Upkeep phase, it receives +1 to any ATR, permanently.
+  scavengeValue: -1
+  interveneValue: -1
+  developmentValue: -1
