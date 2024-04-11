@@ -21,7 +21,7 @@ public class OutpostCard : MonoBehaviour {
 	[SerializeField] private TextMeshProUGUI developeValue;
 	#endregion
 
-	private SO_OutpostCard sO_OutpostCard;
+	private SO_OutpostCard sO_OutpostCard = null;
 
 	//So, this is the script for showing the card I take it?
 	//Yeah, so everything else I'll want to move to another script, I think.
