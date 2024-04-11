@@ -5,12 +5,24 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour {
 
-	[SerializeField] private OutpostDeck outpostDeck;
-
+	[SerializeField] private CardDeck outpostDeck;
 	[SerializeField] private CardHand playerHand;
+	
+	[SerializeField] private CardDeck surfaceDeck;
+	[SerializeField] private SurfaceZone surfaceZone;
 
 	void Start() {
 		BruteTestPlayerCardHand();
+
+		BruteTestSurfaceZone();
+	}
+
+	private void BruteTestSurfaceZone() {
+		//Pull top card from surface deck, give to surfaceZone,
+		//SurfaceZone then needs to create a card, set the values, and then move it to the correct spot.
+		ScriptableObject scriptableObject = surfaceDeck.GetTopCard();
+
+		surfaceZone.NewSurfaceCard(scriptableObject as SO_SurfaceCard);
 	}
 
 	private void BruteTestPlayerCardHand() {
@@ -19,9 +31,7 @@ public class GameHandler : MonoBehaviour {
 
 			ScriptableObject scriptableObject = outpostDeck.GetTopCard();
 
-			SO_OutpostCard testObject = scriptableObject as SO_OutpostCard;
-
-			playerHand.TakeACard(testObject);
+			playerHand.TakeACard(scriptableObject as SO_OutpostCard);
 		}
 	}
 

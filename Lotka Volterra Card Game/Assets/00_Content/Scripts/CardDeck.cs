@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OutpostDeck : MonoBehaviour {
+public class CardDeck : MonoBehaviour {
 
-	[SerializeField] private List<ScriptableObject> outpostDeck = new List<ScriptableObject>();
+	[SerializeField] private List<ScriptableObject> cards = new List<ScriptableObject>();
 
 	public bool HasCards {
 		get {
-			if (outpostDeck.Count > 0) return true;
+			if (cards.Count > 0) return true;
 			else return false;
 		}
 	}
@@ -23,8 +23,8 @@ public class OutpostDeck : MonoBehaviour {
 			return null;
 		}
 
-		ScriptableObject topCard = outpostDeck[0];
-		outpostDeck.RemoveAt(0);
+		ScriptableObject topCard = cards[0];
+		cards.RemoveAt(0);
 
 		return topCard;
 	}
@@ -38,6 +38,6 @@ public class OutpostDeck : MonoBehaviour {
 			return null;
 		}
 
-		return outpostDeck[0].name;
+		return cards[0].name;
 	}
 }
