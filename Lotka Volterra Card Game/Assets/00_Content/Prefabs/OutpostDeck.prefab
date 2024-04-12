@@ -222,12 +222,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8195919805282111384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd8fc6ab6344f234f8d8ba4b417731fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 90ce2fa2102e47e4a884c4d26fba0172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outpostDeck:
-  - {fileID: 11400000, guid: 4a9de9b2396ff3d47a8ff378f48bd35d, type: 2}
-  - {fileID: 11400000, guid: 22ccada7d440b6946bda3352ec5b4398, type: 2}
-  - {fileID: 11400000, guid: 096de40b7a5b4a0458ae9ed5eda218e0, type: 2}
-  - {fileID: 11400000, guid: 4a9de9b2396ff3d47a8ff378f48bd35d, type: 2}
-  - {fileID: 11400000, guid: 22ccada7d440b6946bda3352ec5b4398, type: 2}
+  cards: []
