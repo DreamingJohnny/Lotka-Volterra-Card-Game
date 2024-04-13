@@ -10,11 +10,43 @@ public class GameHandler : MonoBehaviour {
 	
 	[SerializeField] private CardDeck surfaceDeck;
 	[SerializeField] private SurfaceZone surfaceZone;
+	[SerializeField] private SO_OutpostCard outpostCardData;
+
 
 	void Start() {
-		BruteTestPlayerCardHand();
+		//TestingPOCO(outpostCardData);
+		
+		//BruteTestPlayerCardHand();
 
-		BruteTestSurfaceZone();
+		//BruteTestSurfaceZone();
+	}
+
+	private void TestingPOCO(SO_OutpostCard outpostCardData) {
+		POCO_OutpostCard pOCO_OutpostCard = new(outpostCardData);
+
+		Debug.Log(pOCO_OutpostCard.GetCardName);
+		pOCO_OutpostCard.GetDevelopmentCost(out int temp);
+		Debug.Log(temp);
+
+		pOCO_OutpostCard.DevelopmentCostAddition = temp;
+		pOCO_OutpostCard.GetDevelopmentCost(out temp);
+		Debug.Log(temp);
+
+		pOCO_OutpostCard.DevelopmentCostAddition = -2;
+		pOCO_OutpostCard.GetDevelopmentCost(out temp);
+		Debug.Log(temp);
+
+		pOCO_OutpostCard.DevelopmentCostAddition = 0;
+		pOCO_OutpostCard.GetDevelopmentCost(out temp);
+		Debug.Log(temp);
+
+		pOCO_OutpostCard.DevelopmentCostMultiplier = 0.5f;
+		pOCO_OutpostCard.GetDevelopmentCost(out temp);
+		Debug.Log(temp);
+
+		pOCO_OutpostCard.DevelopmentCostMultiplier = 0f;
+		pOCO_OutpostCard.GetDevelopmentCost(out temp);
+		Debug.Log(temp);
 	}
 
 	private void BruteTestSurfaceZone() {
