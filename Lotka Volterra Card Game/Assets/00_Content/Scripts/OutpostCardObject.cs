@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class OutpostCard : MonoBehaviour {
+public class OutpostCardObject : MonoBehaviour {
 
 	#region"UI_components"
-	[SerializeField] private TextMeshProUGUI developmentCost;
+	[SerializeField] private TextMeshProUGUI developmentCostText;
 	[SerializeField] private TextMeshProUGUI title;
-	[SerializeField] private TextMeshProUGUI resourceCost;
+	[SerializeField] private TextMeshProUGUI resourceCostText;
 	[SerializeField] private TextMeshProUGUI hoursCost;
 	[SerializeField] private TextMeshProUGUI upkeepCost;
 	[SerializeField] private TextMeshProUGUI cardType;
@@ -33,10 +33,6 @@ public class OutpostCard : MonoBehaviour {
 	//Needs to contain the info for its own max and minis?
 
 	//Needs to be able to get a scriptable object and set its own values to that.
-	void Start() {
-
-	}
-
 	public void SetSO(SO_OutpostCard sO) {
 		sO_OutpostCard = sO;
 		SetSOToFields();
@@ -54,9 +50,9 @@ public class OutpostCard : MonoBehaviour {
 			return;
 		}
 
-		developmentCost.text = sO_OutpostCard.DevelopmentCost.ToString();
+		developmentCostText.text = sO_OutpostCard.DevelopmentCost.ToString();
 		title.text = sO_OutpostCard.CardName.ToString();
-		resourceCost.text = sO_OutpostCard.ResourceCost.ToString();
+		resourceCostText.text = sO_OutpostCard.ResourceCost.ToString();
 		hoursCost.text = sO_OutpostCard.HourCost.ToString();
 		upkeepCost.text = sO_OutpostCard.UpkeepCost.ToString();
 
@@ -74,9 +70,5 @@ public class OutpostCard : MonoBehaviour {
 
 		if (sO_OutpostCard.DevelopmentValue < 0) developeValue.text = "-";
 		else developeValue.text = sO_OutpostCard.DevelopmentValue.ToString();
-	}
-
-	void Update() {
-
 	}
 }

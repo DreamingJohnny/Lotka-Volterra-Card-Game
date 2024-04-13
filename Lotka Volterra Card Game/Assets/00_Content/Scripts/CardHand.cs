@@ -13,7 +13,7 @@ public class CardHand : MonoBehaviour {
 	//But also sending them on.
 	//Also needs to know how many cards it has, and it max size, and if they are empty.
 
-	[SerializeField] private List<OutpostCard> outpostCards;
+	[SerializeField] private List<OutpostCardObject> outpostCards;
 
 	[SerializeField] private int maxHandSize;
 
