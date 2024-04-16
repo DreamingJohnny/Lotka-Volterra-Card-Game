@@ -19,11 +19,11 @@ public class SurfaceZone : MonoBehaviour {
 
 	[SerializeField] private SurfaceCard surfaceCard;
 
-	public void NewSurfaceCard(SO_SurfaceCard sO_SurfaceCard) {
+	public void NewSurfaceCard(POCO_OutpostCard outPostCardInfo) {
 
 
 		Instantiate(surfaceCard, cardSlots[0]);
-		surfaceCard.SetSurfaceCardData(sO_SurfaceCard);
+		surfaceCard.SetSurfaceCardData(outPostCardInfo);
 
 		Debug.Log("Just instatiated a card, can I see it?");
 

@@ -23,7 +23,7 @@ public class CardHand : MonoBehaviour {
 		get {
 			int temp = 0;
 			foreach (var card in outpostCards) {
-				if (card.HasSO()) temp++;
+				if (card.HasOutpostCardInfo()) temp++;
 			}
 
 			return temp;
@@ -39,10 +39,10 @@ public class CardHand : MonoBehaviour {
 
 	}
 
-	public void TakeACard(SO_OutpostCard SO_cardData) {
+	public void TakeACard(POCO_OutpostCard cardInfo) {
 		foreach (var card in outpostCards) {
-			if (!card.HasSO()) {
-				card.SetSO(SO_cardData);
+			if (!card.HasOutpostCardInfo()) {
+				card.SetOutpostCardInfo(cardInfo);
 				return;
 			}
 		}

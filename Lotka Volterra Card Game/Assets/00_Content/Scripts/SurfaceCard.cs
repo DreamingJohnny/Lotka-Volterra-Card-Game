@@ -17,15 +17,15 @@ public class SurfaceCard : MonoBehaviour {
 	[SerializeField] private TextMeshProUGUI toughnessValue;
 	#endregion
 
-	private SO_SurfaceCard sO_SurfaceCard = null;
+	private POCO_OutpostCard outpostCardInfo = null;
 
-	public void SetSurfaceCardData(SO_SurfaceCard sO) {
-		sO_SurfaceCard = sO;
+	public void SetSurfaceCardData(POCO_OutpostCard outpostCardInfo) {
+		this.outpostCardInfo = outpostCardInfo;
 		SetSurfaceCardDataToFields();
 	}
 
 	public bool HasSurfaceCardData() {
-		if (sO_SurfaceCard != null) return true;
+		if (outpostCardInfo != null) return true;
 		else return false;
 	}
 
@@ -36,21 +36,21 @@ public class SurfaceCard : MonoBehaviour {
 			return;
 		}
 
-		title.text = sO_SurfaceCard.CardName.ToString();
+		//title.text = outpostCardInfo.CardName.ToString();
 
-		if (sO_SurfaceCard.Illustration != null) {
-			illustration = sO_SurfaceCard.Illustration;
-		}
+		//if (outpostCardInfo.Illustration != null) {
+		//	illustration = outpostCardInfo.Illustration;
+		//}
 
-		effectText.text = sO_SurfaceCard.CardEffect;
+		//effectText.text = outpostCardInfo.CardEffect;
 
-		if (sO_SurfaceCard.ThreatLevel < 0) threatLevel.text = "-";
-		else threatLevel.text = sO_SurfaceCard.ThreatLevel.ToString();
+		//if (outpostCardInfo.ThreatLevel < 0) threatLevel.text = "-";
+		//else threatLevel.text = outpostCardInfo.ThreatLevel.ToString();
 
-		if (sO_SurfaceCard.Alertness < 0) alertnessValue.text = "-";
-		else alertnessValue.text = sO_SurfaceCard.Alertness.ToString();
+		//if (outpostCardInfo.Alertness < 0) alertnessValue.text = "-";
+		//else alertnessValue.text = outpostCardInfo.Alertness.ToString();
 
-		if (sO_SurfaceCard.Toughness < 0) toughnessValue.text = "-";
-		else toughnessValue.text = sO_SurfaceCard.Toughness.ToString();
+		//if (outpostCardInfo.Toughness < 0) toughnessValue.text = "-";
+		//else toughnessValue.text = outpostCardInfo.Toughness.ToString();
 	}
 }

@@ -3,72 +3,102 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class OutpostCardObject : MonoBehaviour {
 
 	#region"UI_components"
-	[SerializeField] private TextMeshProUGUI developmentCostText;
-	[SerializeField] private TextMeshProUGUI title;
-	[SerializeField] private TextMeshProUGUI resourceCostText;
+	[SerializeField] private TextMeshProUGUI developmentCost;
+	[SerializeField] private TextMeshProUGUI cardName;
+	[SerializeField] private TextMeshProUGUI resourceCost;
 	[SerializeField] private TextMeshProUGUI hoursCost;
 	[SerializeField] private TextMeshProUGUI upkeepCost;
 	[SerializeField] private TextMeshProUGUI cardType;
 	[SerializeField] private Image illustration;
 	[SerializeField] private TextMeshProUGUI keywords;
-	[SerializeField] private TextMeshProUGUI effectText;
+	[SerializeField] private TextMeshProUGUI cardEffect;
 	[SerializeField] private TextMeshProUGUI scavengeValue;
 	[SerializeField] private TextMeshProUGUI interveneValue;
 	[SerializeField] private TextMeshProUGUI developeValue;
 	#endregion
 
-	private SO_OutpostCard sO_OutpostCard = null;
+	private POCO_OutpostCard outpostCardInfo = null;
 
-	//So, this is the script for showing the card I take it?
-	//Yeah, so everything else I'll want to move to another script, I think.
+	[Tooltip("Used on field for traits when the OutpostCardInfo does not have acceptable data")]
+	private readonly string nA = "N/A";
 
-	//Needs ways to get the values that it has,
-	//Needs the  values
-	//Needs to be able to change and fix the values? Might want to do this, seeing as we might want to be able to temporarily update them.
-	//Should probably be able to check like: Am I missing components? Am I missing values?
-	//Needs to contain the info for its own max and minis?
+	[Tooltip("Used when the OutpostCardInfo does not have a image")]
+	[SerializeField] private Sprite nullImage;
 
-	//Needs to be able to get a scriptable object and set its own values to that.
-	public void SetSO(SO_OutpostCard sO) {
-		sO_OutpostCard = sO;
-		SetSOToFields();
+	private void OnEnable() {
+		Debug.Assert(nullImage != null);
 	}
 
-	public bool HasSO() {
-		if (sO_OutpostCard != null) return true;
+	public void SetOutpostCardInfo(POCO_OutpostCard _outpostCardInfo) {
+		outpostCardInfo = _outpostCardInfo;
+		UpdateAllFields();
+	}
+
+	public bool HasOutpostCardInfo() {
+		if (outpostCardInfo != null) return true;
 		else return false;
 	}
 
-	public void SetSOToFields() {
-		//So this one should set the values in the fields according to the SO that it has received then?
-		if (!HasSO()) {
-			Debug.Log($"{name} didn't have a SO_OutpostCard, so it couldn't set up its own fields.");
+	public void UpdateAllFields() {
+
+		if (!HasOutpostCardInfo()) {
+			Debug.Log($"{name} didn't have a POCO_OutpostCard, so it couldn't set up its own fields.");
 			return;
 		}
 
-		developmentCostText.text = sO_OutpostCard.DevelopmentCost.ToString();
-		title.text = sO_OutpostCard.CardName.ToString();
-		resourceCostText.text = sO_OutpostCard.ResourceCost.ToString();
-		hoursCost.text = sO_OutpostCard.HourCost.ToString();
-		upkeepCost.text = sO_OutpostCard.UpkeepCost.ToString();
+		// TODO: it seems strange that I'm initializing the int "temp" here, and that it's then used in all of the functions below. I wish I could initialize it in each, so that it didn't have such a long life, with several different values. I'm unsure of how to fix this though.
+		developmentCost.text = outpostCardInfo.GetDevelopmentCost(out int temp) ? temp.ToString() : nA;
 
-		if (sO_OutpostCard.Illustration != null) {
-			illustration = sO_OutpostCard.Illustration;
+		if (outpostCardInfo.GetCardName != null) {
+			cardName.text = outpostCardInfo.GetCardName;
+		}
+		else {
+			cardName.text = nA;
 		}
 
-		effectText.text = sO_OutpostCard.CardEffect;
+		resourceCost.text = outpostCardInfo.GetResourceCost(out temp) ? temp.ToString() : nA;
 
-		if (sO_OutpostCard.ScavengeValue < 0) scavengeValue.text = "-";
-		else scavengeValue.text = sO_OutpostCard.ScavengeValue.ToString();
+		hoursCost.text = outpostCardInfo.GetHourCost(out temp) ? temp.ToString() : nA;
 
-		if (sO_OutpostCard.InterveneValue < 0) interveneValue.text = "-";
-		else interveneValue.text = sO_OutpostCard.InterveneValue.ToString();
+		upkeepCost.text = outpostCardInfo.GetUpkeepCost(out temp) ? temp.ToString() : nA;
 
-		if (sO_OutpostCard.DevelopmentValue < 0) developeValue.text = "-";
-		else developeValue.text = sO_OutpostCard.DevelopmentValue.ToString();
+		cardType.text = outpostCardInfo.GetCardType.ToString();
+
+		//Check if the script has a illustration, otherwise uses the "nullImage".
+		if (outpostCardInfo.GetIllustration != null) {
+			illustration.sprite = outpostCardInfo.GetIllustration;
+		}
+		else { illustration.sprite = nullImage; }
+
+		if (outpostCardInfo.GetKeywords(out List<Keyword> keywordsList)) {
+			string keywords = string.Empty;
+			foreach (Keyword keyword in keywordsList) {
+				//Converts the keyword to a string and adds it to this string, adds a comma and space at the end.
+				keywords += keyword.ToString() + ", ";
+			}
+
+			//Removes any trailing commas or spaces
+			this.keywords.text = keywords.TrimEnd(',',' ');
+		}
+		else {
+			//If the cardData does not contain any keywords the field is left empty.
+			keywords.text = string.Empty;
+		}
+
+		if (outpostCardInfo.GetCardEffect != null) {
+			cardEffect.text = outpostCardInfo.GetCardEffect;
+		}
+		else { cardEffect.text = nA; }
+
+		scavengeValue.text = outpostCardInfo.GetScavengeValue(out temp) ? temp.ToString() : nA;
+
+		interveneValue.text = outpostCardInfo.GetInterveneValue(out temp) ? temp.ToString() : nA;
+
+		developeValue.text = outpostCardInfo.GetDevelopmentValue(out temp) ? temp.ToString() : nA;
 	}
 }

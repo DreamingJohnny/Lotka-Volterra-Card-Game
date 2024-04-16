@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CardDeck : MonoBehaviour {
 
-	[SerializeField] private List<ScriptableObject> cards = new List<ScriptableObject>();
+	[SerializeField] private List<POCO_OutpostCard> cards = new List<POCO_OutpostCard>();
 
 	public bool HasCards {
 		get {
@@ -17,13 +17,13 @@ public class CardDeck : MonoBehaviour {
 
 	}
 
-	public ScriptableObject GetTopCard() {
+	public POCO_OutpostCard GetTopCard() {
 		if(!HasCards) {
 			Debug.Log($"{name} doesn't contain anymore cards but is asked to return a card.");
 			return null;
 		}
 
-		ScriptableObject topCard = cards[0];
+		POCO_OutpostCard topCard = cards[0];
 		cards.RemoveAt(0);
 
 		return topCard;
@@ -38,6 +38,6 @@ public class CardDeck : MonoBehaviour {
 			return null;
 		}
 
-		return cards[0].name;
+		return cards[0].GetCardName;
 	}
 }
