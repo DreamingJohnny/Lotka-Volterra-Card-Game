@@ -111,6 +111,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5075947809025009208}
     m_Modifications:
+    - target: {fileID: 1435431711109641454, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
+      propertyPath: m_CellSize.x
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1435431711109641454, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
+      propertyPath: m_CellSize.y
+      value: 198
+      objectReference: {fileID: 0}
     - target: {fileID: 2150150080881393456, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
       propertyPath: m_Name
       value: PlayerHand
@@ -149,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6899071898112403456, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 320
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6899071898112403456, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -181,11 +189,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6899071898112403456, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -130
       objectReference: {fileID: 0}
     - target: {fileID: 6899071898112403456, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 102
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 6899071898112403456, guid: 83ba7546f1c1b754198bb8335ecef7f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

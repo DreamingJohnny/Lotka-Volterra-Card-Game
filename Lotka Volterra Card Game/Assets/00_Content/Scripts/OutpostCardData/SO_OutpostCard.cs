@@ -18,9 +18,11 @@ public class SO_OutpostCard : ScriptableObject {
 	[SerializeField] private int hourCost;
 	[SerializeField] private int upkeepCost;
 
-	[SerializeField] private Image illustration;
+	[SerializeField] private Sprite illustration;
 
 	[SerializeField] private OutpostCardType cardType;
+
+	[SerializeField] private List<Keyword> keywords;
 
 	[TextArea(15,20)]
 	[SerializeField] private string cardEffect;
@@ -35,7 +37,9 @@ public class SO_OutpostCard : ScriptableObject {
 	public int ResourceCost { get { return resourceCost; } }
 	public int HourCost { get { return hourCost; } }
 	public int UpkeepCost { get { return upkeepCost; } }
-	public Image Illustration { get { return illustration; } }
+	public Sprite Illustration { get { return illustration; } }
+	public OutpostCardType CardType { get { return cardType; } }
+	public List<Keyword> Keywords { get { return keywords; } }
 	public string CardEffect { get { return cardEffect; } }
 	public int ScavengeValue { get {  return scavengeValue; } }
 	public int InterveneValue { get { return interveneValue; } }
