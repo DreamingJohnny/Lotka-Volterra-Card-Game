@@ -39,7 +39,7 @@ public class OutpostCardObject : MonoBehaviour {
 		UpdateAllFields();
 	}
 
-	public POCO_OutpostCard GetOutpostCard { get { return outpostCardInfo; } }
+	public POCO_OutpostCard GetOutpostCardInfo { get { return outpostCardInfo; } }
 
 	public bool HasOutpostCardInfo() {
 		if (outpostCardInfo != null) return true;

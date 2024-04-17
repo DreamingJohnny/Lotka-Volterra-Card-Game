@@ -7,23 +7,50 @@ public class GameHandler : MonoBehaviour {
 
 	[SerializeField] private CardDeck outpostDeck;
 	[SerializeField] private CardHand playerHand;
-	
+
 	[SerializeField] private CardDeck surfaceDeck;
 	[SerializeField] private SurfaceZone surfaceZone;
 	[SerializeField] private SO_OutpostCard outpostCardData;
 
 	[SerializeField] private OutpostCardObject outpostCardObject;
 
+	[SerializeField] private List<OutpostCardObject> outpostCardObjects;
 
+	[SerializeField] private List<SO_OutpostCard> SO_OutpostCards;
+
+	[SerializeField] private Discard discard;
 	void Start() {
-		TestingCardObject();
+
+		TestingDiscard();
+
+
+		//TestingCardObject();
 
 		//TestingPOCO(outpostCardData);
-		
+
 		//BruteTestPlayerCardHand();
 
 		//BruteTestSurfaceZone();
 	}
+
+	private void TestingDiscard() {
+
+		for (int i = 0; i < outpostCardObjects.Count; i++) {
+			if (discard != null && outpostCardObjects[i] != null && SO_OutpostCards[i] != null) {
+
+				outpostCardObjects[i].SetOutpostCardInfo(new POCO_OutpostCard(SO_OutpostCards[i]));
+
+				discard.SendToDiscard(outpostCardObjects[i]);
+				Debug.Log("Sent on card " + i);
+			}
+		}
+
+        for (int i = 0; i < 3; i++)
+        {
+			POCO_OutpostCard temp = discard.PopTopDiscardCard();
+			Debug.Log(temp.GetCardName);
+        }
+    }
 
 	private void TestingCardObject() {
 		POCO_OutpostCard pOCO_OutpostCard = new(outpostCardData);
@@ -31,7 +58,7 @@ public class GameHandler : MonoBehaviour {
 		outpostCardObject.SetOutpostCardInfo(pOCO_OutpostCard);
 		Debug.Log("Sent info to CardObject");
 
-		
+
 	}
 
 	private void TestingPOCO(SO_OutpostCard outpostCardData) {
