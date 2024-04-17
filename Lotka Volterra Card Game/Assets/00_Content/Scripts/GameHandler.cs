@@ -19,7 +19,12 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private List<SO_OutpostCard> SO_OutpostCards;
 
 	[SerializeField] private Discard discard;
+
+	[SerializeField] private CardDeck cardDeck;
+
 	void Start() {
+
+		//TestingCardDeck();
 
 		//TestingDiscard();
 
@@ -30,6 +35,23 @@ public class GameHandler : MonoBehaviour {
 		//BruteTestPlayerCardHand();
 
 		//BruteTestSurfaceZone();
+	}
+
+	private void TestingCardDeck() {
+		if (cardDeck == null) return;
+
+		cardDeck.SetNewDeck(SO_OutpostCards);
+
+		cardDeck.GetTopCardName(out string name);
+		Debug.Log($"Topcard Name: {name}");
+
+		cardDeck.GetTopCard(out POCO_OutpostCard pOCO);
+		name = pOCO.GetCardName;
+		Debug.Log($"having gotten the top card its name is: {name}");
+		
+		cardDeck.PutOnTop(pOCO);
+		cardDeck.GetTopCardName(out name);
+		Debug.Log($"Topcard Name: {name} after I put it back");
 	}
 
 	private void TestingDiscard() {

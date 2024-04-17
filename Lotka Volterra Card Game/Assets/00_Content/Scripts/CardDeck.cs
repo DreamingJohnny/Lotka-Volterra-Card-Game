@@ -118,8 +118,8 @@ public class CardDeck : MonoBehaviour {
 	/// <param name="pOCO_OutpostCard"></param>
 	public void PutOnTop(POCO_OutpostCard pOCO_OutpostCard) {
 
-		cards.Reverse();
+		cards = new Queue<SO_OutpostCard>(cards.Reverse());
 		cards.Enqueue(pOCO_OutpostCard.OutpostCardData);
-		cards.Reverse();
+		cards = new Queue<SO_OutpostCard>(cards.Reverse());
 	}
 }
