@@ -21,8 +21,9 @@ MonoBehaviour:
   resourceCost: -1
   hourCost: -1
   upkeepCost: 2
-  illustration: {fileID: 0}
+  illustration: {fileID: 21300000, guid: 953242a14eb9780419d4abb9f8ef5ba7, type: 3}
   cardType: 2
+  keywords: 0100000003000000
   cardEffect: 'Action (4): Deploy another Unit to the Surface'
   scavengeValue: -1
   interveneValue: 2

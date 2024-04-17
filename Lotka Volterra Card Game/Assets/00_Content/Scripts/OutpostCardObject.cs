@@ -39,11 +39,16 @@ public class OutpostCardObject : MonoBehaviour {
 		UpdateAllFields();
 	}
 
+	public POCO_OutpostCard GetOutpostCard { get { return outpostCardInfo; } }
+
 	public bool HasOutpostCardInfo() {
 		if (outpostCardInfo != null) return true;
 		else return false;
 	}
 
+	/// <summary>
+	/// If the object doesn't contain a outpostCardInfo it logs that and returns. Otherwise it sets all of the values from outpostCardInfo to its own UI.
+	/// </summary>
 	public void UpdateAllFields() {
 
 		if (!HasOutpostCardInfo()) {
