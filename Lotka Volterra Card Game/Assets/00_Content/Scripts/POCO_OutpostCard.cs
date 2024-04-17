@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class POCO_OutpostCard {
 
-	private SO_OutpostCard outpostCardData;
+	public SO_OutpostCard OutpostCardData;
 
 	public POCO_OutpostCard(SO_OutpostCard outpostCardData) {
-		this.outpostCardData = outpostCardData;
+		this.OutpostCardData = outpostCardData;
 	}
 
-	public string GetCardID { get { return outpostCardData != null ? outpostCardData.CardID : null; } }
-	public string GetCardName { get { return outpostCardData != null ? outpostCardData.CardName : null; } }
+	public string GetCardID { get { return OutpostCardData != null ? OutpostCardData.CardID : null; } }
+	public string GetCardName { get { return OutpostCardData != null ? OutpostCardData.CardName : null; } }
 
 	#region"DevelopmentCost"
 	private int developmentCostAddition = 0;
@@ -28,12 +28,12 @@ public class POCO_OutpostCard {
 		}
 	}
 	public bool GetDevelopmentCost(out int developmentCost) {
-		if (outpostCardData == null || outpostCardData.DevelopmentCost < 0) {
+		if (OutpostCardData == null || OutpostCardData.DevelopmentCost < 0) {
 			developmentCost = -1;
 			return false;
 		}
 		else {
-			developmentCost = GetModifiedValue(outpostCardData.DevelopmentCost, developmentCostAddition, developmentCostMultiplier);
+			developmentCost = GetModifiedValue(OutpostCardData.DevelopmentCost, developmentCostAddition, developmentCostMultiplier);
 			return true;
 		}
 	}
@@ -52,12 +52,12 @@ public class POCO_OutpostCard {
 		}
 	}
 	public bool GetResourceCost(out int resourceCost) {
-		if (outpostCardData == null || outpostCardData.ResourceCost < 0) {
+		if (OutpostCardData == null || OutpostCardData.ResourceCost < 0) {
 			resourceCost = -1;
 			return false;
 		}
 		else {
-			resourceCost = GetModifiedValue(outpostCardData.ResourceCost, resourceCostAddition, resourceCostMultiplier);
+			resourceCost = GetModifiedValue(OutpostCardData.ResourceCost, resourceCostAddition, resourceCostMultiplier);
 			return true;
 		}
 	}
@@ -76,12 +76,12 @@ public class POCO_OutpostCard {
 		}
 	}
 	public bool GetHourCost(out int hourCost) {
-		if (outpostCardData == null || outpostCardData.HourCost < 0) {
+		if (OutpostCardData == null || OutpostCardData.HourCost < 0) {
 			hourCost = -1;
 			return false;
 		}
 		else {
-			hourCost = GetModifiedValue(outpostCardData.HourCost, hourCostAddition, hourCostMultiplier);
+			hourCost = GetModifiedValue(OutpostCardData.HourCost, hourCostAddition, hourCostMultiplier);
 			return true;
 		}
 	}
@@ -100,33 +100,33 @@ public class POCO_OutpostCard {
 		}
 	}
 	public bool GetUpkeepCost(out int upkeepCost) {
-		if (outpostCardData == null || outpostCardData.UpkeepCost < 0) {
+		if (OutpostCardData == null || OutpostCardData.UpkeepCost < 0) {
 			upkeepCost = -1;
 			return false;
 		}
 		else {
-			upkeepCost = GetModifiedValue(outpostCardData.UpkeepCost, upkeepCostAddition, upkeepCostMultiplier);
+			upkeepCost = GetModifiedValue(OutpostCardData.UpkeepCost, upkeepCostAddition, upkeepCostMultiplier);
 			return true;
 		}
 	}
 	#endregion
 
-	public Sprite GetIllustration { get { return outpostCardData.Illustration != null ? outpostCardData.Illustration : null; } }
+	public Sprite GetIllustration { get { return OutpostCardData.Illustration != null ? OutpostCardData.Illustration : null; } }
 
-	public OutpostCardType GetCardType { get { return outpostCardData.CardType; } }
+	public OutpostCardType GetCardType { get { return OutpostCardData.CardType; } }
 
 	public bool GetKeywords(out List<Keyword> keywords) {
-		if (outpostCardData.Keywords == null || outpostCardData.Keywords.Count <= 0) {
+		if (OutpostCardData.Keywords == null || OutpostCardData.Keywords.Count <= 0) {
 			keywords = new List<Keyword>();
 			return false;
 		}
 		else {
-			keywords = outpostCardData.Keywords;
+			keywords = OutpostCardData.Keywords;
 			return true;
 		}
 	}
 
-	public string GetCardEffect { get { return outpostCardData.CardEffect ?? null; } }
+	public string GetCardEffect { get { return OutpostCardData.CardEffect ?? null; } }
 
 	#region"ScavengeValue"
 	private int scavengeValueAddition = 0;
@@ -140,12 +140,12 @@ public class POCO_OutpostCard {
 		}
 	}
 	public bool GetScavengeValue(out int scavengeValue) {
-		if (outpostCardData == null || outpostCardData.ScavengeValue < 0) {
+		if (OutpostCardData == null || OutpostCardData.ScavengeValue < 0) {
 			scavengeValue = -1;
 			return false;
 		}
 		else {
-			scavengeValue = GetModifiedValue(outpostCardData.ScavengeValue, scavengeValueAddition, scavengeValueMultiplier);
+			scavengeValue = GetModifiedValue(OutpostCardData.ScavengeValue, scavengeValueAddition, scavengeValueMultiplier);
 			return true;
 		}
 	}
@@ -163,12 +163,12 @@ public class POCO_OutpostCard {
 		}
 	}
 	public bool GetInterveneValue(out int scavengeValue) {
-		if (outpostCardData == null || outpostCardData.InterveneValue < 0) {
+		if (OutpostCardData == null || OutpostCardData.InterveneValue < 0) {
 			scavengeValue = -1;
 			return false;
 		}
 		else {
-			scavengeValue = GetModifiedValue(outpostCardData.InterveneValue, interveneValueAddition, interveneValueMultiplier);
+			scavengeValue = GetModifiedValue(OutpostCardData.InterveneValue, interveneValueAddition, interveneValueMultiplier);
 			return true;
 		}
 	}
@@ -186,12 +186,12 @@ public class POCO_OutpostCard {
 		}
 	}
 	public bool GetDevelopmentValue(out int developmentValue) {
-		if (outpostCardData == null || outpostCardData.DevelopmentValue < 0) {
+		if (OutpostCardData == null || OutpostCardData.DevelopmentValue < 0) {
 			developmentValue = -1;
 			return false;
 		}
 		else {
-			developmentValue = GetModifiedValue(outpostCardData.DevelopmentValue, developmentValueAddition, developmentValueMultiplier);
+			developmentValue = GetModifiedValue(OutpostCardData.DevelopmentValue, developmentValueAddition, developmentValueMultiplier);
 			return true;
 		}
 	}

@@ -1,43 +1,125 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardDeck : MonoBehaviour {
 
-	[SerializeField] private List<POCO_OutpostCard> cards = new List<POCO_OutpostCard>();
+	/*To look for a specific SO in the queue.
+	 * Oh, and it needs to be able to look at them and then put them back... hm...
+	 * This one might actually need to be handled by someone else instead.
+	*/
 
-	public bool HasCards {
-		get {
-			if (cards.Count > 0) return true;
-			else return false;
+	private Queue<SO_OutpostCard> cards = new();
+
+	/// <summary>
+	/// Returns true and amount of cards in the deck, or false and amount 0 if there are not cards in the deck.
+	/// </summary>
+	/// <param name="amount"></param>
+	/// <returns></returns>
+	public bool GetCardAmount(out int amount) {
+
+		if (cards.Count > 0) {
+			amount = cards.Count;
+			return true;
+		}
+		else {
+			amount = 0;
+			return false;
 		}
 	}
 
-	void Start() {
+	/// <summary>
+	/// Set the received list of cards to be the queue of cards in the deck after shuffling them.
+	/// </summary>
+	/// <param name="newDeck"></param>
+	public void SetNewDeck(List<SO_OutpostCard> newDeck) {
 
+		cards = new Queue<SO_OutpostCard>(ShuffleDeck(newDeck));
 	}
 
-	public POCO_OutpostCard GetTopCard() {
-		if(!HasCards) {
-			Debug.Log($"{name} doesn't contain anymore cards but is asked to return a card.");
-			return null;
-		}
+	/// <summary>
+	/// Adds the listed cards to the deck before shuffling the whole deck.
+	/// </summary>
+	/// <param name="additionalCards"></param>
+	public void AddToDeck(List<SO_OutpostCard> additionalCards) {
 
-		POCO_OutpostCard topCard = cards[0];
-		cards.RemoveAt(0);
+		foreach (SO_OutpostCard card in additionalCards) cards.Enqueue(card);
 
-		return topCard;
+		cards = new Queue<SO_OutpostCard>(ShuffleDeck(cards.ToList()));
 	}
 
-	public string GetTopCardName() {
-		//Let's begin with getting the name like this,
-		//later on we will need to enforce here in some way that this is some sort of either, OutpostCard or EnemyCard,
-		//and then have it send on valuable info.
-		if (!HasCards) {
-			Debug.Log($"{name} doesn't contain anymore cards but is asked to give the name of the topcard.");
-			return null;
+	/// <summary>
+	/// Shuffles the current queue of cards in the deck.
+	/// </summary>
+	public void ShuffleDeck() {
+		if (!GetCardAmount(out _)) return;
+
+		cards = new Queue<SO_OutpostCard>(ShuffleDeck(cards.ToList()));
+	}
+
+	/// <summary>
+	/// Shuffles the parameter list of cards and then returns it.
+	/// </summary>
+	/// <param name="newDeck"></param>
+	/// <returns></returns>
+	private List<SO_OutpostCard> ShuffleDeck(List<SO_OutpostCard> newDeck) {
+
+		System.Random random = new();
+
+		for (int n = newDeck.Count - 1; n > 0; --n) {
+			int k = random.Next(n + 1);
+			(newDeck[k], newDeck[n]) = (newDeck[n], newDeck[k]);
 		}
 
-		return cards[0].GetCardName;
+		return newDeck;
+	}
+
+	/// <summary>
+	/// If it can find any SO_OutpostCards in the queue it returns "true" and a POCO_OutpostCard with that data that is then dequeued from the list.
+	/// Otherwise it returns a null object and "false".
+	/// </summary>
+	/// <param name="pOCO_OutpostCard"></param>
+	/// <returns></returns>
+	public bool GetTopCard(out POCO_OutpostCard pOCO_OutpostCard) {
+
+		if (cards.TryPeek(out _)) {
+			pOCO_OutpostCard = new POCO_OutpostCard(cards.Dequeue()	);
+			return true;
+		}
+		else {
+			pOCO_OutpostCard = null;
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// If it can find any SO_OutpostCards in the queue it returns "true" and the string of the top one. Does not dequeue. Otherwise an empty string and "false".
+	/// </summary>
+	/// <param name="cardName"></param>
+	/// <returns></returns>
+	public bool GetTopCardName(out string cardName) {
+
+		if (cards.TryPeek(out SO_OutpostCard result)) {
+			cardName = result.CardName;
+			return true;
+		}
+		else {
+			Debug.Log("Could not find any card!");
+			cardName = string.Empty;
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Reverses, Enqueues and Reverses the queue again so that the received card is on the top of the queue.
+	/// </summary>
+	/// <param name="pOCO_OutpostCard"></param>
+	public void PutOnTop(POCO_OutpostCard pOCO_OutpostCard) {
+
+		cards.Reverse();
+		cards.Enqueue(pOCO_OutpostCard.OutpostCardData);
+		cards.Reverse();
 	}
 }

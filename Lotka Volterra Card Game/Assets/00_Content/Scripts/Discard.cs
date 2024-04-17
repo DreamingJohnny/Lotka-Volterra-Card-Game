@@ -27,9 +27,12 @@ public class Discard : MonoBehaviour {
 
 	private Stack<POCO_OutpostCard> outpostCardInfos;
 
+	public int AmountOfCards { get { return outpostCardInfos.Count; } }
+
 	void Start() {
 		outpostCardInfos = new Stack<POCO_OutpostCard>();
 
+		topDiscardCard = null;
 	}
 
 	public void SendToDiscard(OutpostCardObject outpostCardObject) {
@@ -42,18 +45,6 @@ public class Discard : MonoBehaviour {
 			outpostCardInfos.Push(topDiscardCard.GetOutpostCardInfo);
 			//I'm adding a fast teleport here, just for now.
 			topDiscardCard.transform.position = transform.position;
-			Debug.Log(outpostCardInfos.Count);
-			
-			for (int i = 0; i < outpostCardInfos.Count; i++) {
-				Debug.Log(outpostCardInfos.Peek().GetCardName);
-			}
 		}
-	}
-
-	public POCO_OutpostCard PopTopDiscardCard() { return outpostCardInfos.Pop(); }
-
-
-	void Update() {
-
 	}
 }

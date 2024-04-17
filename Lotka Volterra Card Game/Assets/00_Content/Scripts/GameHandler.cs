@@ -21,8 +21,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private Discard discard;
 	void Start() {
 
-		TestingDiscard();
-
+		//TestingDiscard();
 
 		//TestingCardObject();
 
@@ -44,13 +43,7 @@ public class GameHandler : MonoBehaviour {
 				Debug.Log("Sent on card " + i);
 			}
 		}
-
-        for (int i = 0; i < 3; i++)
-        {
-			POCO_OutpostCard temp = discard.PopTopDiscardCard();
-			Debug.Log(temp.GetCardName);
-        }
-    }
+	}
 
 	private void TestingCardObject() {
 		POCO_OutpostCard pOCO_OutpostCard = new(outpostCardData);
@@ -92,18 +85,18 @@ public class GameHandler : MonoBehaviour {
 	private void BruteTestSurfaceZone() {
 		//Pull top card from surface deck, give to surfaceZone,
 		//SurfaceZone then needs to create a card, set the values, and then move it to the correct spot.
-		POCO_OutpostCard outpostCardInfo = surfaceDeck.GetTopCard();
-
-		surfaceZone.NewSurfaceCard(outpostCardInfo);
+		if (surfaceDeck.GetTopCard(out POCO_OutpostCard outpostCardInfo)) {
+			surfaceZone.NewSurfaceCard(outpostCardInfo);
+		}
 	}
 
 	private void BruteTestPlayerCardHand() {
 		//Time to test the cardhand then
 		while (playerHand.HandSize <= playerHand.MaxHandSize) {
 
-			POCO_OutpostCard outpostCardInfo = outpostDeck.GetTopCard();
-
-			playerHand.TakeACard(outpostCardInfo);
+			if (outpostDeck.GetTopCard(out POCO_OutpostCard outpostCardInfo)) {
+				playerHand.TakeACard(outpostCardInfo);
+			}
 		}
 	}
 
