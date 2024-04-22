@@ -9,22 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3aa1ec09d3dfc84cb239d40c5565485, type: 3}
-  m_Name: OutpostCard
+  m_Script: {fileID: 11500000, guid: 34985b5704cba274c9a632031c23e3ed, type: 3}
+  m_Name: MonstrousWorm
   m_EditorClassIdentifier: 
   cardID: 
-  cardName: 
+  cardName: Monstrous Worm
   illustration: {fileID: 0}
   cardType: 0
   keywords: 
-  cardEffect: 
-  rarity: 0
-  ideology: 0
-  daycycle: 0
-  developmentCost: 0
-  resourceCost: 0
-  hourCost: 0
-  upkeepCost: 0
-  scavengeValue: 0
-  interveneValue: 0
-  developmentValue: 0
+  cardEffect: Test surface evil card.
+  threatLevel: 2
+  alertness: 6
+  toughness: -1

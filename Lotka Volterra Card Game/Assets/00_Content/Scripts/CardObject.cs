@@ -7,33 +7,33 @@ using UnityEngine.UI;
 public class CardObject : MonoBehaviour {
 
 	#region"UI_components"
-	[SerializeField] private TextMeshProUGUI cardName;
-	[SerializeField] private TextMeshProUGUI cardType;
-	[SerializeField] private Image illustration;
-	[SerializeField] private TextMeshProUGUI keywords;
-	[SerializeField] private TextMeshProUGUI cardEffect;
+	[SerializeField] protected TextMeshProUGUI cardName;
+	[SerializeField] protected TextMeshProUGUI cardType;
+	[SerializeField] protected Image illustration;
+	[SerializeField] protected TextMeshProUGUI keywords;
+	[SerializeField] protected TextMeshProUGUI cardEffect;
 	#endregion
 
-	private POCO_OutpostCard cardInfo = null;
+	private CardScript cardInfo = null;
 
-	[Tooltip("Used on field for traits when the OutpostCardInfo does not have acceptable data")]
-	private readonly string nA = "N/A";
+	[Tooltip("Used on field for traits when the CardScript does not have acceptable data")]
+	protected readonly string nA = "N/A";
 
-	[Tooltip("Used when the OutpostCardInfo does not have a image")]
-	[SerializeField] private Sprite nullImage;
+	[Tooltip("Used when the CardScript does not have a image")]
+	[SerializeField] protected Sprite nullImage;
 
 	private void OnEnable() {
 		Debug.Assert(nullImage != null);
 	}
 
-	public virtual void SetCardInfo(POCO_OutpostCard _outpostCardInfo) {
-		cardInfo = _outpostCardInfo;
+	public virtual void SetCardInfo(CardScript _CardScript) {
+		cardInfo = _CardScript;
 		UpdateAllFields();
 	}
 
-	public POCO_OutpostCard GetOutpostCardInfo { get { return cardInfo; } }
+	public CardScript GetCardScript { get { return cardInfo; } }
 
-	public bool HasOutpostCardInfo() {
+	public bool HasCardScript() {
 		if (cardInfo != null) return true;
 		else return false;
 	}
@@ -41,10 +41,10 @@ public class CardObject : MonoBehaviour {
 	/// <summary>
 	/// If the object doesn't contain a outpostCardInfo it logs that and returns. Otherwise it sets all of the values from outpostCardInfo to its own UI.
 	/// </summary>
-	public void UpdateAllFields() {
+	public virtual void UpdateAllFields() {
 
-		if (!HasOutpostCardInfo()) {
-			Debug.Log($"{name} didn't have a POCO_OutpostCard, so it couldn't set up its own fields.");
+		if (!HasCardScript()) {
+			Debug.Log($"{name} didn't have a CardScript, so it couldn't set up its own fields.");
 			return;
 		}
 

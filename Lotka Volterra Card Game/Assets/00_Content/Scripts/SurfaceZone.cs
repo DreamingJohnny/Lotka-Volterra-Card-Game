@@ -17,9 +17,9 @@ public class SurfaceZone : MonoBehaviour {
 
 	[SerializeField] private List<RectTransform> cardSlots;
 
-	[SerializeField] private SurfaceCard surfaceCard;
+	[SerializeField] private SurfaceCardObject surfaceCard;
 
-	public void NewSurfaceCard(POCO_OutpostCard outPostCardInfo) {
+	public void NewSurfaceCard(CardScript outPostCardInfo) {
 
 
 		Instantiate(surfaceCard, cardSlots[0]);

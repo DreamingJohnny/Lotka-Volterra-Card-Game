@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c501ab6a8969da245b35f12c06840858, type: 3}
-  m_Name: CommandersQuarters
+  m_Name: OfficersEpaulets
   m_EditorClassIdentifier: 
   cardID: 
-  cardName: Commander's Quaters
+  cardName: OfficersEpaulets
   illustration: {fileID: 21300000, guid: 953242a14eb9780419d4abb9f8ef5ba7, type: 3}
-  cardType: 5
+  cardType: 3
   keywords: 
-  cardEffect: When the Enemy phase starts, choose 1 Officer in the Outpost. Ready
-    that Officer.
+  cardEffect: Someone becomes a bigwig because of this
   rarity: 0
   ideology: 0
   daycycle: 0
-  developmentCost: 6
-  resourceCost: 0
-  hourCost: 0
-  upkeepCost: 1
-  scavengeValue: -1
+  developmentCost: 2
+  resourceCost: 2
+  hourCost: 3
+  upkeepCost: 3
+  scavengeValue: 0
   interveneValue: -1
   developmentValue: -1

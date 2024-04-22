@@ -10,13 +10,13 @@ public class GameHandler : MonoBehaviour {
 
 	[SerializeField] private CardDeck surfaceDeck;
 	[SerializeField] private SurfaceZone surfaceZone;
-	[SerializeField] private SO_OutpostCard outpostCardData;
+	[SerializeField] private SO_OutpostCardData outpostCardData;
 
 	[SerializeField] private OutpostCardObject outpostCardObject;
 
 	[SerializeField] private List<OutpostCardObject> outpostCardObjects;
 
-	[SerializeField] private List<SO_OutpostCard> SO_OutpostCards;
+	[SerializeField] private List<SO_OutpostCardData> SO_OutpostCards;
 
 	[SerializeField] private Discard discard;
 

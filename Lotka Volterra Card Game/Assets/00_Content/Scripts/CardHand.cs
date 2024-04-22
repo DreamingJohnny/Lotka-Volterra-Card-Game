@@ -39,14 +39,14 @@ public class CardHand : MonoBehaviour {
 
 	}
 
-	public void TakeACard(POCO_OutpostCard cardInfo) {
-		foreach (var card in outpostCards) {
-			if (!card.HasOutpostCardInfo()) {
-				card.SetOutpostCardInfo(cardInfo);
-				return;
-			}
-		}
+	//public void TakeACard(CardScript cardInfo) {
+	//	foreach (var card in outpostCards) {
+	//		if (!card.HasOutpostCardInfo()) {
+	//			card.SetOutpostCardInfo(cardInfo);
+	//			return;
+	//		}
+	//	}
 
-		//add function here for if there was no room among the cards, maybe draw a new card?
-	}
+	//add function here for if there was no room among the cards, maybe draw a new card?
+	//}
 }

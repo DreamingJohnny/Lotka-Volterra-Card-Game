@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class POCO_OutpostCard : CardScript {
+public class OutpostCardScript : CardScript {
 
-	public SO_OutpostCard OutpostCardData;
+	public SO_OutpostCardData OutpostCardData;
 
-	public POCO_OutpostCard(SO_CardData cardData) : base(cardData) {
-		this.OutpostCardData = cardData as SO_OutpostCard;
+	public OutpostCardScript(SO_CardData cardData) : base(cardData) {
+		this.OutpostCardData = cardData as SO_OutpostCardData;
 	}
 
 	#region"DevelopmentCost"

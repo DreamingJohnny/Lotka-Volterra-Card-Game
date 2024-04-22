@@ -45,7 +45,7 @@ public class CardDeck : MonoBehaviour {
 	/// <param name="additionalCards"></param>
 	public void AddToDeck(List<SO_CardData> additionalCards) {
 
-		foreach (SO_OutpostCard card in additionalCards) cards.Enqueue(card);
+		foreach (SO_OutpostCardData card in additionalCards) cards.Enqueue(card);
 
 		cards = new Queue<SO_CardData>(ShuffleDeck(cards.ToList()));
 	}
@@ -85,11 +85,11 @@ public class CardDeck : MonoBehaviour {
 	public bool GetTopCard(out CardScript pOCO_OutpostCard) {
 
 		if (cards.TryPeek(out SO_CardData result)) {
-			if(result is SO_OutpostCard) {
-				pOCO_OutpostCard = new POCO_OutpostCard(cards.Dequeue());
+			if(result is SO_OutpostCardData) {
+				pOCO_OutpostCard = new OutpostCardScript(cards.Dequeue());
 				return true;
-			} else if (result is SO_SurfaceCard) {
-				pOCO_OutpostCard = new POCO_SurfaceCard(cards.Dequeue());
+			} else if (result is SO_SurfaceCardData) {
+				pOCO_OutpostCard = new SurfaceCardScript(cards.Dequeue());
 				return true;
 			}
 			pOCO_OutpostCard = null;

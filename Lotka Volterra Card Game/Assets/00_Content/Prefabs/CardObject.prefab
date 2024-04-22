@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -51,6 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fac0b88f592a44481d1ba2224c8b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardName: {fileID: 0}
+  cardType: {fileID: 0}
+  illustration: {fileID: 0}
+  keywords: {fileID: 0}
+  cardEffect: {fileID: 0}
+  nullImage: {fileID: 0}
 --- !u!222 &7942828236883991061
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -79,7 +85,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0e624ff49448f6c4886856935f713e1d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

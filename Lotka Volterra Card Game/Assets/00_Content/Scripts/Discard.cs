@@ -25,12 +25,12 @@ public class Discard : MonoBehaviour {
 
 	private OutpostCardObject topDiscardCard;
 
-	private Stack<POCO_OutpostCard> outpostCardInfos;
+	private Stack<CardScript> outpostCardInfos;
 
 	public int AmountOfCards { get { return outpostCardInfos.Count; } }
 
 	void Start() {
-		outpostCardInfos = new Stack<POCO_OutpostCard>();
+		outpostCardInfos = new Stack<CardScript>();
 
 		topDiscardCard = null;
 	}

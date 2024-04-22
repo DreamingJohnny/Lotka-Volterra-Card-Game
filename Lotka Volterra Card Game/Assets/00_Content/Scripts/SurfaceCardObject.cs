@@ -4,28 +4,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SurfaceCard : MonoBehaviour {
+public class SurfaceCardObject : CardObject {
 
 	#region"UI_components"
-	[SerializeField] private TextMeshProUGUI title;
-	[SerializeField] private TextMeshProUGUI cardType;
-	[SerializeField] private Image illustration;
-	[SerializeField] private TextMeshProUGUI keywords;
-	[SerializeField] private TextMeshProUGUI effectText;
+	[SerializeField] private TextMeshProUGUI scavengingValue;
 	[SerializeField] private TextMeshProUGUI threatLevel;
 	[SerializeField] private TextMeshProUGUI alertnessValue;
 	[SerializeField] private TextMeshProUGUI toughnessValue;
 	#endregion
 
-	private POCO_OutpostCard outpostCardInfo = null;
+	private CardScript surfaceCardScript= null;
 
-	public void SetSurfaceCardData(POCO_OutpostCard outpostCardInfo) {
-		this.outpostCardInfo = outpostCardInfo;
+	public void SetSurfaceCardData(CardScript outpostCardInfo) {
+		this.surfaceCardScript = outpostCardInfo;
 		SetSurfaceCardDataToFields();
 	}
 
 	public bool HasSurfaceCardData() {
-		if (outpostCardInfo != null) return true;
+		if (surfaceCardScript != null) return true;
 		else return false;
 	}
 

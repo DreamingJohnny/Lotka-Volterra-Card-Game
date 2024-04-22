@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "SurfaceCard", menuName = "ScriptableObjects/SO_SurfaceCard")]
 
-public class SO_SurfaceCard : SO_CardData {
+public class SO_SurfaceCardData : SO_CardData {
 
 	[SerializeField] private int threatLevel;
 
