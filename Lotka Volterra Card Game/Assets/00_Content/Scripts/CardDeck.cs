@@ -11,7 +11,7 @@ public class CardDeck : MonoBehaviour {
 	 * This one might actually need to be handled by someone else instead.
 	*/
 
-	private Queue<SO_OutpostCard> cards = new();
+	private Queue<SO_CardData> cards = new();
 
 	/// <summary>
 	/// Returns true and amount of cards in the deck, or false and amount 0 if there are not cards in the deck.
@@ -34,20 +34,20 @@ public class CardDeck : MonoBehaviour {
 	/// Set the received list of cards to be the queue of cards in the deck after shuffling them.
 	/// </summary>
 	/// <param name="newDeck"></param>
-	public void SetNewDeck(List<SO_OutpostCard> newDeck) {
+	public void SetNewDeck(List<SO_CardData> newDeck) {
 
-		cards = new Queue<SO_OutpostCard>(ShuffleDeck(newDeck));
+		cards = new Queue<SO_CardData>(ShuffleDeck(newDeck));
 	}
 
 	/// <summary>
 	/// Adds the listed cards to the deck before shuffling the whole deck.
 	/// </summary>
 	/// <param name="additionalCards"></param>
-	public void AddToDeck(List<SO_OutpostCard> additionalCards) {
+	public void AddToDeck(List<SO_CardData> additionalCards) {
 
 		foreach (SO_OutpostCard card in additionalCards) cards.Enqueue(card);
 
-		cards = new Queue<SO_OutpostCard>(ShuffleDeck(cards.ToList()));
+		cards = new Queue<SO_CardData>(ShuffleDeck(cards.ToList()));
 	}
 
 	/// <summary>
@@ -56,7 +56,7 @@ public class CardDeck : MonoBehaviour {
 	public void ShuffleDeck() {
 		if (!GetCardAmount(out _)) return;
 
-		cards = new Queue<SO_OutpostCard>(ShuffleDeck(cards.ToList()));
+		cards = new Queue<SO_CardData>(ShuffleDeck(cards.ToList()));
 	}
 
 	/// <summary>
@@ -64,7 +64,7 @@ public class CardDeck : MonoBehaviour {
 	/// </summary>
 	/// <param name="newDeck"></param>
 	/// <returns></returns>
-	private List<SO_OutpostCard> ShuffleDeck(List<SO_OutpostCard> newDeck) {
+	private List<SO_CardData> ShuffleDeck(List<SO_CardData> newDeck) {
 
 		System.Random random = new();
 
@@ -82,11 +82,18 @@ public class CardDeck : MonoBehaviour {
 	/// </summary>
 	/// <param name="pOCO_OutpostCard"></param>
 	/// <returns></returns>
-	public bool GetTopCard(out POCO_OutpostCard pOCO_OutpostCard) {
+	public bool GetTopCard(out CardScript pOCO_OutpostCard) {
 
-		if (cards.TryPeek(out _)) {
-			pOCO_OutpostCard = new POCO_OutpostCard(cards.Dequeue()	);
-			return true;
+		if (cards.TryPeek(out SO_CardData result)) {
+			if(result is SO_OutpostCard) {
+				pOCO_OutpostCard = new POCO_OutpostCard(cards.Dequeue());
+				return true;
+			} else if (result is SO_SurfaceCard) {
+				pOCO_OutpostCard = new POCO_SurfaceCard(cards.Dequeue());
+				return true;
+			}
+			pOCO_OutpostCard = null;
+			return false;
 		}
 		else {
 			pOCO_OutpostCard = null;
@@ -101,7 +108,7 @@ public class CardDeck : MonoBehaviour {
 	/// <returns></returns>
 	public bool GetTopCardName(out string cardName) {
 
-		if (cards.TryPeek(out SO_OutpostCard result)) {
+		if (cards.TryPeek(out SO_CardData result)) {
 			cardName = result.CardName;
 			return true;
 		}
@@ -116,10 +123,10 @@ public class CardDeck : MonoBehaviour {
 	/// Reverses, Enqueues and Reverses the queue again so that the received card is on the top of the queue.
 	/// </summary>
 	/// <param name="pOCO_OutpostCard"></param>
-	public void PutOnTop(POCO_OutpostCard pOCO_OutpostCard) {
+	public void PutOnTop(CardScript pOCO_OutpostCard) {
 
-		cards = new Queue<SO_OutpostCard>(cards.Reverse());
-		cards.Enqueue(pOCO_OutpostCard.OutpostCardData);
-		cards = new Queue<SO_OutpostCard>(cards.Reverse());
+		cards = new Queue<SO_CardData>(cards.Reverse());
+		cards.Enqueue(pOCO_OutpostCard.CardData);
+		cards = new Queue<SO_CardData>(cards.Reverse());
 	}
 }

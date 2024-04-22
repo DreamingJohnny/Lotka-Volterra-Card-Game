@@ -4,16 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class POCO_OutpostCard {
+public class POCO_OutpostCard : CardScript {
 
 	public SO_OutpostCard OutpostCardData;
 
-	public POCO_OutpostCard(SO_OutpostCard outpostCardData) {
-		this.OutpostCardData = outpostCardData;
+	public POCO_OutpostCard(SO_CardData cardData) : base(cardData) {
+		this.OutpostCardData = cardData as SO_OutpostCard;
 	}
-
-	public string GetCardID { get { return OutpostCardData != null ? OutpostCardData.CardID : null; } }
-	public string GetCardName { get { return OutpostCardData != null ? OutpostCardData.CardName : null; } }
 
 	#region"DevelopmentCost"
 	private int developmentCostAddition = 0;
@@ -110,24 +107,7 @@ public class POCO_OutpostCard {
 		}
 	}
 	#endregion
-
-	public Sprite GetIllustration { get { return OutpostCardData.Illustration != null ? OutpostCardData.Illustration : null; } }
-
-	public OutpostCardType GetCardType { get { return OutpostCardData.CardType; } }
-
-	public bool GetKeywords(out List<Keyword> keywords) {
-		if (OutpostCardData.Keywords == null || OutpostCardData.Keywords.Count <= 0) {
-			keywords = new List<Keyword>();
-			return false;
-		}
-		else {
-			keywords = OutpostCardData.Keywords;
-			return true;
-		}
-	}
-
-	public string GetCardEffect { get { return OutpostCardData.CardEffect ?? null; } }
-
+	
 	#region"ScavengeValue"
 	private int scavengeValueAddition = 0;
 	public int ScavengeValueAddition { get { return scavengeValueAddition; } set { scavengeValueAddition = value; } }
@@ -196,20 +176,4 @@ public class POCO_OutpostCard {
 		}
 	}
 	#endregion
-
-	/// Carries out the calculations based on the modifier before returning the resulting value.
-	/// Rounds down to closest integer before returning.
-	/// </summary>
-	/// <param name="sO_value"></param>
-	/// <param name="addition"></param>
-	/// <param name="multiplier"></param>
-	/// <returns></returns>
-	private int GetModifiedValue(int sO_value, int addition, float multiplier) {
-		float temp = (sO_value + addition) * multiplier;
-		//Ensures the value isn't below 0
-		temp = (temp < 0) ? 0 : temp;
-		//Convert value to an int (rounded down).
-		temp = Mathf.FloorToInt(temp);
-		return (int)temp;
-	}
 }

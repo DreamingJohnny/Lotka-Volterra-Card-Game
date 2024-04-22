@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class OutpostCardObject : MonoBehaviour {
+public class OutpostCardObject : CardObject {
 
 	#region"UI_components"
 	[SerializeField] private TextMeshProUGUI developmentCost;
