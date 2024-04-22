@@ -13,40 +13,29 @@ public class SurfaceCardObject : CardObject {
 	[SerializeField] private TextMeshProUGUI toughnessValue;
 	#endregion
 
-	private CardScript surfaceCardScript= null;
+	private SurfaceCardScript surfaceCardScript= null;
 
-	public void SetSurfaceCardData(CardScript outpostCardInfo) {
-		this.surfaceCardScript = outpostCardInfo;
-		SetSurfaceCardDataToFields();
+	public void SetSurfaceCardScript(CardScript cardScript) {
+		surfaceCardScript = cardScript as SurfaceCardScript;
+		UpdateAllFields();
 	}
 
-	public bool HasSurfaceCardData() {
-		if (surfaceCardScript != null) return true;
-		else return false;
-	}
+	public override void UpdateAllFields() {
 
-	public void SetSurfaceCardDataToFields() {
-
-		if (!HasSurfaceCardData()) {
+		if (!HasCardScript()) {
 			Debug.Log($"{name} didn't have a SO_SurfaceCard, so it couldn't set up its own fields.");
 			return;
 		}
 
-		//title.text = outpostCardInfo.CardName.ToString();
+		base.UpdateAllFields();
 
-		//if (outpostCardInfo.Illustration != null) {
-		//	illustration = outpostCardInfo.Illustration;
-		//}
+		scavengingValue.text = surfaceCardScript.GetScavengingValue(out int temp) ? temp.ToString() : nA;
 
-		//effectText.text = outpostCardInfo.CardEffect;
+		threatLevel.text = surfaceCardScript.GetThreatLevel(out temp) ? temp.ToString() : nA;
 
-		//if (outpostCardInfo.ThreatLevel < 0) threatLevel.text = "-";
-		//else threatLevel.text = outpostCardInfo.ThreatLevel.ToString();
+		alertnessValue.text = surfaceCardScript.GetAlertnessValue(out temp) ? temp.ToString() : nA;
 
-		//if (outpostCardInfo.Alertness < 0) alertnessValue.text = "-";
-		//else alertnessValue.text = outpostCardInfo.Alertness.ToString();
+		toughnessValue.text = surfaceCardScript.GetToughnessValue(out temp) ? temp.ToString() : nA;
 
-		//if (outpostCardInfo.Toughness < 0) toughnessValue.text = "-";
-		//else toughnessValue.text = outpostCardInfo.Toughness.ToString();
 	}
 }

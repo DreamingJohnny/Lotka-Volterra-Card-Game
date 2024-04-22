@@ -7,13 +7,16 @@ using UnityEngine.UI;
 
 public class SO_SurfaceCardData : SO_CardData {
 
+	[SerializeField] private int scavengingValue;
+
 	[SerializeField] private int threatLevel;
 
-	[SerializeField] private int alertness;
+	[SerializeField] private int alertnessValue;
 
-	[SerializeField] private int toughness;
+	[SerializeField] private int toughnessValue;
 
+	public int ScavengingValue { get { return scavengingValue; } }
 	public int ThreatLevel { get { return threatLevel; } }
-	public int Alertness { get {  return alertness; } }
-	public int Toughness { get { return toughness; } }
+	public int AlertnessValue { get {  return alertnessValue; } }
+	public int ToughnessValue { get { return toughnessValue; } }
 }

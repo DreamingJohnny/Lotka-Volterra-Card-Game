@@ -23,7 +23,7 @@ public class CardHand : MonoBehaviour {
 		get {
 			int temp = 0;
 			foreach (var card in outpostCards) {
-				if (card.HasOutpostCardInfo()) temp++;
+				if (card.HasCardScript()) temp++;
 			}
 
 			return temp;

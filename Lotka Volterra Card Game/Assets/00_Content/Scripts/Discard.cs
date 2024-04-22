@@ -37,7 +37,7 @@ public class Discard : MonoBehaviour {
 
 	public void SendToDiscard(OutpostCardObject outpostCardObject) {
 		//Should I add a return function here instead? so that if it doesn't have one then nothing happens?
-		if (outpostCardObject.HasOutpostCardInfo()) {
+		if (outpostCardObject.HasCardScript()) {
 
 			if (topDiscardCard != null) Destroy(topDiscardCard.gameObject);
 

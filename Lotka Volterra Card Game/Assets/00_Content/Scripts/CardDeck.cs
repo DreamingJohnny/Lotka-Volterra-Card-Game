@@ -45,7 +45,7 @@ public class CardDeck : MonoBehaviour {
 	/// <param name="additionalCards"></param>
 	public void AddToDeck(List<SO_CardData> additionalCards) {
 
-		foreach (SO_OutpostCardData card in additionalCards) cards.Enqueue(card);
+		foreach (SO_CardData card in additionalCards) cards.Enqueue(card);
 
 		cards = new Queue<SO_CardData>(ShuffleDeck(cards.ToList()));
 	}
@@ -122,11 +122,11 @@ public class CardDeck : MonoBehaviour {
 	/// <summary>
 	/// Reverses, Enqueues and Reverses the queue again so that the received card is on the top of the queue.
 	/// </summary>
-	/// <param name="pOCO_OutpostCard"></param>
-	public void PutOnTop(CardScript pOCO_OutpostCard) {
+	/// <param name="cardScript"></param>
+	public void PutOnTop(CardScript cardScript) {
 
 		cards = new Queue<SO_CardData>(cards.Reverse());
-		cards.Enqueue(pOCO_OutpostCard.CardData);
+		cards.Enqueue(cardScript.CardData);
 		cards = new Queue<SO_CardData>(cards.Reverse());
 	}
 }

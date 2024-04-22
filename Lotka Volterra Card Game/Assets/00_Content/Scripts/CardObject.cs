@@ -26,7 +26,7 @@ public class CardObject : MonoBehaviour {
 		Debug.Assert(nullImage != null);
 	}
 
-	public virtual void SetCardInfo(CardScript _CardScript) {
+	public virtual void SetCardScript(CardScript _CardScript) {
 		cardInfo = _CardScript;
 		UpdateAllFields();
 	}

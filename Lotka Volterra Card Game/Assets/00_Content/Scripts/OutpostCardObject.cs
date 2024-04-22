@@ -19,75 +19,33 @@ public class OutpostCardObject : CardObject {
 
 	private OutpostCardScript outpostCardScript = null;
 
-	private void OnEnable() {
-		Debug.Assert(nullImage != null);
-	}
-
-	public void SetOutpostCardInfo(OutpostCardScript _outpostCardScript) {
-		outpostCardScript = _outpostCardScript;
+	public override void SetCardScript(CardScript _outpostCardScript) {
+		outpostCardScript = (OutpostCardScript)_outpostCardScript;
 		UpdateAllFields();
 	}
 
 	public CardScript GetOutpostCardInfo { get { return outpostCardScript; } }
-
-	public bool HasOutpostCardInfo() {
-		if (outpostCardScript != null) return true;
-		else return false;
-	}
 
 	/// <summary>
 	/// If the object doesn't contain a outpostCardInfo it logs that and returns. Otherwise it sets all of the values from outpostCardInfo to its own UI.
 	/// </summary>
 	public override void UpdateAllFields() {
 
-		if (!HasOutpostCardInfo()) {
+		if (!HasCardScript()) {
 			Debug.Log($"{name} didn't have a POCO_OutpostCard, so it couldn't set up its own fields.");
 			return;
 		}
 
+		base.UpdateAllFields();
+
 		// TODO: it seems strange that I'm initializing the int "temp" here, and that it's then used in all of the functions below. I wish I could initialize it in each, so that it didn't have such a long life, with several different values. I'm unsure of how to fix this though.
 		developmentCost.text = outpostCardScript.GetDevelopmentCost(out int temp) ? temp.ToString() : nA;
-
-		if (outpostCardScript.GetCardName != null) {
-			cardName.text = outpostCardScript.GetCardName;
-		}
-		else {
-			cardName.text = nA;
-		}
 
 		resourceCost.text = outpostCardScript.GetResourceCost(out temp) ? temp.ToString() : nA;
 
 		hoursCost.text = outpostCardScript.GetHourCost(out temp) ? temp.ToString() : nA;
 
 		upkeepCost.text = outpostCardScript.GetUpkeepCost(out temp) ? temp.ToString() : nA;
-
-		cardType.text = outpostCardScript.GetCardType.ToString();
-
-		//Check if the script has a illustration, otherwise uses the "nullImage".
-		if (outpostCardScript.GetIllustration != null) {
-			illustration.sprite = outpostCardScript.GetIllustration;
-		}
-		else { illustration.sprite = nullImage; }
-
-		if (outpostCardScript.GetKeywords(out List<Keyword> keywordsList)) {
-			string keywords = string.Empty;
-			foreach (Keyword keyword in keywordsList) {
-				//Converts the keyword to a string and adds it to this string, adds a comma and space at the end.
-				keywords += keyword.ToString() + ", ";
-			}
-
-			//Removes any trailing commas or spaces
-			this.keywords.text = keywords.TrimEnd(',',' ');
-		}
-		else {
-			//If the cardData does not contain any keywords the field is left empty.
-			keywords.text = string.Empty;
-		}
-
-		if (outpostCardScript.GetCardEffect != null) {
-			cardEffect.text = outpostCardScript.GetCardEffect;
-		}
-		else { cardEffect.text = nA; }
 
 		scavengeValue.text = outpostCardScript.GetScavengeValue(out temp) ? temp.ToString() : nA;
 

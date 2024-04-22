@@ -21,9 +21,8 @@ public class SurfaceZone : MonoBehaviour {
 
 	public void NewSurfaceCard(CardScript outPostCardInfo) {
 
-
 		Instantiate(surfaceCard, cardSlots[0]);
-		surfaceCard.SetSurfaceCardData(outPostCardInfo);
+		surfaceCard.SetCardScript(outPostCardInfo);
 
 		Debug.Log("Just instatiated a card, can I see it?");
 
