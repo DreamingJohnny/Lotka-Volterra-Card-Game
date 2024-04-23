@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class SurfaceCardScript : CardScript {
-	public SO_SurfaceCardData SurfaceCardData;
+public sealed class SurfaceCardScript : CardScript {
+
+	public override SO_CardData CardData => m_SO_SurfaceCardData;
+
+	private SO_SurfaceCardData m_SO_SurfaceCardData;
 
 	public SurfaceCardScript(SO_CardData cardData) : base(cardData) {
-		SurfaceCardData = cardData as SO_SurfaceCardData;
+		m_SO_SurfaceCardData = cardData as SO_SurfaceCardData;
 	}
 
 	#region"ScavengingValue"
@@ -22,12 +26,12 @@ public class SurfaceCardScript : CardScript {
 		}
 	}
 	public bool GetScavengingValue(out int scavengingValue) {
-		if (SurfaceCardData == null || SurfaceCardData.ScavengingValue < 0) {
+		if (m_SO_SurfaceCardData == null || m_SO_SurfaceCardData.ScavengingValue < 0) {
 			scavengingValue = -1;
 			return false;
 		}
 		else {
-			scavengingValue = GetModifiedValue(SurfaceCardData.ScavengingValue, scavengingValueAddition, scavengingValueMultiplier);
+			scavengingValue = GetModifiedValue(m_SO_SurfaceCardData.ScavengingValue, scavengingValueAddition, scavengingValueMultiplier);
 			return true;
 		}
 	}
@@ -46,12 +50,12 @@ public class SurfaceCardScript : CardScript {
 		}
 	}
 	public bool GetThreatLevel(out int threatLevel) {
-		if (SurfaceCardData == null || SurfaceCardData.ThreatLevel < 0) {
+		if (m_SO_SurfaceCardData == null || m_SO_SurfaceCardData.ThreatLevel < 0) {
 			threatLevel = -1;
 			return false;
 		}
 		else {
-			threatLevel = GetModifiedValue(SurfaceCardData.ThreatLevel, threatLevelAddition, threatLevelMultiplier);
+			threatLevel = GetModifiedValue(m_SO_SurfaceCardData.ThreatLevel, threatLevelAddition, threatLevelMultiplier);
 			return true;
 		}
 	}
@@ -70,12 +74,12 @@ public class SurfaceCardScript : CardScript {
 		}
 	}
 	public bool GetAlertnessValue(out int alertnessValue) {
-		if (SurfaceCardData == null || SurfaceCardData.AlertnessValue < 0) {
+		if (m_SO_SurfaceCardData == null || m_SO_SurfaceCardData.AlertnessValue < 0) {
 			alertnessValue = -1;
 			return false;
 		}
 		else {
-			alertnessValue = GetModifiedValue(SurfaceCardData.AlertnessValue, alertnessValueAddition, alertnessValueMultiplier);
+			alertnessValue = GetModifiedValue(m_SO_SurfaceCardData.AlertnessValue, alertnessValueAddition, alertnessValueMultiplier);
 			return true;
 		}
 	}
@@ -94,12 +98,12 @@ public class SurfaceCardScript : CardScript {
 		}
 	}
 	public bool GetToughnessValue(out int toughnessValue) {
-		if (SurfaceCardData == null || SurfaceCardData.ToughnessValue < 0) {
+		if (m_SO_SurfaceCardData == null || m_SO_SurfaceCardData.ToughnessValue < 0) {
 			toughnessValue = -1;
 			return false;
 		}
 		else {
-			toughnessValue = GetModifiedValue(SurfaceCardData.ToughnessValue, toughnessValueAddition, toughnessValueMultiplier);
+			toughnessValue = GetModifiedValue(m_SO_SurfaceCardData.ToughnessValue, toughnessValueAddition, toughnessValueMultiplier);
 			return true;
 		}
 	}

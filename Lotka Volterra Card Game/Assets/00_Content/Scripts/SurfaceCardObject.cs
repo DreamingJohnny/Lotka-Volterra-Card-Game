@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SurfaceCardObject : CardObject {
+public sealed class SurfaceCardObject : CardObject {
 
 	#region"UI_components"
 	[SerializeField] private TextMeshProUGUI scavengingValue;

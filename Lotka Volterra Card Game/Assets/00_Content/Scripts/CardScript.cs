@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class CardScript {
 
 	public CardScript(SO_CardData _cardData) {
-		this.CardData = _cardData;
+		CardData = _cardData;
 	}
 	public virtual SO_CardData CardData { get; set; }
 
@@ -13,7 +13,8 @@ public abstract class CardScript {
 	public string GetCardName { get { return CardData != null ? CardData.CardName : null; } }
 
 	public Sprite GetIllustration { get { return CardData.Illustration != null ? CardData.Illustration : null; } }
-
+	
+	//TODO: This one will need to be extended to deal with a more general card type.
 	public OutpostCardType GetCardType { get { return CardData.CardType; } }
 
 	public bool GetKeywords(out List<Keyword> keywords) {

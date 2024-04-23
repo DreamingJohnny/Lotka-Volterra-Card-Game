@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "OutpostCard", menuName = "ScriptableObjects/SO_OutpostCard")]
-public class SO_OutpostCardData : SO_CardData {
+public sealed class SO_OutpostCardData : SO_CardData {
 
 	[SerializeField] private CardRarity rarity;
 	[SerializeField] private IdeologyType ideology;

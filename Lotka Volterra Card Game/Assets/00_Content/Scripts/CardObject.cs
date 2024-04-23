@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardObject : MonoBehaviour {
+public abstract class CardObject : MonoBehaviour {
 
 	#region"UI_components"
 	[SerializeField] protected TextMeshProUGUI cardName;
@@ -14,7 +14,9 @@ public class CardObject : MonoBehaviour {
 	[SerializeField] protected TextMeshProUGUI cardEffect;
 	#endregion
 
-	private CardScript cardInfo = null;
+	private CardScript cardScript = null;
+	//TODO: look over if this should be public, if so, should it have getter and setter here instead?
+	public CardScript GetCardScript { get { return cardScript; } }
 
 	[Tooltip("Used on field for traits when the CardScript does not have acceptable data")]
 	protected readonly string nA = "N/A";
@@ -27,14 +29,14 @@ public class CardObject : MonoBehaviour {
 	}
 
 	public virtual void SetCardScript(CardScript _CardScript) {
-		cardInfo = _CardScript;
+		cardScript = _CardScript;
 		UpdateAllFields();
 	}
 
-	public CardScript GetCardScript { get { return cardInfo; } }
+	
 
 	public bool HasCardScript() {
-		if (cardInfo != null) return true;
+		if (cardScript != null) return true;
 		else return false;
 	}
 
@@ -48,22 +50,22 @@ public class CardObject : MonoBehaviour {
 			return;
 		}
 
-		if (cardInfo.GetCardName != null) {
-			cardName.text = cardInfo.GetCardName;
+		if (cardScript.GetCardName != null) {
+			cardName.text = cardScript.GetCardName;
 		}
 		else {
 			cardName.text = nA;
 		}
 
-		cardType.text = cardInfo.GetCardType.ToString();
+		cardType.text = cardScript.GetCardType.ToString();
 
 		//Check if the script has a illustration, otherwise uses the "nullImage".
-		if (cardInfo.GetIllustration != null) {
-			illustration.sprite = cardInfo.GetIllustration;
+		if (cardScript.GetIllustration != null) {
+			illustration.sprite = cardScript.GetIllustration;
 		}
 		else { illustration.sprite = nullImage; }
 
-		if (cardInfo.GetKeywords(out List<Keyword> keywordsList)) {
+		if (cardScript.GetKeywords(out List<Keyword> keywordsList)) {
 			string keywords = string.Empty;
 			foreach (Keyword keyword in keywordsList) {
 				//Converts the keyword to a string and adds it to this string, adds a comma and space at the end.
@@ -78,8 +80,8 @@ public class CardObject : MonoBehaviour {
 			keywords.text = string.Empty;
 		}
 
-		if (cardInfo.GetCardEffect != null) {
-			cardEffect.text = cardInfo.GetCardEffect;
+		if (cardScript.GetCardEffect != null) {
+			cardEffect.text = cardScript.GetCardEffect;
 		}
 		else { cardEffect.text = nA; }
 	}

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class OutpostCardObject : CardObject {
+public sealed class OutpostCardObject : CardObject {
 
 	#region"UI_components"
 	[SerializeField] private TextMeshProUGUI developmentCost;
@@ -18,13 +18,14 @@ public class OutpostCardObject : CardObject {
 	#endregion
 
 	private OutpostCardScript outpostCardScript = null;
+	//TODO: This should be changed or removed as well.
+	public CardScript GetOutpostCardScript { get { return outpostCardScript; } }
 
 	public override void SetCardScript(CardScript _outpostCardScript) {
 		outpostCardScript = (OutpostCardScript)_outpostCardScript;
 		UpdateAllFields();
 	}
 
-	public CardScript GetOutpostCardInfo { get { return outpostCardScript; } }
 
 	/// <summary>
 	/// If the object doesn't contain a outpostCardInfo it logs that and returns. Otherwise it sets all of the values from outpostCardInfo to its own UI.
@@ -32,7 +33,7 @@ public class OutpostCardObject : CardObject {
 	public override void UpdateAllFields() {
 
 		if (!HasCardScript()) {
-			Debug.Log($"{name} didn't have a POCO_OutpostCard, so it couldn't set up its own fields.");
+			Debug.Log($"{name} didn't have a OutpostCardScript, so it couldn't set up its own fields.");
 			return;
 		}
 

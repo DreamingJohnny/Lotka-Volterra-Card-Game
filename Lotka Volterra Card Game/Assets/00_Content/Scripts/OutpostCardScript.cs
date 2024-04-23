@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OutpostCardScript : CardScript {
+public sealed class OutpostCardScript : CardScript {
 
-	public SO_OutpostCardData OutpostCardData;
+	private SO_OutpostCardData m_SO_OutpostCardData;
+
+	public override SO_CardData CardData => m_SO_OutpostCardData;
 
 	public OutpostCardScript(SO_CardData cardData) : base(cardData) {
-		this.OutpostCardData = cardData as SO_OutpostCardData;
+		m_SO_OutpostCardData = cardData as SO_OutpostCardData;
 	}
 
 	#region"DevelopmentCost"
@@ -25,12 +27,12 @@ public class OutpostCardScript : CardScript {
 		}
 	}
 	public bool GetDevelopmentCost(out int developmentCost) {
-		if (OutpostCardData == null || OutpostCardData.DevelopmentCost < 0) {
+		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.DevelopmentCost < 0) {
 			developmentCost = -1;
 			return false;
 		}
 		else {
-			developmentCost = GetModifiedValue(OutpostCardData.DevelopmentCost, developmentCostAddition, developmentCostMultiplier);
+			developmentCost = GetModifiedValue(m_SO_OutpostCardData.DevelopmentCost, developmentCostAddition, developmentCostMultiplier);
 			return true;
 		}
 	}
@@ -49,12 +51,12 @@ public class OutpostCardScript : CardScript {
 		}
 	}
 	public bool GetResourceCost(out int resourceCost) {
-		if (OutpostCardData == null || OutpostCardData.ResourceCost < 0) {
+		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.ResourceCost < 0) {
 			resourceCost = -1;
 			return false;
 		}
 		else {
-			resourceCost = GetModifiedValue(OutpostCardData.ResourceCost, resourceCostAddition, resourceCostMultiplier);
+			resourceCost = GetModifiedValue(m_SO_OutpostCardData.ResourceCost, resourceCostAddition, resourceCostMultiplier);
 			return true;
 		}
 	}
@@ -73,12 +75,12 @@ public class OutpostCardScript : CardScript {
 		}
 	}
 	public bool GetHourCost(out int hourCost) {
-		if (OutpostCardData == null || OutpostCardData.HourCost < 0) {
+		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.HourCost < 0) {
 			hourCost = -1;
 			return false;
 		}
 		else {
-			hourCost = GetModifiedValue(OutpostCardData.HourCost, hourCostAddition, hourCostMultiplier);
+			hourCost = GetModifiedValue(m_SO_OutpostCardData.HourCost, hourCostAddition, hourCostMultiplier);
 			return true;
 		}
 	}
@@ -97,12 +99,12 @@ public class OutpostCardScript : CardScript {
 		}
 	}
 	public bool GetUpkeepCost(out int upkeepCost) {
-		if (OutpostCardData == null || OutpostCardData.UpkeepCost < 0) {
+		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.UpkeepCost < 0) {
 			upkeepCost = -1;
 			return false;
 		}
 		else {
-			upkeepCost = GetModifiedValue(OutpostCardData.UpkeepCost, upkeepCostAddition, upkeepCostMultiplier);
+			upkeepCost = GetModifiedValue(m_SO_OutpostCardData.UpkeepCost, upkeepCostAddition, upkeepCostMultiplier);
 			return true;
 		}
 	}
@@ -120,12 +122,12 @@ public class OutpostCardScript : CardScript {
 		}
 	}
 	public bool GetScavengeValue(out int scavengeValue) {
-		if (OutpostCardData == null || OutpostCardData.ScavengeValue < 0) {
+		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.ScavengeValue < 0) {
 			scavengeValue = -1;
 			return false;
 		}
 		else {
-			scavengeValue = GetModifiedValue(OutpostCardData.ScavengeValue, scavengeValueAddition, scavengeValueMultiplier);
+			scavengeValue = GetModifiedValue(m_SO_OutpostCardData.ScavengeValue, scavengeValueAddition, scavengeValueMultiplier);
 			return true;
 		}
 	}
@@ -143,12 +145,12 @@ public class OutpostCardScript : CardScript {
 		}
 	}
 	public bool GetInterveneValue(out int scavengeValue) {
-		if (OutpostCardData == null || OutpostCardData.InterveneValue < 0) {
+		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.InterveneValue < 0) {
 			scavengeValue = -1;
 			return false;
 		}
 		else {
-			scavengeValue = GetModifiedValue(OutpostCardData.InterveneValue, interveneValueAddition, interveneValueMultiplier);
+			scavengeValue = GetModifiedValue(m_SO_OutpostCardData.InterveneValue, interveneValueAddition, interveneValueMultiplier);
 			return true;
 		}
 	}
@@ -166,12 +168,12 @@ public class OutpostCardScript : CardScript {
 		}
 	}
 	public bool GetDevelopmentValue(out int developmentValue) {
-		if (OutpostCardData == null || OutpostCardData.DevelopmentValue < 0) {
+		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.DevelopmentValue < 0) {
 			developmentValue = -1;
 			return false;
 		}
 		else {
-			developmentValue = GetModifiedValue(OutpostCardData.DevelopmentValue, developmentValueAddition, developmentValueMultiplier);
+			developmentValue = GetModifiedValue(m_SO_OutpostCardData.DevelopmentValue, developmentValueAddition, developmentValueMultiplier);
 			return true;
 		}
 	}
