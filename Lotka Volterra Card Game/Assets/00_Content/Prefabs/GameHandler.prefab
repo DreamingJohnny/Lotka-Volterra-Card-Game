@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3500509010547193062
 MonoBehaviour:
@@ -44,5 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c1408c4ef9617429ae3b55f9f1da70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCard: {fileID: 0}
-  test_SO_OutpostCard: {fileID: 11400000, guid: 22ccada7d440b6946bda3352ec5b4398, type: 2}
+  outpostDeck: {fileID: 0}
+  playerHand: {fileID: 0}
+  surfaceDeck: {fileID: 0}
+  surfaceZone: {fileID: 0}
+  outpostCardData: {fileID: 11400000, guid: 096de40b7a5b4a0458ae9ed5eda218e0, type: 2}
+  outpostCardObject: {fileID: 0}
+  outpostCardObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  SO_OutpostCards:
+  - {fileID: 11400000, guid: 4a9de9b2396ff3d47a8ff378f48bd35d, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 096de40b7a5b4a0458ae9ed5eda218e0, type: 2}
+  discard: {fileID: 0}
+  cardDeck: {fileID: 0}

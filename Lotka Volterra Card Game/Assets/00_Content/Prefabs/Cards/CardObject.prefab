@@ -492,9 +492,8 @@ GameObject:
   - component: {fileID: 5645319497109885653}
   - component: {fileID: 8131410080821110963}
   - component: {fileID: 9014254167941747226}
-  - component: {fileID: 8625297855794120533}
   m_Layer: 5
-  m_Name: TempCardObject
+  m_Name: CardObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -563,24 +562,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8625297855794120533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7027386883764916087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75fac0b88f592a44481d1ba2224c8b2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardName: {fileID: 1794900077719850972}
-  cardType: {fileID: 5062167232370014722}
-  illustration: {fileID: 8422715296629442807}
-  keywords: {fileID: 7491670877046242952}
-  cardEffect: {fileID: 6025880787836404423}
-  nullImage: {fileID: 21300000, guid: c502435e0beb5a046b731efa4252e5c2, type: 3}
 --- !u!1 &8875569586319766303
 GameObject:
   m_ObjectHideFlags: 0
