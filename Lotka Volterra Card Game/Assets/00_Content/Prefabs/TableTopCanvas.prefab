@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 4955151897772395925}
   - component: {fileID: 9175518278681408395}
   - component: {fileID: 5779201543857794463}
+  - component: {fileID: 1513021395563732797}
   m_Layer: 5
   m_Name: Personality
   m_TagString: Untagged
@@ -482,7 +483,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5231944961959721376}
   m_Father: {fileID: 2779563054274351165}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -588,6 +590,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1513021395563732797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3792351249257483678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22435de0bb313c145b2c3e478b37cb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4010980967201989964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +1020,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7654768468415363177}
   - component: {fileID: 2113856303187099023}
-  - component: {fileID: 480097277494644993}
   m_Layer: 5
   m_Name: OutpostDiscard
   m_TagString: Untagged
@@ -1043,18 +1056,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4817526141065713139}
   m_CullTransparentMesh: 1
---- !u!114 &480097277494644993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817526141065713139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c595d9845038e524195bbe31be19bfae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7589482412748921912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1191,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7633824836190280385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5231944961959721376}
+  m_Layer: 5
+  m_Name: CardSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5231944961959721376
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633824836190280385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4955151897772395925}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9167955486921661708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,6 +1641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 825618266967145717, guid: 53250fd40efa2a141bb668fa74b15855, type: 3}
+    - {fileID: 3895772344735518933, guid: 53250fd40efa2a141bb668fa74b15855, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1723,7 +1761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8140123630212433985, guid: e2ba3a820aeaded4cb47bbfc2147ec15, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -170
+      value: -165
       objectReference: {fileID: 0}
     - target: {fileID: 8140123630212433985, guid: e2ba3a820aeaded4cb47bbfc2147ec15, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

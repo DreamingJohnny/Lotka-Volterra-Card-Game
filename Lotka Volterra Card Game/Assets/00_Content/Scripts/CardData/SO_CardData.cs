@@ -11,7 +11,7 @@ public abstract class SO_CardData : ScriptableObject {
 
 	[SerializeField] private OutpostCardType cardType;
 
-	[SerializeField] private List<Keyword> keywords;
+	[SerializeField] private List<Trait> keywords;
 
 	[TextArea(15, 20)]
 	[SerializeField] private string cardEffect;
@@ -20,6 +20,6 @@ public abstract class SO_CardData : ScriptableObject {
 	public string CardName { get { return cardName; } }
 	public Sprite Illustration { get { return illustration; } }
 	public OutpostCardType CardType { get { return cardType; } }
-	public List<Keyword> Keywords { get { return keywords; } }
+	public List<Trait> Keywords { get { return keywords; } }
 	public string CardEffect { get { return cardEffect; } }
 }

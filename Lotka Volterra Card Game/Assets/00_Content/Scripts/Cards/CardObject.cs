@@ -14,9 +14,17 @@ public abstract class CardObject : MonoBehaviour {
 	[SerializeField] protected TextMeshProUGUI cardEffect;
 	#endregion
 
-	protected CardScript cardScript;
+	private CardScript cardScript;
 	//TODO: look over if this should be public, if so, should it have getter and setter here instead?
 	//public CardScript GetCardScript { get { return cardScript; } }
+	//public virtual CardScript GetCardScript { get { return CardScript; } }
+
+	protected CardScript CardScript { get => cardScript; set => cardScript = value; }
+
+	public virtual void SetCardScript(CardScript _cardScript) {
+		CardScript = _cardScript;
+		UpdateAllFields();
+	}
 
 	[Tooltip("Used on field for traits when the CardScript does not have acceptable data")]
 	protected readonly string nA = "N/A";
@@ -28,17 +36,11 @@ public abstract class CardObject : MonoBehaviour {
 		Debug.Assert(nullImage != null);
 	}
 
-	public virtual CardScript GetCardScript { get { return cardScript; } }
-
-	public virtual void SetCardScript(CardScript _cardScript) {
-		cardScript = _cardScript;
-		UpdateAllFields();
-	}
 
 	
 
 	public bool HasCardScript() {
-		if (cardScript != null) return true;
+		if (CardScript != null) return true;
 		else return false;
 	}
 
@@ -52,24 +54,24 @@ public abstract class CardObject : MonoBehaviour {
 			return;
 		}
 
-		if (cardScript.GetCardName != null) {
-			cardName.text = cardScript.GetCardName;
+		if (CardScript.GetCardName != null) {
+			cardName.text = CardScript.GetCardName;
 		}
 		else {
 			cardName.text = nA;
 		}
 
-		cardType.text = cardScript.GetCardType.ToString();
+		cardType.text = CardScript.GetCardType.ToString();
 
 		//Check if the script has a illustration, otherwise uses the "nullImage".
-		if (cardScript.GetIllustration != null) {
-			illustration.sprite = cardScript.GetIllustration;
+		if (CardScript.GetIllustration != null) {
+			illustration.sprite = CardScript.GetIllustration;
 		}
 		else { illustration.sprite = nullImage; }
 
-		if (cardScript.GetKeywords(out List<Keyword> keywordsList)) {
+		if (CardScript.GetKeywords(out List<Trait> keywordsList)) {
 			string keywords = string.Empty;
-			foreach (Keyword keyword in keywordsList) {
+			foreach (Trait keyword in keywordsList) {
 				//Converts the keyword to a string and adds it to this string, adds a comma and space at the end.
 				keywords += keyword.ToString() + ", ";
 			}
@@ -82,8 +84,8 @@ public abstract class CardObject : MonoBehaviour {
 			keywords.text = string.Empty;
 		}
 
-		if (cardScript.GetCardEffect != null) {
-			cardEffect.text = cardScript.GetCardEffect;
+		if (CardScript.GetCardEffect != null) {
+			cardEffect.text = CardScript.GetCardEffect;
 		}
 		else { cardEffect.text = nA; }
 	}

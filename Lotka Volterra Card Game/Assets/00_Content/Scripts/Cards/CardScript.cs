@@ -17,9 +17,9 @@ public abstract class CardScript {
 	//TODO: This one will need to be extended to deal with a more general card type.
 	public OutpostCardType GetCardType { get { return CardData.CardType; } }
 
-	public bool GetKeywords(out List<Keyword> keywords) {
+	public bool GetKeywords(out List<Trait> keywords) {
 		if (CardData.Keywords == null || CardData.Keywords.Count <= 0) {
-			keywords = new List<Keyword>();
+			keywords = new List<Trait>();
 			return false;
 		}
 		else {

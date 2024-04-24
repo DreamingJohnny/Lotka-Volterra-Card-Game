@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c501ab6a8969da245b35f12c06840858, type: 3}
+  m_Name: Cmdr.FedericaAdenauer
+  m_EditorClassIdentifier: 
+  cardID: 
+  cardName: Cmndr. Federica Adenauer
+  illustration: {fileID: 21300000, guid: 1508d378c45ada94c80da62d74a57ab7, type: 3}
+  cardType: 0
+  keywords: 00000000
+  cardEffect: 'At the start of the Light Cycle, designate one Soldier Unit as the
+    Squad Leader. Any other Soldier Units Deployed together with it (Either with
+    SCA or INT) have their respective attribute increased by 50% (rounded up) of
+    the Squad Leader''s. Skip the Exhaust step for the Squad Leader. '
+  rarity: 0
+  ideology: 0
+  daycycle: 0
+  developmentCost: 0
+  resourceCost: 0
+  hourCost: 0
+  upkeepCost: 0
+  scavengeValue: 0
+  interveneValue: 0
+  developmentValue: 0
