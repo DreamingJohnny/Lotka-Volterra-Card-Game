@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Discard : MonoBehaviour {
+public class DiscardPile : MonoBehaviour {
 
 	//So, needs a stack then, that you can send cards to, and then functions for peeking at those and such.
 	//Needs a function that can be reached by others, easily,
@@ -23,26 +23,26 @@ public class Discard : MonoBehaviour {
 	//So it has a place for a CardObject
 	//And a stack of POCOs
 
-	private OutpostCardObject topDiscardCard;
+	private CardObject topDiscardCard;
 
-	private Stack<CardScript> outpostCardInfos;
+	private Stack<SO_CardData> cardPile;
 
-	public int AmountOfCards { get { return outpostCardInfos.Count; } }
+	public int AmountOfCards { get { return cardPile.Count; } }
 
 	void Start() {
-		outpostCardInfos = new Stack<CardScript>();
+		cardPile = new Stack<SO_CardData>();
 
 		topDiscardCard = null;
 	}
 
-	public void SendToDiscard(OutpostCardObject outpostCardObject) {
+	public void SendToDiscard(CardObject cardObject) {
 		//Should I add a return function here instead? so that if it doesn't have one then nothing happens?
-		if (outpostCardObject.HasCardScript()) {
+		if (cardObject.HasCardScript()) {
 
 			if (topDiscardCard != null) Destroy(topDiscardCard.gameObject);
 
-			topDiscardCard = outpostCardObject;
-			outpostCardInfos.Push(topDiscardCard.GetOutpostCardScript);
+			topDiscardCard = cardObject;
+			cardPile.Push(topDiscardCard.GetCardScript.CardData);
 			//I'm adding a fast teleport here, just for now.
 			topDiscardCard.transform.position = transform.position;
 		}

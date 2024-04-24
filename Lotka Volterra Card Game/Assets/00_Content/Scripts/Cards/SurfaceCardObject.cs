@@ -15,6 +15,8 @@ public sealed class SurfaceCardObject : CardObject {
 
 	private SurfaceCardScript surfaceCardScript= null;
 
+	protected CardScript CardScript => surfaceCardScript;
+
 	public void SetSurfaceCardScript(CardScript cardScript) {
 		surfaceCardScript = cardScript as SurfaceCardScript;
 		UpdateAllFields();

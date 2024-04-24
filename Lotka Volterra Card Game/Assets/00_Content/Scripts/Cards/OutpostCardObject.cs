@@ -17,6 +17,7 @@ public sealed class OutpostCardObject : CardObject {
 	[SerializeField] private TextMeshProUGUI developeValue;
 	#endregion
 
+	//Presumably this should override the one in the parent as well?
 	private OutpostCardScript outpostCardScript = null;
 	//TODO: This should be changed or removed as well.
 	public CardScript GetOutpostCardScript { get { return outpostCardScript; } }

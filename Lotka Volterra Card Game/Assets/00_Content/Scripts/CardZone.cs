@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurfaceZone : MonoBehaviour {
+public class CardZone : MonoBehaviour {
 	//Should receive enemy cards and place them in their spots, should move them along when a new one comes in.
 
 	//Need way to handle if there are too many cards
@@ -17,12 +17,12 @@ public class SurfaceZone : MonoBehaviour {
 
 	[SerializeField] private List<RectTransform> cardSlots;
 
-	[SerializeField] private SurfaceCardObject surfaceCard;
+	[SerializeField] private CardObject cardObject;
 
-	public void NewSurfaceCard(CardScript outPostCardInfo) {
+	public void NewSurfaceCard(CardScript cardScript) {
 
-		Instantiate(surfaceCard, cardSlots[0]);
-		surfaceCard.SetCardScript(outPostCardInfo);
+		Instantiate(cardObject, cardSlots[0]);
+		cardObject.SetCardScript(cardScript);
 
 		Debug.Log("Just instatiated a card, can I see it?");
 

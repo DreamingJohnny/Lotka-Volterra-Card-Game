@@ -14,9 +14,9 @@ public abstract class CardObject : MonoBehaviour {
 	[SerializeField] protected TextMeshProUGUI cardEffect;
 	#endregion
 
-	private CardScript cardScript = null;
+	protected CardScript cardScript;
 	//TODO: look over if this should be public, if so, should it have getter and setter here instead?
-	public CardScript GetCardScript { get { return cardScript; } }
+	//public CardScript GetCardScript { get { return cardScript; } }
 
 	[Tooltip("Used on field for traits when the CardScript does not have acceptable data")]
 	protected readonly string nA = "N/A";
@@ -28,8 +28,10 @@ public abstract class CardObject : MonoBehaviour {
 		Debug.Assert(nullImage != null);
 	}
 
-	public virtual void SetCardScript(CardScript _CardScript) {
-		cardScript = _CardScript;
+	public virtual CardScript GetCardScript { get { return cardScript; } }
+
+	public virtual void SetCardScript(CardScript _cardScript) {
+		cardScript = _cardScript;
 		UpdateAllFields();
 	}
 
