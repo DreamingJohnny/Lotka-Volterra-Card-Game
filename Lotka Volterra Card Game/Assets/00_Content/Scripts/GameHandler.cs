@@ -22,7 +22,7 @@ public class GameHandler : MonoBehaviour {
 
 	[Header("Ugly Testing")]
 	[SerializeField] private SO_CardData testCardData;
-	[SerializeField] private CardObject testCard;
+	[SerializeField] private OutpostCardObject testCard;
 
 	void Start() {
 

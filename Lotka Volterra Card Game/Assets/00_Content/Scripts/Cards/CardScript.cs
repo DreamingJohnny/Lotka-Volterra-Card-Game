@@ -7,7 +7,7 @@ public abstract class CardScript {
 	public CardScript(SO_CardData _cardData) {
 		CardData = _cardData;
 	}
-	public virtual SO_CardData CardData { get; set; }
+	protected virtual SO_CardData CardData { get; private set; }
 
 	public string GetCardID { get { return CardData != null ? CardData.CardID : null; } }
 	public string GetCardName { get { return CardData != null ? CardData.CardName : null; } }

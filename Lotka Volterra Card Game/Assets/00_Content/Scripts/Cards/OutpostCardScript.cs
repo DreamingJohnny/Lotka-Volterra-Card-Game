@@ -7,11 +7,10 @@ using UnityEngine.UI;
 public sealed class OutpostCardScript : CardScript {
 
 	private SO_OutpostCardData m_SO_OutpostCardData;
-
-	public override SO_CardData CardData => m_SO_OutpostCardData;
+	protected override SO_CardData CardData => m_SO_OutpostCardData;
 
 	public OutpostCardScript(SO_CardData cardData) : base(cardData) {
-		m_SO_OutpostCardData = cardData as SO_OutpostCardData;
+		m_SO_OutpostCardData = (SO_OutpostCardData)cardData;
 	}
 
 	#region"DevelopmentCost"

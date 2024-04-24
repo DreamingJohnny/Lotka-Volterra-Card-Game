@@ -17,16 +17,15 @@ public sealed class OutpostCardObject : CardObject {
 	[SerializeField] private TextMeshProUGUI developeValue;
 	#endregion
 
-	//Presumably this should override the one in the parent as well?
-	private OutpostCardScript outpostCardScript = null;
-	//TODO: This should be changed or removed as well.
-	public CardScript GetOutpostCardScript { get { return outpostCardScript; } }
+	private OutpostCardScript outpostCardScript;
+	public override CardScript CardScript => outpostCardScript;
 
-	public override void SetCardScript(CardScript _outpostCardScript) {
-		outpostCardScript = (OutpostCardScript)_outpostCardScript;
+	public override void SetCardScriptBase(CardScript cardScript) => SetCardScript((OutpostCardScript)cardScript);
+
+	public void SetCardScript(OutpostCardScript newOutpostCardScript) {
+		outpostCardScript = newOutpostCardScript;
 		UpdateAllFields();
 	}
-
 
 	/// <summary>
 	/// If the object doesn't contain a outpostCardInfo it logs that and returns. Otherwise it sets all of the values from outpostCardInfo to its own UI.

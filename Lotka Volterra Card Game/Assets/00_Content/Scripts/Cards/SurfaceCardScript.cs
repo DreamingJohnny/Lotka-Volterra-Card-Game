@@ -5,12 +5,11 @@ using UnityEngine;
 
 public sealed class SurfaceCardScript : CardScript {
 
-	public override SO_CardData CardData => m_SO_SurfaceCardData;
-
 	private SO_SurfaceCardData m_SO_SurfaceCardData;
+	protected override SO_CardData CardData => m_SO_SurfaceCardData;
 
 	public SurfaceCardScript(SO_CardData cardData) : base(cardData) {
-		m_SO_SurfaceCardData = cardData as SO_SurfaceCardData;
+		m_SO_SurfaceCardData = (SO_SurfaceCardData)cardData;
 	}
 
 	#region"ScavengingValue"

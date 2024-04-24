@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class CardDeck : MonoBehaviour {
 
@@ -126,7 +127,8 @@ public class CardDeck : MonoBehaviour {
 	public void PutOnTop(CardScript cardScript) {
 
 		cards = new Queue<SO_CardData>(cards.Reverse());
-		cards.Enqueue(cardScript.CardData);
+		
+		//cards.Enqueue(cardScript.CardData);
 		cards = new Queue<SO_CardData>(cards.Reverse());
 	}
 }

@@ -42,7 +42,7 @@ public class DiscardPile : MonoBehaviour {
 			if (topDiscardCard != null) Destroy(topDiscardCard.gameObject);
 
 			topDiscardCard = cardObject;
-			cardPile.Push(topDiscardCard.GetCardScript.CardData);
+			//cardPile.Push(topDiscardCard.GetCardScript.CardData);
 			//I'm adding a fast teleport here, just for now.
 			topDiscardCard.transform.position = transform.position;
 		}

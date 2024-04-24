@@ -13,12 +13,13 @@ public sealed class SurfaceCardObject : CardObject {
 	[SerializeField] private TextMeshProUGUI toughnessValue;
 	#endregion
 
-	private SurfaceCardScript surfaceCardScript= null;
+	private SurfaceCardScript surfaceCardScript;
+	public override CardScript CardScript => surfaceCardScript;
 
-	protected override CardScript CardScript => surfaceCardScript;
+	public override void SetCardScriptBase(CardScript cardScript) =>	SetCardScript((SurfaceCardScript)cardScript);
 
-	public void SetSurfaceCardScript(CardScript cardScript) {
-		surfaceCardScript = cardScript as SurfaceCardScript;
+	public void SetCardScript(SurfaceCardScript cardScript) {
+		surfaceCardScript = cardScript;
 		UpdateAllFields();
 	}
 
