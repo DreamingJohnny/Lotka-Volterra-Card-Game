@@ -1039,7 +1039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7027386883764916087, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
       propertyPath: m_Name
-      value: TempCardObject Variant Outpost
+      value: OutpostCardObject
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8625297855794120533, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
@@ -1140,7 +1140,7 @@ MonoBehaviour:
   cardName: {fileID: 628422007276210442}
   cardType: {fileID: 6201509630622170324}
   illustration: {fileID: 7256179226409455137}
-  keywords: {fileID: 8622032189532829790}
+  traits: {fileID: 8622032189532829790}
   cardEffect: {fileID: 4895523598577140753}
   nullImage: {fileID: 21300000, guid: c502435e0beb5a046b731efa4252e5c2, type: 3}
   developmentCost: {fileID: 1660408704500555113}

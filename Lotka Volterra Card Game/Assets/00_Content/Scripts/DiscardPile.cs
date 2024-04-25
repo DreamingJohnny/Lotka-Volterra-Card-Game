@@ -23,7 +23,9 @@ public class DiscardPile : MonoBehaviour {
 	//So it has a place for a CardObject
 	//And a stack of POCOs
 
-	private CardObject topDiscardCard;
+	//I'll want to fix this pretty soon, so that this one actually doesn't have one to begin with, and so that it, as it gets new ones, send the old ones back presumably?
+	//Perhaps going by an event for "UnUsedCards" or something like that?
+	[SerializeField] private CardObject topDiscardCard;
 
 	private Stack<CardScript> cardPile;
 
@@ -32,19 +34,18 @@ public class DiscardPile : MonoBehaviour {
 	void Start() {
 		cardPile = new Stack<CardScript>();
 
-		topDiscardCard = null;
+		topDiscardCard.gameObject.SetActive(false);
 	}
 
-	public void SendToDiscard(CardObject cardObject) {
+	public void SendToDiscard(CardScript cardScript) {
 		//Should I add a return function here instead? so that if it doesn't have one then nothing happens?
-		if (cardObject.HasCardScript()) {
-
-			if (topDiscardCard != null) Destroy(topDiscardCard.gameObject);
-
-			topDiscardCard = cardObject;
-			cardPile.Push(topDiscardCard.CardScript);
-			//I'm adding a fast teleport here, just for now.
-			topDiscardCard.transform.position = transform.position;
+		if (topDiscardCard != null) {
+			topDiscardCard.SetCardScriptBase(cardScript);
+			topDiscardCard.gameObject.SetActive(true);
 		}
+
+		cardPile.Push(cardScript);
+		//I'm adding a fast teleport here, just for now.
+		//topDiscardCard.transform.position = transform.position;
 	}
 }
