@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public sealed class SurfaceCardObject : CardObject {
 
 	#region"UI_components"
+	[SerializeField] private TextMeshProUGUI keywords;
 	[SerializeField] private TextMeshProUGUI scavengingValue;
 	[SerializeField] private TextMeshProUGUI threatLevel;
 	[SerializeField] private TextMeshProUGUI alertnessValue;
@@ -31,6 +32,21 @@ public sealed class SurfaceCardObject : CardObject {
 		}
 
 		base.UpdateAllFields();
+
+			if (surfaceCardScript.GetKeywords(out List<Keyword> keywordsList)) {
+			string tempKeywords = string.Empty;
+			foreach (Keyword keyword in keywordsList) {
+				//Converts the keyword to a string and adds it to this string, adds a comma and space at the end.
+				tempKeywords += keyword.ToString() + ", ";
+			}
+
+			//Removes any trailing commas or spaces
+			keywords.text = tempKeywords.TrimEnd(',', ' ');
+		}
+		else {
+			//If the cardData does not contain any keywords the field is left empty.
+			keywords.text = string.Empty;
+		}
 
 		scavengingValue.text = surfaceCardScript.GetScavengingValue(out int temp) ? temp.ToString() : nA;
 

@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c501ab6a8969da245b35f12c06840858, type: 3}
-  m_Name: OfficersEpaulets
+  m_Name: SignalRecognition
   m_EditorClassIdentifier: 
   cardID: 
-  cardName: OfficersEpaulets
-  illustration: {fileID: 21300000, guid: 953242a14eb9780419d4abb9f8ef5ba7, type: 3}
-  cardType: 3
-  keywords: 
-  cardEffect: Someone becomes a bigwig because of this
+  cardName: Signal Recognition
+  illustration: {fileID: 21300000, guid: ebed21d0381126345bf85fb905f1bfa2, type: 3}
+  cardType: 7
+  traits: 15000000
+  cardEffect: You may now look at an Enemy card when it is drawn. This does not reveal
+    the Enemy.
   rarity: 0
   ideology: 0
-  daycycle: 0
-  developmentCost: 2
-  resourceCost: 2
-  hourCost: 3
-  upkeepCost: 3
-  scavengeValue: 0
+  daycycle: 2
+  developmentCost: 12
+  resourceCost: -1
+  hourCost: -1
+  upkeepCost: -1
+  scavengeValue: -1
   interveneValue: -1
   developmentValue: -1

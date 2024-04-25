@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 3602624545721611763}
   - component: {fileID: 6004694312914766670}
   m_Layer: 5
-  m_Name: Keyword
+  m_Name: Keywords
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1032,9 +1032,10 @@ MonoBehaviour:
   cardName: {fileID: 3638051651803533823}
   cardType: {fileID: 7841997206526403617}
   illustration: {fileID: 6806995398785046228}
-  keywords: {fileID: 5576567221371478187}
+  traits: {fileID: 5576567221371478187}
   cardEffect: {fileID: 8733616614207053028}
   nullImage: {fileID: 21300000, guid: c502435e0beb5a046b731efa4252e5c2, type: 3}
+  keywords: {fileID: 6004694312914766670}
   scavengingValue: {fileID: 7727145427947149985}
   threatLevel: {fileID: 579223380858425650}
   alertnessValue: {fileID: 5098258007499908634}

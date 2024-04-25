@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "SurfaceCard", menuName = "ScriptableObjects/SO_SurfaceCard")]
 public sealed class SO_SurfaceCardData : SO_CardData {
 
+	[SerializeField] private List<Keyword> keywords;
+
 	[SerializeField] private int scavengingValue;
 
 	[SerializeField] private int threatLevel;
@@ -14,6 +16,7 @@ public sealed class SO_SurfaceCardData : SO_CardData {
 
 	[SerializeField] private int toughnessValue;
 
+	public List<Keyword> Keywords {  get { return keywords; } } 
 	public int ScavengingValue { get { return scavengingValue; } }
 	public int ThreatLevel { get { return threatLevel; } }
 	public int AlertnessValue { get {  return alertnessValue; } }

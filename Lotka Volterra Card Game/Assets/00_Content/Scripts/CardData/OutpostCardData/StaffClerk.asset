@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c501ab6a8969da245b35f12c06840858, type: 3}
+  m_Name: StaffClerk
+  m_EditorClassIdentifier: 
+  cardID: 
+  cardName: Staff Clerk
+  illustration: {fileID: 21300000, guid: 953242a14eb9780419d4abb9f8ef5ba7, type: 3}
+  cardType: 8
+  traits: 
+  cardEffect: Increases Base Personality bonuses by 1.
+  rarity: 1
+  ideology: 0
+  daycycle: 0
+  developmentCost: 0
+  resourceCost: -1
+  hourCost: -1
+  upkeepCost: 2
+  scavengeValue: 1
+  interveneValue: 1
+  developmentValue: 2

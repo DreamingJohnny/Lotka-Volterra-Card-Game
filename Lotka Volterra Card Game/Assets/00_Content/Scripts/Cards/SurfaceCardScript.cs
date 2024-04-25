@@ -12,6 +12,19 @@ public sealed class SurfaceCardScript : CardScript {
 		m_SO_SurfaceCardData = (SO_SurfaceCardData)cardData;
 	}
 
+	#region"Keywords"
+	public bool GetKeywords(out List<Keyword> keywords) {
+		if (m_SO_SurfaceCardData.Keywords == null || m_SO_SurfaceCardData.Keywords.Count <= 0) {
+			keywords = new List<Keyword>();
+			return false;
+		}
+		else {
+			keywords = m_SO_SurfaceCardData.Keywords;
+			return true;
+		}
+	}
+	#endregion
+
 	#region"ScavengingValue"
 	private int scavengingValueAddition = 0;
 	public int ScavengingValueAddition { get { return scavengingValueAddition; } set { scavengingValueAddition = value; } }

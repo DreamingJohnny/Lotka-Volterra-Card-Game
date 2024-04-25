@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c501ab6a8969da245b35f12c06840858, type: 3}
-  m_Name: CommandersQuarters
+  m_Name: Laborer
   m_EditorClassIdentifier: 
   cardID: 
-  cardName: Commander's Quaters
-  illustration: {fileID: 21300000, guid: 953242a14eb9780419d4abb9f8ef5ba7, type: 3}
-  cardType: 5
-  keywords: 
-  cardEffect: When the Enemy phase starts, choose 1 Officer in the Outpost. Ready
-    that Officer.
-  rarity: 0
+  cardName: Laborer
+  illustration: {fileID: 21300000, guid: 6054952ea2ec07f42ae901470327bfae, type: 3}
+  cardType: 8
+  traits: 
+  cardEffect: 'When Developing, produce 1 resource. '
+  rarity: 1
   ideology: 0
   daycycle: 0
-  developmentCost: 6
+  developmentCost: 0
   resourceCost: 0
   hourCost: 0
-  upkeepCost: 1
-  scavengeValue: -1
-  interveneValue: -1
-  developmentValue: -1
+  upkeepCost: 2
+  scavengeValue: 4
+  interveneValue: 3
+  developmentValue: 4

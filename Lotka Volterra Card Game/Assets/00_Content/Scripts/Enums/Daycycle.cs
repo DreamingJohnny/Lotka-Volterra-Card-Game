@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Daycycle {
+	Unapplicable,
 	Both,
 	Day,
 	Night
