@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 3602624545721611763}
   - component: {fileID: 6004694312914766670}
   m_Layer: 5
-  m_Name: Trait
+  m_Name: Keyword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Trait
+  m_text: Keyword
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -952,7 +952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7027386883764916087, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
       propertyPath: m_Name
-      value: TempCardObject Variant Surface
+      value: SurfaceCardObject
       objectReference: {fileID: 0}
     - target: {fileID: 7491670877046242952, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
       propertyPath: m_fontColor.b

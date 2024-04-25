@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public sealed class SO_OutpostCardData : SO_CardData {
 
 	[SerializeField] private CardRarity rarity;
-	[SerializeField] private IdeologyType ideology;
+	[SerializeField] private Ideology ideology;
 	[SerializeField] private Daycycle daycycle;
 	
 	[SerializeField] private int developmentCost;

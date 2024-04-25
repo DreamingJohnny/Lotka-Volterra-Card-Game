@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum IdeologyType {
+public enum Ideology {
 
 	None,
-	Interventionist,
-	Isolationist,
-	Democratic,
+
 	Autocratic,
 	Communal,
-	Individualist
+	Democratic,
+	Individualist,
+	Interventionist,
+	Isolationist,
 }

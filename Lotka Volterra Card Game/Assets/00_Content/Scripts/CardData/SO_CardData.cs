@@ -9,9 +9,9 @@ public abstract class SO_CardData : ScriptableObject {
 
 	[SerializeField] private Sprite illustration;
 
-	[SerializeField] private OutpostCardType cardType;
+	[SerializeField] private CardType cardType;
 
-	[SerializeField] private List<Trait> keywords;
+	[SerializeField] private List<Trait> traits;
 
 	[TextArea(15, 20)]
 	[SerializeField] private string cardEffect;
@@ -19,7 +19,7 @@ public abstract class SO_CardData : ScriptableObject {
 	public string CardID { get { return cardID; } }
 	public string CardName { get { return cardName; } }
 	public Sprite Illustration { get { return illustration; } }
-	public OutpostCardType CardType { get { return cardType; } }
-	public List<Trait> Keywords { get { return keywords; } }
+	public CardType CardType { get { return cardType; } }
+	public List<Trait> Traits { get { return traits; } }
 	public string CardEffect { get { return cardEffect; } }
 }

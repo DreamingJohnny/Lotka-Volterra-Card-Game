@@ -27,10 +27,27 @@ public class GameHandler : MonoBehaviour {
 	void Start() {
 
 		BruteTestingPersonalityZone();
+
+		BruteTestingDiscardPile();
+	}
+
+	private void BruteTestingDiscardPile() {
+		Instantiate(testCard);
+		testCard.SetCardScript(new OutpostCardScript(sO_OutpostCardDatas[0]));
+		outpostDiscardPile.SendToDiscard(testCard);
+
+		Instantiate(testCard);
+		testCard.SetCardScript(new OutpostCardScript(sO_OutpostCardDatas[1]));
+		personalityZone.AddCard(testCard);
+		outpostDiscardPile.SendToDiscard(testCard);
 	}
 
 	private void BruteTestingPersonalityZone() {
-		testCard.SetCardScript(new OutpostCardScript(testCardData));
+		testCard.SetCardScript(new OutpostCardScript(sO_OutpostCardDatas[0]));
+		personalityZone.AddCard(testCard);
+
+		Instantiate(testCard);
+		testCard.SetCardScript(new OutpostCardScript(sO_OutpostCardDatas[1]));
 		personalityZone.AddCard(testCard);
 	}
 }

@@ -1020,6 +1020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7654768468415363177}
   - component: {fileID: 2113856303187099023}
+  - component: {fileID: 5241501017871322426}
   m_Layer: 5
   m_Name: OutpostDiscard
   m_TagString: Untagged
@@ -1056,6 +1057,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4817526141065713139}
   m_CullTransparentMesh: 1
+--- !u!114 &5241501017871322426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817526141065713139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf50f49791d0044c8f7a4b2f01c5554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7589482412748921912
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum OutpostCardType
-{
-	Personality,
+public enum CardType {
 	Action,
-	Unit,
+	Enemy,
+	Event,
 	Equipment,
+	Location,
+	Outpost,
+	Scavenge,
 	Technology,
-	Locations,
-	Outpost
+	Unit,
 }

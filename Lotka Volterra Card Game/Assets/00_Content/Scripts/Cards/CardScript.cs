@@ -14,16 +14,15 @@ public abstract class CardScript {
 
 	public Sprite GetIllustration { get { return CardData.Illustration != null ? CardData.Illustration : null; } }
 	
-	//TODO: This one will need to be extended to deal with a more general card type.
-	public OutpostCardType GetCardType { get { return CardData.CardType; } }
+	public CardType GetCardType { get { return CardData.CardType; } }
 
-	public bool GetKeywords(out List<Trait> keywords) {
-		if (CardData.Keywords == null || CardData.Keywords.Count <= 0) {
-			keywords = new List<Trait>();
+	public bool GetTraits(out List<Trait> traits) {
+		if (CardData.Traits == null || CardData.Traits.Count <= 0) {
+			traits = new List<Trait>();
 			return false;
 		}
 		else {
-			keywords = CardData.Keywords;
+			traits = CardData.Traits;
 			return true;
 		}
 	}
@@ -45,5 +44,4 @@ public abstract class CardScript {
 		temp = Mathf.FloorToInt(temp);
 		return (int)temp;
 	}
-
 }

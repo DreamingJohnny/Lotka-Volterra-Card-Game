@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SurfaceCardType {
+public enum Keyword {
 
-	Undefined,
-	Discovery,
-	Enemy,
-	Event,
-	Supplies
+	Mindless,
+	Invasive,
 }

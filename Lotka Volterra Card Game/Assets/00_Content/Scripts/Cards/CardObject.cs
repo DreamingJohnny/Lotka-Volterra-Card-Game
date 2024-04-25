@@ -10,7 +10,7 @@ public abstract class CardObject : MonoBehaviour {
 	[SerializeField] protected TextMeshProUGUI cardName;
 	[SerializeField] protected TextMeshProUGUI cardType;
 	[SerializeField] protected Image illustration;
-	[SerializeField] protected TextMeshProUGUI keywords;
+	[SerializeField] protected TextMeshProUGUI traits;
 	[SerializeField] protected TextMeshProUGUI cardEffect;
 	#endregion
 
@@ -58,19 +58,19 @@ public abstract class CardObject : MonoBehaviour {
 		}
 		else { illustration.sprite = nullImage; }
 
-		if (CardScript.GetKeywords(out List<Trait> keywordsList)) {
-			string keywords = string.Empty;
-			foreach (Trait keyword in keywordsList) {
+		if (CardScript.GetTraits(out List<Trait> traitsList)) {
+			string traits = string.Empty;
+			foreach (Trait trait in traitsList) {
 				//Converts the keyword to a string and adds it to this string, adds a comma and space at the end.
-				keywords += keyword.ToString() + ", ";
+				traits += trait.ToString() + ", ";
 			}
 
 			//Removes any trailing commas or spaces
-			this.keywords.text = keywords.TrimEnd(',', ' ');
+			this.traits.text = traits.TrimEnd(',', ' ');
 		}
 		else {
 			//If the cardData does not contain any keywords the field is left empty.
-			keywords.text = string.Empty;
+			traits.text = string.Empty;
 		}
 
 		if (CardScript.GetCardEffect != null) {
