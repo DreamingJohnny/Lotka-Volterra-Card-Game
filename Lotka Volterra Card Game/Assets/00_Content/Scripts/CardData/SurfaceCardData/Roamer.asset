@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34985b5704cba274c9a632031c23e3ed, type: 3}
-  m_Name: Nanospore
+  m_Name: Roamer
   m_EditorClassIdentifier: 
   cardID: 
-  cardName: Nanospores
-  illustration: {fileID: 21300000, guid: d45b5df328da87844b6e90a4b2f65b1c, type: 3}
+  cardName: Roamer
+  illustration: {fileID: 21300000, guid: 3c8e656a6ce900a4bb3e33c7bbe5307f, type: 3}
   cardType: 1
-  traits: 1e000000
-  cardEffect: 'When revealed, move Nanospores from the Surface area to the Outpost
-    area. Increase spore level by 2. Nanospores are defeated whenever spore count
-    is lowered by any amount. '
+  traits: 1200000019000000
+  cardEffect: 'Effect: Halve the SCA of any Deployed Units'
   keywords: 
   scavengingValue: 0
   threatLevel: 1
-  alertnessValue: -1
-  toughnessValue: -1
+  alertnessValue: 4
+  toughnessValue: 4

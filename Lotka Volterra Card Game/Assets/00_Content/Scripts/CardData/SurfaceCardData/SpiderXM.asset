@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34985b5704cba274c9a632031c23e3ed, type: 3}
-  m_Name: Nanospore
+  m_Name: SpiderXM
   m_EditorClassIdentifier: 
   cardID: 
-  cardName: Nanospores
-  illustration: {fileID: 21300000, guid: d45b5df328da87844b6e90a4b2f65b1c, type: 3}
+  cardName: Spider XM
+  illustration: {fileID: 21300000, guid: 695a034c50986024d8ec9c8b6a0ce2ff, type: 3}
   cardType: 1
-  traits: 1e000000
-  cardEffect: 'When revealed, move Nanospores from the Surface area to the Outpost
-    area. Increase spore level by 2. Nanospores are defeated whenever spore count
-    is lowered by any amount. '
+  traits: 22000000
+  cardEffect: 'Spider XEM can be Intervened during Day and/or Night. Effect: Increase
+    upkeep by 2 until end of turn.'
   keywords: 
   scavengingValue: 0
   threatLevel: 1
-  alertnessValue: -1
-  toughnessValue: -1
+  alertnessValue: 6
+  toughnessValue: 2

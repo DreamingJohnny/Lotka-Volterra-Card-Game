@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34985b5704cba274c9a632031c23e3ed, type: 3}
-  m_Name: Nanospore
+  m_Name: XM7Seeder
   m_EditorClassIdentifier: 
   cardID: 
-  cardName: Nanospores
-  illustration: {fileID: 21300000, guid: d45b5df328da87844b6e90a4b2f65b1c, type: 3}
+  cardName: XM7 Seeder
+  illustration: {fileID: 21300000, guid: 1de9f23c4f59fd34fa73d3a81b8740ee, type: 3}
   cardType: 1
-  traits: 1e000000
-  cardEffect: 'When revealed, move Nanospores from the Surface area to the Outpost
-    area. Increase spore level by 2. Nanospores are defeated whenever spore count
-    is lowered by any amount. '
-  keywords: 
+  traits: 22000000
+  cardEffect: 'Effect: At the Draw Surface Cards step, draw an additional Surface
+    card. '
+  keywords: 00000000
   scavengingValue: 0
-  threatLevel: 1
-  alertnessValue: -1
-  toughnessValue: -1
+  threatLevel: 2
+  alertnessValue: 0
+  toughnessValue: 12
