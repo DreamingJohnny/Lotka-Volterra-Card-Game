@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private DiscardPile outpostDiscardPile;
 	[SerializeField] private CardHand playerHand;
 	[SerializeField] private CardZone personalityZone;
+	[SerializeField] private CardZone outpostZone;
 	[SerializeField] private OutpostCardObject outpostCardObject;
 	private Queue<OutpostCardObject> outpostCards;
 
@@ -38,7 +39,16 @@ public class GameHandler : MonoBehaviour {
 
 		BruteTestingPersonalityZone(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[0])));
 
+		BruteTestingOutpostZone();
+
 		//BruteTestingDiscardPile(new OutpostCardScript(sO_OutpostCardDatas[1]));
+	}
+
+	private void BruteTestingOutpostZone() {
+		Debug.Log("Adding a first outpostcard to the outpostZone");
+		outpostZone.AddCard(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[1])));
+		Debug.Log("Adding a second outpostcard to the outpostZone");
+		outpostZone.AddCard(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[2])));
 	}
 
 	private void BruteTestingObjectPooling() {
