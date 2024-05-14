@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private DiscardPile outpostDiscardPile;
 	[SerializeField] private CardHand playerHand;
 	[SerializeField] private CardZone personalityZone;
+	[SerializeField] private OutpostCardObject outpostCardObject;
 	private Queue<OutpostCardObject> outpostCards;
 
 	[Header("Surface")]
@@ -26,14 +27,26 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private SO_CardData testCardData;
 	[SerializeField] private OutpostCardObject testCard;
 
+	[SerializeField] private ObjectPool objectPooler;
+
 	void Start() {
 
 		outpostCards = new Queue<OutpostCardObject>();
-		surfaceCards = new Queue<SurfaceCardObject>();
+		//surfaceCards = new Queue<SurfaceCardObject>();
+
+		//BruteTestingObjectPooling();
 
 		BruteTestingPersonalityZone(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[0])));
 
-		BruteTestingDiscardPile(new OutpostCardScript(sO_OutpostCardDatas[1]));
+		//BruteTestingDiscardPile(new OutpostCardScript(sO_OutpostCardDatas[1]));
+	}
+
+	private void BruteTestingObjectPooling() {
+		Debug.Log(objectPooler.ObjectPoolAmount);
+
+		GameObject test = objectPooler.GetObject();
+		test.SetActive(true);
+		test.transform.position = Vector3.zero;
 	}
 
 	/// <summary>
@@ -61,7 +74,8 @@ public class GameHandler : MonoBehaviour {
 	/// <returns></returns>
 	private OutpostCardObject GetCardObject(OutpostCardScript outpostCardScript) {
 		if(outpostCards.Count <= 0) {
-			OutpostCardObject outpostCard = new();
+			Debug.Log("Creating a new outpostcard object");
+			OutpostCardObject outpostCard = Instantiate(outpostCardObject);
 			outpostCard.SetCardScript(outpostCardScript);
 			return outpostCard;
 		} else {
