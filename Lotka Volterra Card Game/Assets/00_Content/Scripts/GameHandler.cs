@@ -11,6 +11,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private CardHand playerHand;
 	[SerializeField] private CardZone personalityZone;
 	[SerializeField] private CardZone outpostZone;
+	[SerializeField] private CardZone developmentZone;
 	[SerializeField] private OutpostCardObject outpostCardObject;
 	private Queue<OutpostCardObject> outpostCards;
 
@@ -27,6 +28,7 @@ public class GameHandler : MonoBehaviour {
 	[Header("Ugly Testing")]
 	[SerializeField] private SO_CardData testCardData;
 	[SerializeField] private OutpostCardObject testCard;
+	private int testIndex = 0;
 
 	[SerializeField] private ObjectPool objectPooler;
 
@@ -37,11 +39,34 @@ public class GameHandler : MonoBehaviour {
 
 		//BruteTestingObjectPooling();
 
-		BruteTestingPersonalityZone(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[0])));
-
-		BruteTestingOutpostZone();
+		//BruteTestingCardTransfer();
 
 		//BruteTestingDiscardPile(new OutpostCardScript(sO_OutpostCardDatas[1]));
+	}
+
+	private void Update() {
+		if (Input.GetMouseButtonDown(0)) {
+			switch (testIndex) {
+				case 0:
+					BruteTestingPersonalityZone(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[0])));
+					break;
+				case 1:
+					BruteTestingOutpostZone();
+					break;
+				case 2:
+					BruteTestingCardTransfer();
+					break;
+				default:
+					Debug.Log("Recycling the switch.");
+					break;
+			}
+			testIndex++;
+		}
+	}
+
+	private void BruteTestingCardTransfer() {
+		Debug.Log("Sending card to other zone.");
+		developmentZone.AddCard(outpostZone.GetCard(0));
 	}
 
 	private void BruteTestingOutpostZone() {
@@ -83,12 +108,13 @@ public class GameHandler : MonoBehaviour {
 	/// <param name="outpostCardScript"></param>
 	/// <returns></returns>
 	private OutpostCardObject GetCardObject(OutpostCardScript outpostCardScript) {
-		if(outpostCards.Count <= 0) {
+		if (outpostCards.Count <= 0) {
 			Debug.Log("Creating a new outpostcard object");
 			OutpostCardObject outpostCard = Instantiate(outpostCardObject);
 			outpostCard.SetCardScript(outpostCardScript);
 			return outpostCard;
-		} else {
+		}
+		else {
 			OutpostCardObject outpostCard = outpostCards.Dequeue();
 			outpostCard.SetCardScript(outpostCardScript);
 			outpostCard.gameObject.SetActive(true);
@@ -106,16 +132,17 @@ public class GameHandler : MonoBehaviour {
 			SurfaceCardObject surfaceCard = new();
 			surfaceCard.SetCardScript(surfaceCardScript);
 			return surfaceCard;
-		} else {
+		}
+		else {
 			SurfaceCardObject surfaceCard = surfaceCards.Dequeue();
 			surfaceCard.SetCardScript(surfaceCardScript);
 			surfaceCard.gameObject.SetActive(true);
-			return surfaceCard ;
+			return surfaceCard;
 		}
 	}
-	
+
 	private void BruteTestingDiscardPile(CardScript cardScript) {
-		outpostDiscardPile.SendToDiscard(cardScript);		
+		outpostDiscardPile.SendToDiscard(cardScript);
 	}
 
 	private void BruteTestingPersonalityZone(OutpostCardObject outpostCardObject) {

@@ -9,14 +9,12 @@ public class CardZone : MonoBehaviour {
 	 * Attempting to create a more general way to handle cards that are placed face up on different areas of the board.
 	 * Knows a max of amount of cards it can have as children.
 	 * And have GM be the one that tells zones if they should light up and be ready to receive cards.
-	 * Needs list of it's children
 	 * Way of getting if it is full,
 	 * How many places it has
 	 * Get cards that it holds, if it holds cards.
+	 * Should receive cards and place them in their spots, should move them along when a new one comes in.
+	 * Need way to handle if there are too many cards
 	 */
-
-	//Should receive cards and place them in their spots, should move them along when a new one comes in.
-	//Need way to handle if there are too many cards
 
 	[SerializeField] private int cardSlotMax;
 	public int CardSlotMax { get { return cardSlotMax; } }
@@ -46,9 +44,14 @@ public class CardZone : MonoBehaviour {
 			Debug.Log($"{name} doesn't have the space to receive a new cardObject.");
 			return;
 		} else {
-			//newCard.transform.parent = gameObject.transform;
 			newCard.transform.SetParent(gameObject.transform,false);
 		}
+	}
 
+	public CardObject GetCard(int cardSlot) {
+		CardObject[] cardObjects = GetComponentsInChildren<CardObject>();
+		CardObject cardObject = cardObjects[cardSlot];
+		cardObject.transform.SetParent(null,false);
+		return cardObject;
 	}
 }
