@@ -8,7 +8,7 @@ public class GameHandler : MonoBehaviour {
 	[Header("Player")]
 	[SerializeField] private CardDeck outpostDeck;
 	[SerializeField] private DiscardPile outpostDiscardPile;
-	[SerializeField] private CardHand playerHand;
+	[SerializeField] private CardZone playerHand;
 	[SerializeField] private CardZone personalityZone;
 	[SerializeField] private CardZone outpostZone;
 	[SerializeField] private CardZone developmentZone;
@@ -48,16 +48,14 @@ public class GameHandler : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0)) {
 			switch (testIndex) {
 				case 0:
-					BruteTestingPersonalityZone(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[0])));
-					break;
-				case 1:
 					BruteTestingOutpostZone();
 					break;
-				case 2:
+				case 1:
 					BruteTestingCardTransfer();
 					break;
 				default:
 					Debug.Log("Recycling the switch.");
+					testIndex = 0;
 					break;
 			}
 			testIndex++;
@@ -66,14 +64,14 @@ public class GameHandler : MonoBehaviour {
 
 	private void BruteTestingCardTransfer() {
 		Debug.Log("Sending card to other zone.");
+		if(outpostZone.GetCard(0))
 		developmentZone.AddCard(outpostZone.GetCard(0));
 	}
 
 	private void BruteTestingOutpostZone() {
-		Debug.Log("Adding a first outpostcard to the outpostZone");
-		outpostZone.AddCard(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[1])));
-		Debug.Log("Adding a second outpostcard to the outpostZone");
-		outpostZone.AddCard(GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[2])));
+		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
+			outpostZone.AddCard(GetCardObject(new OutpostCardScript(cardData)));
+		}
 	}
 
 	private void BruteTestingObjectPooling() {
