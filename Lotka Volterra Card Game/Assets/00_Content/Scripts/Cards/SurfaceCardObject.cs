@@ -17,7 +17,7 @@ public sealed class SurfaceCardObject : CardObject {
 	private SurfaceCardScript surfaceCardScript;
 	public override CardScript CardScript => surfaceCardScript;
 
-	public override void SetCardScriptBase(CardScript cardScript) =>	SetCardScript((SurfaceCardScript)cardScript);
+	public override void SetCardScriptBase(CardScript cardScript) => SetCardScript((SurfaceCardScript)cardScript);
 
 	public void SetCardScript(SurfaceCardScript cardScript) {
 		surfaceCardScript = cardScript;
@@ -33,7 +33,7 @@ public sealed class SurfaceCardObject : CardObject {
 
 		base.UpdateAllFields();
 
-			if (surfaceCardScript.GetKeywords(out List<Keyword> keywordsList)) {
+		if (surfaceCardScript.GetKeywords(out List<Keyword> keywordsList)) {
 			string tempKeywords = string.Empty;
 			foreach (Keyword keyword in keywordsList) {
 				//Converts the keyword to a string and adds it to this string, adds a comma and space at the end.
