@@ -25,6 +25,9 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private List<SO_SurfaceCardData> sO_SurfaceCardDatas;
 	[SerializeField] private List<SO_OutpostCardData> sO_OutpostCardDatas;
 
+	[Header("Interactions")]
+	private CardObject selectedCard;
+
 	[Header("Ugly Testing")]
 	[SerializeField] private GameObject tabletopCanvas;
 	[SerializeField] private SO_CardData testCardData;
@@ -35,6 +38,8 @@ public class GameHandler : MonoBehaviour {
 
 	void Start() {
 
+		selectedCard = null;
+
 		outpostCards = new Queue<OutpostCardObject>();
 		//surfaceCards = new Queue<SurfaceCardObject>();
 
@@ -43,27 +48,28 @@ public class GameHandler : MonoBehaviour {
 		//BruteTestingCardTransfer();
 
 		//BruteTestingDiscardPile(new OutpostCardScript(sO_OutpostCardDatas[1]));
+
+		FirstTestOfSelections();
+
+    }
+
+	private void FirstTestOfSelections() {
+		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		outpostZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		developmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+
+		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
+			CardObject temp = GetCardObject(new OutpostCardScript(cardData));
+			temp.transform.SetParent(playerHand.transform, false);
+			temp.gameObject.SetActive(true);
+			Debug.Log("Card created!");
+		}
+
 	}
 
 	private void Update() {
-		if (Input.GetMouseButtonDown(0)) {
-			switch (testIndex) {
-				case 0:
-					BruteTestingOutpostZone();
-					break;
-				case 1:
-					BruteTestingCardTransfer();
-					break;
-				case 2:
-					BruteTestAddingTrait();
-					break;
-				default:
-					Debug.Log("Recycling the switch.");
-					testIndex = 0;
-					break;
-			}
-			testIndex++;
-		}
+		
 	}
 
 	private void BruteTestAddingTrait() {
@@ -132,6 +138,7 @@ public class GameHandler : MonoBehaviour {
 			Debug.Log("Creating a new outpostcard object");
 			OutpostCardObject outpostCard = Instantiate(outpostCardObject);
 			outpostCard.SetCardScript(outpostCardScript);
+			outpostCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
 			return outpostCard;
 		}
 		else {
@@ -139,6 +146,30 @@ public class GameHandler : MonoBehaviour {
 			outpostCard.SetCardScript(outpostCardScript);
 			outpostCard.gameObject.SetActive(true);
 			return outpostCard;
+		}
+	}
+
+	private void HandleOnCardSelected(object sender, EventArgs e) {
+		Debug.Log($"{sender} was just clicked and the event registered by the GM!");
+		
+		if(sender.GetType() == typeof(CardObject)) { 
+			selectedCard = sender as CardObject;
+		}
+		else {
+			Debug.Log("The GM just registered an event for a object that doesn't seem to be a CardObject");
+		}
+	}
+
+	private void HandleOnZoneSelected(object sender, EventArgs e) {
+		Debug.Log($"{sender} was just clicked and the event registered by the GM!");
+
+		if (selectedCard == null) {
+			Debug.Log("SelectedCard was null");
+			return;
+		} else {
+			CardZone cardZone = sender as CardZone;
+			selectedCard.transform.SetParent(cardZone.transform, false);
+			selectedCard = null;
 		}
 	}
 
@@ -151,6 +182,7 @@ public class GameHandler : MonoBehaviour {
 		if (surfaceCards.Count <= 0) {
 			SurfaceCardObject surfaceCard = new();
 			surfaceCard.SetCardScript(surfaceCardScript);
+			surfaceCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
 			return surfaceCard;
 		}
 		else {
