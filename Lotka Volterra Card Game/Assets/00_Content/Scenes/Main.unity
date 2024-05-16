@@ -535,6 +535,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ce2fa2102e47e4a884c4d26fba0172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1841754565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9167955486921661708, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+  m_PrefabInstance: {fileID: 694770303504640266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2127665805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1135,10 @@ PrefabInstance:
       value: GameHandler
       objectReference: {fileID: 0}
     - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
+      propertyPath: testCard
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: playerHand
       value: 
       objectReference: {fileID: 5962146593312576947}
@@ -1149,6 +1158,10 @@ PrefabInstance:
       propertyPath: objectPooler
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
+      propertyPath: tabletopCanvas
+      value: 
+      objectReference: {fileID: 1841754565}
     - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: developmentZone
       value: 

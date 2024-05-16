@@ -26,6 +26,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private List<SO_OutpostCardData> sO_OutpostCardDatas;
 
 	[Header("Ugly Testing")]
+	[SerializeField] private GameObject tabletopCanvas;
 	[SerializeField] private SO_CardData testCardData;
 	[SerializeField] private OutpostCardObject testCard;
 	private int testIndex = 0;
@@ -53,6 +54,9 @@ public class GameHandler : MonoBehaviour {
 				case 1:
 					BruteTestingCardTransfer();
 					break;
+				case 2:
+					BruteTestAddingTrait();
+					break;
 				default:
 					Debug.Log("Recycling the switch.");
 					testIndex = 0;
@@ -62,9 +66,27 @@ public class GameHandler : MonoBehaviour {
 		}
 	}
 
+	private void BruteTestAddingTrait() {
+
+		Debug.Log("Testing to add traits...");
+
+		CardObject cardObject = GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[0]));
+		cardObject.transform.SetParent(tabletopCanvas.transform);
+		cardObject.transform.position = Vector3.zero;
+
+		cardObject.CardScript.AddTraits(Trait.Assistant);
+		cardObject.CardScript.AddTraits(Trait.Commander);
+		cardObject.CardScript.AddTraits(Trait.Environment);
+
+		if (cardObject.CardScript.GetTraits(out List<Trait> traits)) {
+			foreach (Trait trait in traits) {
+				Debug.Log(trait);
+			}
+		}
+	}
+
 	private void BruteTestingCardTransfer() {
 		Debug.Log("Sending card to other zone.");
-		if(outpostZone.GetCard(0))
 		developmentZone.AddCard(outpostZone.GetCard(0));
 	}
 

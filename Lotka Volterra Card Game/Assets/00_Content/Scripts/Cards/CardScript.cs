@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class CardScript {
@@ -16,14 +17,30 @@ public abstract class CardScript {
 	
 	public CardType GetCardType { get { return CardData.CardType; } }
 
+	protected List<Trait> addedTraits = new List<Trait>();
+
 	public bool GetTraits(out List<Trait> traits) {
-		if (CardData.Traits == null || CardData.Traits.Count <= 0) {
+
+		//So, lets say if this isn't null, add and send back, otherwise, if this isn't null, add and send back...
+
+		if (CardData.Traits != null && CardData.Traits.Count > 0) {
+			traits = CardData.Traits.Concat(addedTraits).ToList();
+			return true;
+		}
+		else if(addedTraits != null && addedTraits.Count > 0) {
+			traits = CardData.Traits.Concat(addedTraits).ToList();
+			return true;
+		}
+		else {
 			traits = new List<Trait>();
 			return false;
 		}
-		else {
-			traits = CardData.Traits;
-			return true;
+	}
+
+	public void AddTraits(Trait newTrait) {
+		//Check if either list already contains the trait, if so, does not add it.
+		if (!addedTraits.Contains(newTrait) && !CardData.Traits.Contains(newTrait)) {
+			addedTraits.Add(newTrait);
 		}
 	}
 

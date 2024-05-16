@@ -623,7 +623,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -145, y: -420}
+  m_AnchoredPosition: {x: -145, y: -413.75}
   m_SizeDelta: {x: 1100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &561891770470425109
@@ -693,7 +693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf50f49791d0044c8f7a4b2f01c5554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topDiscardCard: {fileID: 0}
 --- !u!1 &9167955486921661708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,7 +1034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1581442024062602098, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -166
+      value: -167.25
       objectReference: {fileID: 0}
     - target: {fileID: 1581442024062602098, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1082,6 +1081,10 @@ PrefabInstance:
     - target: {fileID: 976895727868534910, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_Name
       value: UnderDevelopment
+      objectReference: {fileID: 0}
+    - target: {fileID: 1403914523277235761, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
+      propertyPath: cardSlotMax
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1581442024062602098, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_Pivot.x
@@ -1499,7 +1502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2665270734951307292, guid: bf440f3de1ffa6b448bec28518cc5b22, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 160
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 2665270734951307292, guid: bf440f3de1ffa6b448bec28518cc5b22, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
