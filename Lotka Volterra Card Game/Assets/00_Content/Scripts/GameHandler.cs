@@ -51,7 +51,7 @@ public class GameHandler : MonoBehaviour {
 
 		FirstTestOfSelections();
 
-    }
+	}
 
 	private void FirstTestOfSelections() {
 		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
@@ -69,7 +69,7 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void Update() {
-		
+
 	}
 
 	private void BruteTestAddingTrait() {
@@ -149,27 +149,33 @@ public class GameHandler : MonoBehaviour {
 		}
 	}
 
-	private void HandleOnCardSelected(object sender, EventArgs e) {
-		Debug.Log($"{sender} was just clicked and the event registered by the GM!");
-		
-		if(sender.GetType() == typeof(CardObject)) { 
-			selectedCard = sender as CardObject;
+	private void HandleOnCardSelected(CardSelection card) {
+
+		Debug.Log("Event for clicking on card was fired and caught!");
+
+		if (card.TryGetComponent(out CardObject cardObject)) {
+			Debug.Log("The CardObject was found!");
+			selectedCard = cardObject;
 		}
 		else {
 			Debug.Log("The GM just registered an event for a object that doesn't seem to be a CardObject");
 		}
 	}
 
-	private void HandleOnZoneSelected(object sender, EventArgs e) {
-		Debug.Log($"{sender} was just clicked and the event registered by the GM!");
+	private void HandleOnZoneSelected(ZoneSelection zone) {
 
 		if (selectedCard == null) {
 			Debug.Log("SelectedCard was null");
 			return;
-		} else {
-			CardZone cardZone = sender as CardZone;
-			selectedCard.transform.SetParent(cardZone.transform, false);
-			selectedCard = null;
+		}
+		else {
+			if (zone.TryGetComponent(out CardZone cardZone)) {
+				if (cardZone.IsCardAllowed(selectedCard)) {
+					//Later on, I want to have a think here, where I send the card of to a function, and I get it back if it isn't acceptable, what would that be like?
+					selectedCard.transform.SetParent(zone.transform, false);
+					selectedCard = null;
+				}
+			}
 		}
 	}
 

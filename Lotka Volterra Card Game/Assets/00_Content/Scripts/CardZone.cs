@@ -6,15 +6,29 @@ using UnityEngine;
 
 public class CardZone : MonoBehaviour {
 
+	[SerializeField] private List<CardType> approvedCardTypes = new();
+
 	[SerializeField] private int cardSlotMax;
 	public int CardSlotMax { get { return cardSlotMax; } }
 
 	public bool IsFull { get { if (cardSlotMax >= transform.childCount) return false; return true; } }
 
+	public bool IsCardAllowed(CardObject cardObject) {
+		if (cardObject == null) return false;
+		else if (IsFull) return false;
+		else {
+            foreach (CardType cardType in approvedCardTypes)
+            {
+				if (cardType == cardObject.CardScript.GetCardType) return true;
+			}
+			return false;
+        }
+	}
+
 	public void AddCard(CardObject newCard) {
 
-		if (IsFull) {
-			Debug.Log($"{name} doesn't have the space to receive a new cardObject.");
+		if (!IsCardAllowed(newCard)) {
+			Debug.Log($"{name} cannot receive the new card.");
 			return;
 		}
 		else {

@@ -9,15 +9,15 @@ public class CardSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	//So, this script notices when it is selected by a pointer, it then highlights itself, and sends an even to the GM?
 
-	public event EventHandler OnCardSelected;
+	public event Action<CardSelection> OnCardSelected;
 
 	public void OnPointerEnter(PointerEventData pointerEventData) {
 		
 	}
 
 	public void OnPointerClick(PointerEventData pointerEventData) {
-
-		OnCardSelected?.Invoke(this, EventArgs.Empty);
+		Debug.Log("Card was clicked!");
+		OnCardSelected?.Invoke(this);
 	}
 	public void OnPointerExit(PointerEventData pointerEventData) {
 		

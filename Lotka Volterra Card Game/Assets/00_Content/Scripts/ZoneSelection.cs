@@ -10,15 +10,17 @@ public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	//Once we've fixed that, the next step should be to have it send an event when the mouse clicks on it,
 	//So that the GM, that subscribes to the event, then knows what it is, and can decide if it should recieve the card.
 
-	public event EventHandler OnZoneSelection;
+	public event Action<ZoneSelection> OnZoneSelection;
+
+
 
 	public void OnPointerEnter(PointerEventData pointerEventData) {
+		Debug.Log("Pointer enters...");
 	}
 
 	public void OnPointerClick(PointerEventData pointerEventData) {
-		//Should send the event to the GM here.
 
-		OnZoneSelection?.Invoke(this, EventArgs.Empty);
+		OnZoneSelection?.Invoke(this);
 	}
 	public void OnPointerExit(PointerEventData pointerEventData) {
 	}
