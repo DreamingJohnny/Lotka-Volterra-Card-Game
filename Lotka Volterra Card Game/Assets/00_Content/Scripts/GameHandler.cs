@@ -25,45 +25,42 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private List<SO_SurfaceCardData> sO_SurfaceCardDatas;
 	[SerializeField] private List<SO_OutpostCardData> sO_OutpostCardDatas;
 
+	[Header("Interactions")]
+	private CardObject selectedCard;
+
 	[Header("Ugly Testing")]
 	[SerializeField] private GameObject tabletopCanvas;
 	[SerializeField] private SO_CardData testCardData;
 	[SerializeField] private OutpostCardObject testCard;
-	private int testIndex = 0;
 
 	[SerializeField] private ObjectPool objectPooler;
 
 	void Start() {
 
+		selectedCard = null;
+
 		outpostCards = new Queue<OutpostCardObject>();
-		//surfaceCards = new Queue<SurfaceCardObject>();
 
-		//BruteTestingObjectPooling();
+		FirstTestOfSelections();
 
-		//BruteTestingCardTransfer();
+	}
 
-		//BruteTestingDiscardPile(new OutpostCardScript(sO_OutpostCardDatas[1]));
+	private void FirstTestOfSelections() {
+		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		outpostZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		developmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+
+		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
+			CardObject temp = GetCardObject(new OutpostCardScript(cardData));
+			temp.transform.SetParent(playerHand.transform, false);
+			temp.gameObject.SetActive(true);
+			Debug.Log("Card created!");
+		}
 	}
 
 	private void Update() {
-		if (Input.GetMouseButtonDown(0)) {
-			switch (testIndex) {
-				case 0:
-					BruteTestingOutpostZone();
-					break;
-				case 1:
-					BruteTestingCardTransfer();
-					break;
-				case 2:
-					BruteTestAddingTrait();
-					break;
-				default:
-					Debug.Log("Recycling the switch.");
-					testIndex = 0;
-					break;
-			}
-			testIndex++;
-		}
+
 	}
 
 	private void BruteTestAddingTrait() {
@@ -82,17 +79,6 @@ public class GameHandler : MonoBehaviour {
 			foreach (Trait trait in traits) {
 				Debug.Log(trait);
 			}
-		}
-	}
-
-	private void BruteTestingCardTransfer() {
-		Debug.Log("Sending card to other zone.");
-		developmentZone.AddCard(outpostZone.GetCard(0));
-	}
-
-	private void BruteTestingOutpostZone() {
-		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
-			outpostZone.AddCard(GetCardObject(new OutpostCardScript(cardData)));
 		}
 	}
 
@@ -132,6 +118,7 @@ public class GameHandler : MonoBehaviour {
 			Debug.Log("Creating a new outpostcard object");
 			OutpostCardObject outpostCard = Instantiate(outpostCardObject);
 			outpostCard.SetCardScript(outpostCardScript);
+			outpostCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
 			return outpostCard;
 		}
 		else {
@@ -139,6 +126,33 @@ public class GameHandler : MonoBehaviour {
 			outpostCard.SetCardScript(outpostCardScript);
 			outpostCard.gameObject.SetActive(true);
 			return outpostCard;
+		}
+	}
+
+	private void HandleOnCardSelected(CardSelection card) {
+
+		if (card.TryGetComponent(out CardObject cardObject)) {
+			selectedCard = cardObject;
+		}
+		else {
+			Debug.Log("The GM just registered an event for a object that doesn't seem to be a CardObject");
+		}
+	}
+
+	private void HandleOnZoneSelected(ZoneSelection zone) {
+
+		if (selectedCard == null) {
+			Debug.Log("SelectedCard was null");
+			return;
+		}
+		else {
+			if (zone.TryGetComponent(out CardZone cardZone)) {
+				if (cardZone.IsCardAllowed(selectedCard)) {
+					//Later on, I want to have a think here, where I send the card of to a function, and I get it back if it isn't acceptable, what would that be like?
+					selectedCard.transform.SetParent(zone.transform, false);
+					selectedCard = null;
+				}
+			}
 		}
 	}
 
@@ -151,6 +165,7 @@ public class GameHandler : MonoBehaviour {
 		if (surfaceCards.Count <= 0) {
 			SurfaceCardObject surfaceCard = new();
 			surfaceCard.SetCardScript(surfaceCardScript);
+			surfaceCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
 			return surfaceCard;
 		}
 		else {
@@ -159,13 +174,5 @@ public class GameHandler : MonoBehaviour {
 			surfaceCard.gameObject.SetActive(true);
 			return surfaceCard;
 		}
-	}
-
-	private void BruteTestingDiscardPile(CardScript cardScript) {
-		outpostDiscardPile.SendToDiscard(cardScript);
-	}
-
-	private void BruteTestingPersonalityZone(OutpostCardObject outpostCardObject) {
-		personalityZone.AddCard(outpostCardObject);
 	}
 }

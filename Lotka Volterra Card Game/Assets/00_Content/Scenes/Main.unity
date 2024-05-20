@@ -598,7 +598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b487743489cfdfe438d46bc67a9aca9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1bd94ed9b5c65940a9daf44861be9c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -624,10 +624,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2316083825026971819, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
-      propertyPath: cardSlotMax
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2779563054274351165, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -711,6 +707,18 @@ PrefabInstance:
     - target: {fileID: 2779563054274351165, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293665375283480591, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+      propertyPath: m_Color.b
+      value: 0.24705884
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293665375283480591, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+      propertyPath: m_Color.g
+      value: 0.27058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293665375283480591, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+      propertyPath: m_Color.r
+      value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 9167955486921661708, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
       propertyPath: m_Name
@@ -940,10 +948,6 @@ PrefabInstance:
     - target: {fileID: 6224676417368566462, guid: b4e60d6e1fd5ecf44bff5e11de0adfac, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687463018057462809, guid: b4e60d6e1fd5ecf44bff5e11de0adfac, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 7805194987943170073, guid: b4e60d6e1fd5ecf44bff5e11de0adfac, type: 3}
       propertyPath: m_AnchorMax.y
