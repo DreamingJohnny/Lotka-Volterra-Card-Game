@@ -7,19 +7,23 @@ using UnityEngine.EventSystems;
 
 public class CardSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
-	//So, this script notices when it is selected by a pointer, it then highlights itself, and sends an even to the GM?
+	private Vector3 neutralScale = Vector3.one;
+	private Vector3 highlightedScale = new(1.2f, 1.2f, 1.2f);
 
 	public event Action<CardSelection> OnCardSelected;
 
+	private void OnEnable() {
+		transform.localScale = neutralScale;
+	}
+
 	public void OnPointerEnter(PointerEventData pointerEventData) {
-		
+		transform.localScale = highlightedScale;
 	}
 
 	public void OnPointerClick(PointerEventData pointerEventData) {
-		Debug.Log("Card was clicked!");
 		OnCardSelected?.Invoke(this);
 	}
 	public void OnPointerExit(PointerEventData pointerEventData) {
-		
+		transform.localScale = neutralScale;
 	}
 }

@@ -32,7 +32,6 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private GameObject tabletopCanvas;
 	[SerializeField] private SO_CardData testCardData;
 	[SerializeField] private OutpostCardObject testCard;
-	private int testIndex = 0;
 
 	[SerializeField] private ObjectPool objectPooler;
 
@@ -41,13 +40,6 @@ public class GameHandler : MonoBehaviour {
 		selectedCard = null;
 
 		outpostCards = new Queue<OutpostCardObject>();
-		//surfaceCards = new Queue<SurfaceCardObject>();
-
-		//BruteTestingObjectPooling();
-
-		//BruteTestingCardTransfer();
-
-		//BruteTestingDiscardPile(new OutpostCardScript(sO_OutpostCardDatas[1]));
 
 		FirstTestOfSelections();
 
@@ -65,7 +57,6 @@ public class GameHandler : MonoBehaviour {
 			temp.gameObject.SetActive(true);
 			Debug.Log("Card created!");
 		}
-
 	}
 
 	private void Update() {
@@ -88,17 +79,6 @@ public class GameHandler : MonoBehaviour {
 			foreach (Trait trait in traits) {
 				Debug.Log(trait);
 			}
-		}
-	}
-
-	private void BruteTestingCardTransfer() {
-		Debug.Log("Sending card to other zone.");
-		developmentZone.AddCard(outpostZone.GetCard(0));
-	}
-
-	private void BruteTestingOutpostZone() {
-		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
-			outpostZone.AddCard(GetCardObject(new OutpostCardScript(cardData)));
 		}
 	}
 
@@ -151,10 +131,7 @@ public class GameHandler : MonoBehaviour {
 
 	private void HandleOnCardSelected(CardSelection card) {
 
-		Debug.Log("Event for clicking on card was fired and caught!");
-
 		if (card.TryGetComponent(out CardObject cardObject)) {
-			Debug.Log("The CardObject was found!");
 			selectedCard = cardObject;
 		}
 		else {
@@ -197,13 +174,5 @@ public class GameHandler : MonoBehaviour {
 			surfaceCard.gameObject.SetActive(true);
 			return surfaceCard;
 		}
-	}
-
-	private void BruteTestingDiscardPile(CardScript cardScript) {
-		outpostDiscardPile.SendToDiscard(cardScript);
-	}
-
-	private void BruteTestingPersonalityZone(OutpostCardObject outpostCardObject) {
-		personalityZone.AddCard(outpostCardObject);
 	}
 }

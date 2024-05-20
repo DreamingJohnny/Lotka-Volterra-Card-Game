@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
-	//So, this will sit on a zone, firstly we'll want it to just light up when the mouse is above it,
-	//Once we've fixed that, the next step should be to have it send an event when the mouse clicks on it,
-	//So that the GM, that subscribes to the event, then knows what it is, and can decide if it should recieve the card.
-
 	[SerializeField][Range(0f,1.0f)] private float neutralAlpha = 0.35f;
 	[SerializeField][Range(0f, 1.0f)] private float highlightedAlpha = 1.0f;
 
