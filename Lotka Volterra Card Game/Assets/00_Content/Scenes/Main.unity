@@ -708,18 +708,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4293665375283480591, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
-      propertyPath: m_Color.b
-      value: 0.24705884
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293665375283480591, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
-      propertyPath: m_Color.g
-      value: 0.27058825
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293665375283480591, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
-      propertyPath: m_Color.r
-      value: 0.1254902
-      objectReference: {fileID: 0}
     - target: {fileID: 9167955486921661708, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
       propertyPath: m_Name
       value: TableTopCanvas

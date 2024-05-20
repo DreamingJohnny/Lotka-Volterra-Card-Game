@@ -10,6 +10,8 @@ public abstract class CardScript {
 	}
 	protected virtual SO_CardData CardData { get; private set; }
 
+	public SO_CardData GetCardData { get {  return CardData; } }
+
 	public string GetCardID { get { return CardData != null ? CardData.CardID : null; } }
 	public string GetCardName { get { return CardData != null ? CardData.CardName : null; } }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,9 +10,6 @@ public class DiscardPile : MonoBehaviour {
 	//Needs a function that can be reached by others, easily,
 	//Yeah, it should have a reference to a top card.
 
-	//And a queue
-	//And when it gets a card it adds it to the stack, and it sends the topmost on to OutpostCardObject
-
 
 	//So it has a place for a CardObject
 	//And a stack of POCOs just the POCOs
@@ -20,23 +18,40 @@ public class DiscardPile : MonoBehaviour {
 	//Perhaps going by an event for "UnUsedCards" or something like that?
 	private CardObject topDiscardCard;
 
-	private Stack<CardScript> cardPile;
+	private Stack<SO_CardData> cardPile;
 
 	public int AmountOfCards { get { return cardPile.Count; } }
 
+	public event Action<CardObject> OnUnUsedCard;
+
 	void Start() {
-		cardPile = new Stack<CardScript>();
+		cardPile = new Stack<SO_CardData>();
+		topDiscardCard = null;
 	}
 
-	public void SendToDiscard(CardScript cardScript) {
-		//Should I add a return function here instead? so that if it doesn't have one then nothing happens?
-		if (topDiscardCard != null) {
-			topDiscardCard.SetCardScriptBase(cardScript);
-			topDiscardCard.gameObject.SetActive(true);
+	public void GetCard() {
+		//So, this function will return the topCard, before that, it will check if it needs a new card, and if yes, it will ask for it.
+		//So, this will also need to take the SO out of the list then?
+
+		//What happens if you ask for more than one card? Does each card, as they come in, get the SO from the top?
+
+		//Does it begin by checking that? So if it recieves a card that doesn't have a SO, then it sets it up with one from the top?
+
+	}
+
+	public void RecieveCard(CardObject card) {
+		cardPile.Push(card.CardScript.GetCardData);
+		SetTopCard(card);
+	}
+
+	private void SetTopCard(CardObject card) {
+
+		card.transform.SetParent(transform,false);
+
+		if (topDiscardCard != null ) {
+			OnUnUsedCard?.Invoke(topDiscardCard);
 		}
 
-		cardPile.Push(cardScript);
-		//I'm adding a fast teleport here, just for now.
-		topDiscardCard.transform.position = transform.position;
+		topDiscardCard = card;
 	}
 }
