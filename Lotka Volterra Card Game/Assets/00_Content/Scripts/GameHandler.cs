@@ -42,7 +42,6 @@ public class GameHandler : MonoBehaviour {
 		outpostCards = new Queue<OutpostCardObject>();
 
 		FirstTestOfSelections();
-
 	}
 
 	private void FirstTestOfSelections() {
@@ -61,25 +60,6 @@ public class GameHandler : MonoBehaviour {
 
 	private void Update() {
 
-	}
-
-	private void BruteTestAddingTrait() {
-
-		Debug.Log("Testing to add traits...");
-
-		CardObject cardObject = GetCardObject(new OutpostCardScript(sO_OutpostCardDatas[0]));
-		cardObject.transform.SetParent(tabletopCanvas.transform);
-		cardObject.transform.position = Vector3.zero;
-
-		cardObject.CardScript.AddTraits(Trait.Assistant);
-		cardObject.CardScript.AddTraits(Trait.Commander);
-		cardObject.CardScript.AddTraits(Trait.Environment);
-
-		if (cardObject.CardScript.GetTraits(out List<Trait> traits)) {
-			foreach (Trait trait in traits) {
-				Debug.Log(trait);
-			}
-		}
 	}
 
 	private void BruteTestingObjectPooling() {

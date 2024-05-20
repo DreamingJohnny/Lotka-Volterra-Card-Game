@@ -21,8 +21,6 @@ public abstract class CardScript {
 
 	public bool GetTraits(out List<Trait> traits) {
 
-		//So, lets say if this isn't null, add and send back, otherwise, if this isn't null, add and send back...
-
 		if (CardData.Traits != null && CardData.Traits.Count > 0) {
 			traits = CardData.Traits.Concat(addedTraits).ToList();
 			return true;
