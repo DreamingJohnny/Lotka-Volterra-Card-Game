@@ -708,6 +708,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7036704604811634447, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -582
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036704604811634447, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -125
+      objectReference: {fileID: 0}
     - target: {fileID: 9167955486921661708, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
       propertyPath: m_Name
       value: TableTopCanvas
@@ -715,7 +723,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8700141194821268023, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 694770303504640271}
   m_SourcePrefab: {fileID: 100100000, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
 --- !u!114 &694770303504640267 stripped
 MonoBehaviour:
@@ -748,6 +759,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22435de0bb313c145b2c3e478b37cb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &694770303504640270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8700141194821268023, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+  m_PrefabInstance: {fileID: 694770303504640266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &694770303504640271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694770303504640270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c54f7c82c4c8694b994000b8393a9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neutralAlpha: 0.35
+  highlightedAlpha: 1
+--- !u!114 &694770303504640275 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 190338108036958880, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+  m_PrefabInstance: {fileID: 694770303504640266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694770303504640270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf50f49791d0044c8f7a4b2f01c5554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1000811089854228777 stripped
@@ -1150,6 +1191,10 @@ PrefabInstance:
       propertyPath: objectPooler
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
+      propertyPath: testCardPile
+      value: 
+      objectReference: {fileID: 694770303504640275}
     - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: tabletopCanvas
       value: 

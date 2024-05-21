@@ -33,6 +33,8 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private SO_CardData testCardData;
 	[SerializeField] private OutpostCardObject testCard;
 
+	[SerializeField] private DiscardPile testCardPile;
+
 	[SerializeField] private ObjectPool objectPooler;
 
 	void Start() {
@@ -49,6 +51,7 @@ public class GameHandler : MonoBehaviour {
 		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 		outpostZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 		developmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		testCardPile.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 
 		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
 			CardObject temp = GetCardObject(new OutpostCardScript(cardData));
@@ -59,7 +62,9 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void Update() {
+		if (Input.GetMouseButtonDown(0)) {
 
+		}
 	}
 
 	private void BruteTestingObjectPooling() {
@@ -132,6 +137,9 @@ public class GameHandler : MonoBehaviour {
 					selectedCard.transform.SetParent(zone.transform, false);
 					selectedCard = null;
 				}
+			}
+			else if (zone.TryGetComponent(out DiscardPile discardPile)) {
+				discardPile.RecieveCard(selectedCard);
 			}
 		}
 	}
