@@ -22,7 +22,10 @@ public class DiscardPile : MonoBehaviour {
 
 	public int AmountOfCards { get { return cardPile.Count; } }
 
+	public bool HasTopCardObject { get { if (topDiscardCard == null) return false; return true; } }
+
 	public event Action<CardObject> OnUnUsedCard;
+	public event Action<DiscardPile> OnCardNeeded;
 
 	void Start() {
 		cardPile = new Stack<SO_CardData>();
@@ -39,6 +42,43 @@ public class DiscardPile : MonoBehaviour {
 
 	}
 
+	public CardObject GetTopDiscardCard() {
+		if (topDiscardCard == null) return null;
+		else {
+			CardObject temp = topDiscardCard;
+			topDiscardCard = null;
+			if (AmountOfCards > 1) {
+				OnCardNeeded?.Invoke(this);
+				//I'm thinking/hoping that this line will remove the CardData from the stack, seeing as the card is removed.
+				cardPile.Pop();
+			}
+			return temp;
+		}
+	}
+
+	//Pretty sure this method still won't work if you ask for the Data in the top card right?
+	public bool GetCardData(int index, out SO_CardData sO_CardData) {
+		if (AmountOfCards >= index) {
+			List<SO_CardData> tempCardDatas = cardPile.ToListPooled();
+			sO_CardData = tempCardDatas[index];
+
+			foreach (var cardData in tempCardDatas) {
+				//I need to check what this does to the order of the content
+				cardPile.Push(cardData);
+			}
+
+			
+			//Also here, what should it do if you ask it for a data, it sends it, but then it is empty so it doesn't actually need a card?
+			if (AmountOfCards <= 0) OnCardNeeded?.Invoke(this);
+
+			return true;
+		}
+		else {
+			sO_CardData = null;
+			return false;
+		}
+	}
+
 	public void RecieveCard(CardObject card) {
 		cardPile.Push(card.CardScript.GetCardData);
 		SetTopCard(card);
@@ -46,9 +86,9 @@ public class DiscardPile : MonoBehaviour {
 
 	private void SetTopCard(CardObject card) {
 
-		card.transform.SetParent(transform,false);
+		card.transform.SetParent(transform, false);
 
-		if (topDiscardCard != null ) {
+		if (topDiscardCard != null) {
 			OnUnUsedCard?.Invoke(topDiscardCard);
 		}
 
