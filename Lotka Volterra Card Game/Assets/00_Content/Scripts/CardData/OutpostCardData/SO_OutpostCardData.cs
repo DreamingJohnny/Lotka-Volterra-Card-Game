@@ -9,7 +9,7 @@ public sealed class SO_OutpostCardData : SO_CardData {
 	[SerializeField] private CardRarity rarity;
 	[SerializeField] private Ideology ideology;
 	[SerializeField] private Daycycle daycycle;
-	
+
 	[SerializeField] private int developmentCost;
 	[SerializeField] private int resourceCost;
 	[SerializeField] private int hourCost;

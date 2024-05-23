@@ -28,6 +28,9 @@ public class GameHandler : MonoBehaviour {
 	[Header("Interactions")]
 	private CardObject selectedCard;
 
+	[Header("Gamestats")]
+	
+
 	[Header("Ugly Testing")]
 	[SerializeField] private GameObject tabletopCanvas;
 	[SerializeField] private SO_CardData testCardData;
@@ -46,6 +49,14 @@ public class GameHandler : MonoBehaviour {
 		FirstTestOfSelections();
 	}
 
+	private void Update() {
+		if (Input.GetMouseButtonDown(0)) {
+
+		}
+	}
+
+	//Initiative
+
 	private void FirstTestOfSelections() {
 		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
@@ -58,12 +69,6 @@ public class GameHandler : MonoBehaviour {
 			temp.transform.SetParent(playerHand.transform, false);
 			temp.gameObject.SetActive(true);
 			Debug.Log("Card created!");
-		}
-	}
-
-	private void Update() {
-		if (Input.GetMouseButtonDown(0)) {
-
 		}
 	}
 
