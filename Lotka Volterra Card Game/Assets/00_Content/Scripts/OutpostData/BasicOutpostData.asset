@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e2361ee736b6e43bfc477a317197ee, type: 3}
   m_Name: BasicOutpostData
   m_EditorClassIdentifier: 
-  costPerLevel: 0
-  upkeepPerLevel: 0
+  costPerLevel: 10
+  upkeepPerLevel: 2
+  developmentSlotsPerLevel: 0
+  recouperationPerLevel: 0

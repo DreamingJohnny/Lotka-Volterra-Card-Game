@@ -29,7 +29,8 @@ public class GameHandler : MonoBehaviour {
 	private CardObject selectedCard;
 
 	[Header("Gamestats")]
-	
+	//How to handle current round phase/stage?
+
 
 	[Header("Ugly Testing")]
 	[SerializeField] private GameObject tabletopCanvas;
