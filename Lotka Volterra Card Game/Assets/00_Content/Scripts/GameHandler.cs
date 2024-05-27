@@ -14,6 +14,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private CardZone developmentZone;
 	[SerializeField] private OutpostCardObject outpostCardObject;
 	private Queue<OutpostCardObject> outpostCards;
+	[SerializeField] private SO_OutpostData outpostData;
 
 	[Header("Surface")]
 	[SerializeField] private CardDeck surfaceDeck;
@@ -22,15 +23,14 @@ public class GameHandler : MonoBehaviour {
 	private Queue<SurfaceCardObject> surfaceCards;
 
 	[Header("General")]
-	[SerializeField] private List<SO_SurfaceCardData> sO_SurfaceCardDatas;
-	[SerializeField] private List<SO_OutpostCardData> sO_OutpostCardDatas;
+	[SerializeField] private List<SO_CardData> sO_SurfaceCardDatas;
+	[SerializeField] private List<SO_CardData> sO_OutpostCardDatas;
 
 	[Header("Interactions")]
 	private CardObject selectedCard;
 
-	[Header("Gamestats")]
-	//How to handle current round phase/stage?
-
+	[Header("UI")]
+	[SerializeField] private UIHandler uiHandler;
 
 	[Header("Ugly Testing")]
 	[SerializeField] private GameObject tabletopCanvas;
@@ -40,6 +40,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private DiscardPile testCardPile;
 
 	[SerializeField] private ObjectPool objectPooler;
+	private int startingCardHand = 2;
 
 	void Start() {
 
@@ -47,16 +48,101 @@ public class GameHandler : MonoBehaviour {
 
 		outpostCards = new Queue<OutpostCardObject>();
 
-		FirstTestOfSelections();
+		//FirstTestOfSelections();
+
+		//InitiativeStepSurfaceCards();
+
+		SetUpFirstGame();
 	}
 
 	private void Update() {
 		if (Input.GetMouseButtonDown(0)) {
 
+			switch (GameStats.TurnSegment) {
+				case TurnSegment.Initiative:
+					InitiativeStepSurfaceCards();
+					GameStats.IncreaseTurnSegment();
+					break;
+				case TurnSegment.Planning:
+					Debug.Log("Here we will want button so that the play can go to the next step...");
+					GameStats.IncreaseTurnSegment();
+					break;
+				case TurnSegment.Day:
+					GameStats.IncreaseTurnSegment();
+					break;
+				case TurnSegment.Night:
+					GameStats.IncreaseTurnSegment();
+					break;
+				case TurnSegment.Resolution:
+					GameStats.IncreaseTurnSegment();
+					break;
+				case TurnSegment.Upkeep:
+					GameStats.IncreaseTurnSegment();
+					break;
+				default:
+					break;
+			}
+
 		}
 	}
 
+	private void SetUpFirstGame() {
+		GameStats.InitGame();
+		Outpost.SetOutpostData(outpostData);
+		Outpost.InitGame();
+
+		//Later on, here we'll want to do the subscription to the zones here. So there is no mistake with that.
+
+		Debug.Log("Setting up outpostDeck...");
+		outpostDeck.SetNewDeck(sO_OutpostCardDatas);
+
+		Debug.Log("Setting up surfaceDeck...");
+		surfaceDeck.SetNewDeck(sO_SurfaceCardDatas);
+
+		SetupFirstOutpostCardHand();
+
+	}
+
+	private void SetupFirstOutpostCardHand() {
+		Debug.Log("Setting up the players initial card hand...");
+		//Give the player their cards,
+		for (int i = 0; i < startingCardHand; i++) {
+			
+			if (outpostDeck.GetTopCard(out CardScript cardScript)) {
+				CardObject temp = GetCardObject(cardScript as OutpostCardScript);
+				temp.transform.SetParent(playerHand.transform, false);
+				temp.gameObject.SetActive(true);
+				Debug.Log("Card created!");
+			}
+		}
+		
+		//Later on, work on mulligan here
+		//Show button signifying, that they are happy and wants to go to the next stage...
+	}
+
 	//Initiative
+	private void InitiativeStepSurfaceCards() {
+		//Send threat level to surfacedeck?
+		int tempThreat = GameStats.ThreatLevel;
+
+		for (int i = 0; i < tempThreat; i++) {
+			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
+
+				if (cardScript is SurfaceCardScript surfaceScript) {
+					surfaceZone.AddCard(GetCardObject(surfaceScript));
+				}
+				else if (cardScript is OutpostCardScript outpostScript) {
+					surfaceZone.AddCard(GetCardObject(outpostScript));
+				}
+				else {
+					Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast to either surfaceScript or CardScript");
+				}
+			}
+			else {
+				Debug.Log($"{name} asked for a card from the surfaceDeck {surfaceDeck.name} but received false back");
+			}
+		}
+	}
 
 	private void FirstTestOfSelections() {
 		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;

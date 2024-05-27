@@ -15,14 +15,16 @@ public static class Outpost {
 	public static bool HasOutpostData() { if (sO_OutpostData == null) return false; return true; }
 
 	#region"Level"
-	private static int level;
+	private static int level = 1;
 
 	public static int Level {
 		get {
 			return level;
 		}
 		set {
-			if (value < 1) value = 1; level = value;
+			if (value < 1) value = 1;
+			level = value;
+			OnLevelChanged?.Invoke(level);
 		}
 	}
 	#endregion
@@ -50,12 +52,14 @@ public static class Outpost {
 		set {
 			resources = value;
 			if (resources < 0) resources = 0;
+			OnResourcesChanged?.Invoke(resources);
 		}
 	}
 
 	public static bool PayResources(int cost) {
 		if (cost > 0 && cost < Resources) {
 			Resources -= cost;
+			OnResourcesChanged?.Invoke(resources);
 			return true;
 		}
 		else { return false; }
@@ -71,7 +75,11 @@ public static class Outpost {
 		}
 		set {
 			development = value;
-			if (development < 0) development = 0;
+			if (development < 0) {
+				development = 0;
+				OnDevelopmentChanged?.Invoke(development);
+				return;
+			}
 
 			if (sO_OutpostData == null) {
 				Debug.Log($"Outpost lacks an sO_OutpostData, and so cannot judge if the outpostlevel should increase.");
@@ -82,6 +90,8 @@ public static class Outpost {
 				development -= sO_OutpostData.CostPerLevel * Level;
 				Level++;
 			}
+
+			OnDevelopmentChanged?.Invoke(development);
 		}
 	}
 	#endregion
@@ -93,4 +103,12 @@ public static class Outpost {
 	#region"DevelopmentSlots"
 	public static int DevelopmentSlots { get { return sO_OutpostData.DevelopmentSlotsPerLevel * Level; } }
 	#endregion
+
+	public static void InitGame() {
+		Level = 0;
+		Resources = 10;
+		Development = 0;
+
+	}
+
 }

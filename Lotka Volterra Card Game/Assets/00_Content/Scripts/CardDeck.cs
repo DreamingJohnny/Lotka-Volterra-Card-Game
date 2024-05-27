@@ -36,7 +36,7 @@ public class CardDeck : MonoBehaviour {
 	/// </summary>
 	/// <param name="newDeck"></param>
 	public void SetNewDeck(List<SO_CardData> newDeck) {
-
+		Debug.Log("New deck of cards added");
 		cards = new Queue<SO_CardData>(ShuffleDeck(newDeck));
 	}
 
@@ -81,23 +81,24 @@ public class CardDeck : MonoBehaviour {
 	/// If it can find any SO_OutpostCards in the queue it returns "true" and a POCO_OutpostCard with that data that is then dequeued from the list.
 	/// Otherwise it returns a null object and "false".
 	/// </summary>
-	/// <param name="pOCO_OutpostCard"></param>
+	/// <param name="cardScript"></param>
 	/// <returns></returns>
-	public bool GetTopCard(out CardScript pOCO_OutpostCard) {
+	public bool GetTopCard(out CardScript cardScript) {
 
 		if (cards.TryPeek(out SO_CardData result)) {
 			if(result is SO_OutpostCardData) {
-				pOCO_OutpostCard = new OutpostCardScript(cards.Dequeue());
+				cardScript = new OutpostCardScript(cards.Dequeue());
 				return true;
 			} else if (result is SO_SurfaceCardData) {
-				pOCO_OutpostCard = new SurfaceCardScript(cards.Dequeue());
+				cardScript = new SurfaceCardScript(cards.Dequeue());
 				return true;
+			} else {
+				cardScript = null;
+				return false;
 			}
-			pOCO_OutpostCard = null;
-			return false;
 		}
 		else {
-			pOCO_OutpostCard = null;
+			cardScript = null;
 			return false;
 		}
 	}

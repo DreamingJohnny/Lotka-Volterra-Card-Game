@@ -9,13 +9,18 @@ public class UIHandler : MonoBehaviour {
 	 * So, this will need to handle all the various parts that needs to get their values updated, so, should it then get called whenever those are updated?
 	 * Yeah, so there is a bunch of functions here that listens then?
 	 */
+	[Header("Turn")]
 	[SerializeField] private TextMeshProUGUI turnCounter;
 	[SerializeField] private TextMeshProUGUI turnSegment;
+
+	[Header("Outpost")]
+	[SerializeField] private TextMeshProUGUI outpostLevel;
+	[SerializeField] private TextMeshProUGUI upkeep;
+	[SerializeField] private TextMeshProUGUI resources;
+
+	[Header("Surface")]
 	[SerializeField] private TextMeshProUGUI threatLevel;
 	[SerializeField] private TextMeshProUGUI sporeCounter;
-	[SerializeField] private TextMeshProUGUI outpostLevel;
-	[SerializeField] private TextMeshProUGUI resources;
-	[SerializeField] private TextMeshProUGUI upkeep;
 
 	private void OnEnable() {
 		GameStats.OnTurnCounterChanged += HandleOnTurnChanged;
@@ -67,6 +72,6 @@ public class UIHandler : MonoBehaviour {
 	resources.text = _resources.ToString();
 	}
 	private void HandleOnDevelopmentChanged(int obj) {
-		throw new NotImplementedException();
+		Debug.Log("There isn't yet a way for the UI handler to display the amount of development the Outpost has");
 	}
 }

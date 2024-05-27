@@ -12,24 +12,36 @@ public static class GameStats {
 
 	#region"Turn"
 	private static int turn;
-	public static int Turn { get { return turn; } private set { turn = value; } }
+	public static int Turn {
+		get { return turn; }
+		private set {
+			turn = value;
+			OnTurnCounterChanged?.Invoke(Turn);
+		}
+	}
 	#endregion
 
 	#region"TurnSegment"
 	private static TurnSegment turnSegment;
-	public static TurnSegment TurnSegment { get { return turnSegment; } private set { turnSegment = value; } }
+	public static TurnSegment TurnSegment {
+		get { return turnSegment; }
+		private set {
+			turnSegment = value;
+			OnTurnSegmentChanged?.Invoke(TurnSegment);
+		}
+	}
 
 	public static void IncreaseTurnSegment() {
 		if (TurnSegment == TurnSegment.Upkeep) TurnSegment = TurnSegment.Initiative;
 		else TurnSegment++;
 		//Like here, is there a reason why this shouldn't be placed inside the private setter above instead?
-		OnTurnSegmentChanged?.Invoke(TurnSegment);
+		//OnTurnSegmentChanged?.Invoke(TurnSegment);
 	}
 
 	public static void SetTurnSegmentTo(TurnSegment _turnSegment) {
 		TurnSegment = _turnSegment;
 		//And here?
-		OnTurnSegmentChanged?.Invoke(TurnSegment);
+		//OnTurnSegmentChanged?.Invoke(TurnSegment);
 	}
 	#endregion
 
@@ -41,7 +53,7 @@ public static class GameStats {
 		}
 		private set {
 			threatLevel = value;
-			if (threatLevel < 0) threatLevel = 0;
+			if (threatLevel < 1) threatLevel = 1;
 			OnThreatLevelChanged?.Invoke(ThreatLevel);
 		}
 	}
@@ -49,7 +61,13 @@ public static class GameStats {
 
 	#region"SporeCount"
 	private static int sporeCount;
-	public static int SporeCount { get { return sporeCount; } private set { } }
+	public static int SporeCount {
+		get { return sporeCount; }
+		private set {
+			sporeCount = value; if (sporeCount < 0) sporeCount = 0;
+			OnSporeCountChanged?.Invoke(SporeCount);
+		}
+	}
 
 	public static void IncreaseSporeCount(int amount) {
 		if (amount <= 0) return;
@@ -59,9 +77,16 @@ public static class GameStats {
 			ThreatLevel++;
 			sporeCount -= 10;
 		}
-		OnSporeCountChanged?.Invoke(SporeCount);
+		//OnSporeCountChanged?.Invoke(SporeCount);
 	}
 	#endregion
+
+	public static void InitGame() {
+		Turn = 1;
+		TurnSegment = TurnSegment.Initiative;
+		ThreatLevel = 1;
+		SporeCount = 0;
+	}
 
 	public static void HandleOnCardUnintervened() {
 		//This is mostly as a reminder to myself, that I think I'll want to handle a lot of events like this.
