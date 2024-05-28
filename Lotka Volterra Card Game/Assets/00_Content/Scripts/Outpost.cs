@@ -42,6 +42,19 @@ public static class Outpost {
 	}
 	#endregion
 
+	#region"Income"
+	public static bool GetIncome(out int income) {
+		if (sO_OutpostData != null) {
+			income = sO_OutpostData.IncomePerLevel * Level;
+			return true;
+		}
+		else {
+			income = 0;
+			return false;
+		}
+	}
+	#endregion
+
 	#region"Resources"
 	private static int resources;
 

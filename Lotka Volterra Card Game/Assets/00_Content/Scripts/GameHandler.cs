@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour {
@@ -15,6 +16,8 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private OutpostCardObject outpostCardObject;
 	private Queue<OutpostCardObject> outpostCards;
 	[SerializeField] private SO_OutpostData outpostData;
+
+	[SerializeField] private int startingHandSize = 2;
 
 	[Header("Surface")]
 	[SerializeField] private CardDeck surfaceDeck;
@@ -32,57 +35,72 @@ public class GameHandler : MonoBehaviour {
 	[Header("UI")]
 	[SerializeField] private UIHandler uiHandler;
 
-	[Header("Ugly Testing")]
-	[SerializeField] private GameObject tabletopCanvas;
-	[SerializeField] private SO_CardData testCardData;
-	[SerializeField] private OutpostCardObject testCard;
-
-	[SerializeField] private DiscardPile testCardPile;
-
-	[SerializeField] private ObjectPool objectPooler;
-	private int startingCardHand = 2;
-
 	void Start() {
+		
+		//This should be removed as soon as I've added back objectpooling into the game.
+		outpostCards = new Queue<OutpostCardObject>();
 
 		selectedCard = null;
 
-		outpostCards = new Queue<OutpostCardObject>();
-
-		//FirstTestOfSelections();
-
-		//InitiativeStepSurfaceCards();
-
 		SetUpFirstGame();
+
 	}
 
 	private void Update() {
-		if (Input.GetMouseButtonDown(0)) {
 
-			switch (GameStats.TurnSegment) {
-				case TurnSegment.Initiative:
-					InitiativeStepSurfaceCards();
-					GameStats.IncreaseTurnSegment();
-					break;
-				case TurnSegment.Planning:
-					Debug.Log("Here we will want button so that the play can go to the next step...");
-					GameStats.IncreaseTurnSegment();
-					break;
-				case TurnSegment.Day:
-					GameStats.IncreaseTurnSegment();
-					break;
-				case TurnSegment.Night:
-					GameStats.IncreaseTurnSegment();
-					break;
-				case TurnSegment.Resolution:
-					GameStats.IncreaseTurnSegment();
-					break;
-				case TurnSegment.Upkeep:
-					GameStats.IncreaseTurnSegment();
-					break;
-				default:
-					break;
+	}
+
+	private void DoNextTurnPhase() {
+		
+		switch (GameStats.TurnSegment) {
+			case TurnSegment.Initiative:
+				InitiativeStepSurfaceCards();
+
+				break;
+			case TurnSegment.Planning:
+				Debug.Log("Here we will want button so that the play can go to the next step...");
+
+				break;
+			case TurnSegment.Day:
+				Debug.Log("Zones are selectable, and cards and movable.");
+				break;
+			case TurnSegment.Night:
+				Debug.Log("Zones are selectable, and cards and movable.");
+				break;
+			case TurnSegment.Resolution:
+
+				DoDevelopmentPhase();
+
+				break;
+			case TurnSegment.Upkeep:
+				DoUpkeepPhase();
+				break;
+			default:
+				break;
+		}
+	}
+
+	private void DoUpkeepPhase() {
+
+		//So, Gamestats produces...
+		if (Outpost.GetIncome(out int income)) Outpost.Resources += income;
+
+		//Later on, this one will need to be turned into something bigger where you look for all upkeep from current cards etc...
+		if (Outpost.GetUpkeep(out int upkeep)) Outpost.Resources -= upkeep;
+
+		GameStats.IncreaseSporeCount(1);
+	}
+
+	private void DoDevelopmentPhase() {
+
+		//Player draws one card here...
+		if (!playerHand.IsFull) {
+			if (outpostDeck.GetTopCard(out CardScript cardScript)) {
+				CardObject temp = GetCardObject(cardScript as OutpostCardScript);
+				temp.transform.SetParent(playerHand.transform, false);
+				temp.gameObject.SetActive(true);
+				Debug.Log("Card created!");
 			}
-
 		}
 	}
 
@@ -91,7 +109,9 @@ public class GameHandler : MonoBehaviour {
 		Outpost.SetOutpostData(outpostData);
 		Outpost.InitGame();
 
-		//Later on, here we'll want to do the subscription to the zones here. So there is no mistake with that.
+		SubscribeToZones();
+
+		uiHandler.OnNextButtonPressed += HandleOnNextButtonPressed;
 
 		Debug.Log("Setting up outpostDeck...");
 		outpostDeck.SetNewDeck(sO_OutpostCardDatas);
@@ -103,11 +123,24 @@ public class GameHandler : MonoBehaviour {
 
 	}
 
+	private void HandleOnNextButtonPressed() {
+		GameStats.IncreaseTurnSegment();
+
+		DoNextTurnPhase();
+	}
+
+	private void SubscribeToZones() {
+		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		outpostZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		developmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+	}
+
 	private void SetupFirstOutpostCardHand() {
 		Debug.Log("Setting up the players initial card hand...");
 		//Give the player their cards,
-		for (int i = 0; i < startingCardHand; i++) {
-			
+		for (int i = 0; i < startingHandSize; i++) {
+
 			if (outpostDeck.GetTopCard(out CardScript cardScript)) {
 				CardObject temp = GetCardObject(cardScript as OutpostCardScript);
 				temp.transform.SetParent(playerHand.transform, false);
@@ -115,7 +148,7 @@ public class GameHandler : MonoBehaviour {
 				Debug.Log("Card created!");
 			}
 		}
-		
+
 		//Later on, work on mulligan here
 		//Show button signifying, that they are happy and wants to go to the next stage...
 	}
@@ -145,11 +178,6 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void FirstTestOfSelections() {
-		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		outpostZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		developmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		testCardPile.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 
 		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
 			CardObject temp = GetCardObject(new OutpostCardScript(cardData));
@@ -157,14 +185,6 @@ public class GameHandler : MonoBehaviour {
 			temp.gameObject.SetActive(true);
 			Debug.Log("Card created!");
 		}
-	}
-
-	private void BruteTestingObjectPooling() {
-		Debug.Log(objectPooler.ObjectPoolAmount);
-
-		GameObject test = objectPooler.GetObject();
-		test.SetActive(true);
-		test.transform.position = Vector3.zero;
 	}
 
 	/// <summary>

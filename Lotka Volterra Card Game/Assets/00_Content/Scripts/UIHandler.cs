@@ -9,6 +9,9 @@ public class UIHandler : MonoBehaviour {
 	 * So, this will need to handle all the various parts that needs to get their values updated, so, should it then get called whenever those are updated?
 	 * Yeah, so there is a bunch of functions here that listens then?
 	 */
+	public event Action OnNextButtonPressed;
+	
+
 	[Header("Turn")]
 	[SerializeField] private TextMeshProUGUI turnCounter;
 	[SerializeField] private TextMeshProUGUI turnSegment;
@@ -73,5 +76,10 @@ public class UIHandler : MonoBehaviour {
 	}
 	private void HandleOnDevelopmentChanged(int obj) {
 		Debug.Log("There isn't yet a way for the UI handler to display the amount of development the Outpost has");
+	}
+
+	public void NextButtonPressed() {
+
+		OnNextButtonPressed?.Invoke();
 	}
 }

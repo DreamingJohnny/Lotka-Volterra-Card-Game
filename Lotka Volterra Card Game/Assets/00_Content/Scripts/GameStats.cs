@@ -77,7 +77,7 @@ public static class GameStats {
 			ThreatLevel++;
 			sporeCount -= 10;
 		}
-		//OnSporeCountChanged?.Invoke(SporeCount);
+		OnSporeCountChanged?.Invoke(SporeCount);
 	}
 	#endregion
 

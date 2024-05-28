@@ -51,6 +51,8 @@ MonoBehaviour:
   outpostZone: {fileID: 0}
   developmentZone: {fileID: 0}
   outpostCardObject: {fileID: 1030217317533501852, guid: 2cb747c004ed5554f81bdc03fc91a13e, type: 3}
+  outpostData: {fileID: 11400000, guid: 0b86e1dc7485e034786671064f0f2377, type: 2}
+  startingHandSize: 2
   surfaceDeck: {fileID: 0}
   surfaceDiscardPile: {fileID: 0}
   surfaceZone: {fileID: 0}
@@ -61,6 +63,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4d04792a9a26daa4f8407718d68ed605, type: 2}
   - {fileID: 11400000, guid: 041c637c575d1864ba140dbda65bc944, type: 2}
   - {fileID: 11400000, guid: 88d33f353404feb40a44f5fcd66eec9c, type: 2}
-  testCardData: {fileID: 11400000, guid: d56113c3ef670e148a8e748e6b056bd4, type: 2}
-  testCard: {fileID: 0}
-  objectPooler: {fileID: 0}
+  uiHandler: {fileID: 0}
