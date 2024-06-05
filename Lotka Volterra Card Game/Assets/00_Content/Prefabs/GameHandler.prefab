@@ -56,7 +56,12 @@ MonoBehaviour:
   surfaceDeck: {fileID: 0}
   surfaceDiscardPile: {fileID: 0}
   surfaceZone: {fileID: 0}
-  sO_SurfaceCardDatas: []
+  sO_SurfaceCardDatas:
+  - {fileID: 11400000, guid: 42f8ecf6a52a4484ca76c43fa07edbe2, type: 2}
+  - {fileID: 11400000, guid: 467126be4177d1745b17701a3372cfd0, type: 2}
+  - {fileID: 11400000, guid: 53356d550dee34043b9d77d69925f26c, type: 2}
+  - {fileID: 11400000, guid: d6fb5732f236f2f478a3bb1f705a168c, type: 2}
+  - {fileID: 11400000, guid: 2de928778dc32724cadc04b9eab50d5b, type: 2}
   sO_OutpostCardDatas:
   - {fileID: 11400000, guid: d56113c3ef670e148a8e748e6b056bd4, type: 2}
   - {fileID: 11400000, guid: 2532764edf5dcdb4eba2d2b799834534, type: 2}
