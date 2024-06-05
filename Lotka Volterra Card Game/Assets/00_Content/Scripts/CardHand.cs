@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardHand : MonoBehaviour {
@@ -30,14 +31,7 @@ public class CardHand : MonoBehaviour {
 		}
 	}
 
-	void Start() {
-
-	}
-
-
-	void Update() {
-
-	}
+	public bool IsFull { get { if (HandSize < MaxHandSize) return true; return false; } }
 
 	//public void TakeACard(CardScript cardInfo) {
 	//	foreach (var card in outpostCards) {

@@ -6,18 +6,27 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour {
 
-	[Header("Player")]
-	[SerializeField] private CardDeck outpostDeck;
-	[SerializeField] private DiscardPile outpostDiscardPile;
-	[SerializeField] private CardZone playerHand;
+	[Header("Player 1")]
+	[SerializeField] private int startingHandSize = 2;
+	[SerializeField] private CardDeck outpostDeck_1;
+	[SerializeField] private DiscardPile outpostDiscardPile_1;
+	[SerializeField] private CardHand playerHand_1;
+
+	[Header("Player 2")]
+	[SerializeField] private CardDeck outpostDeck_2;
+	[SerializeField] private DiscardPile outpostDiscardPile_2;
+	[SerializeField] private CardHand playerHand_2;
+
+	[Header("Outpost")]
 	[SerializeField] private CardZone personalityZone;
 	[SerializeField] private CardZone outpostZone;
-	[SerializeField] private CardZone developmentZone;
+	[SerializeField] private CardZone underDevelopmentZone;
+	[SerializeField] private CardZone technologyZone;
+	[SerializeField] private CardZone equipmentZone;
 	[SerializeField] private OutpostCardObject outpostCardObject;
-	private Queue<OutpostCardObject> outpostCards;
 	[SerializeField] private SO_OutpostData outpostData;
+	private Queue<OutpostCardObject> outpostCards;
 
-	[SerializeField] private int startingHandSize = 2;
 
 	[Header("Surface")]
 	[SerializeField] private CardDeck surfaceDeck;
@@ -36,7 +45,7 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private UIHandler uiHandler;
 
 	void Start() {
-		
+
 		//This should be removed as soon as I've added back objectpooling into the game.
 		outpostCards = new Queue<OutpostCardObject>();
 
@@ -51,7 +60,7 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void DoNextTurnPhase() {
-		
+
 		switch (GameStats.TurnSegment) {
 			case TurnSegment.Initiative:
 				InitiativeStepSurfaceCards();
@@ -94,10 +103,10 @@ public class GameHandler : MonoBehaviour {
 	private void DoDevelopmentPhase() {
 
 		//Player draws one card here...
-		if (!playerHand.IsFull) {
-			if (outpostDeck.GetTopCard(out CardScript cardScript)) {
+		if (!playerHand_1.IsFull) {
+			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
 				CardObject temp = GetCardObject(cardScript as OutpostCardScript);
-				temp.transform.SetParent(playerHand.transform, false);
+				temp.transform.SetParent(playerHand_1.transform, false);
 				temp.gameObject.SetActive(true);
 				Debug.Log("Card created!");
 			}
@@ -114,7 +123,7 @@ public class GameHandler : MonoBehaviour {
 		uiHandler.OnNextButtonPressed += HandleOnNextButtonPressed;
 
 		Debug.Log("Setting up outpostDeck...");
-		outpostDeck.SetNewDeck(sO_OutpostCardDatas);
+		outpostDeck_1.SetNewDeck(sO_OutpostCardDatas);
 
 		Debug.Log("Setting up surfaceDeck...");
 		surfaceDeck.SetNewDeck(sO_SurfaceCardDatas);
@@ -130,10 +139,14 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void SubscribeToZones() {
-		playerHand.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+
+		//outpostDiscardPile_1.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		//outpostDiscardPile_2.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		technologyZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		equipmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 		outpostZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		developmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
+		underDevelopmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 	}
 
 	private void SetupFirstOutpostCardHand() {
@@ -141,9 +154,9 @@ public class GameHandler : MonoBehaviour {
 		//Give the player their cards,
 		for (int i = 0; i < startingHandSize; i++) {
 
-			if (outpostDeck.GetTopCard(out CardScript cardScript)) {
+			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
 				CardObject temp = GetCardObject(cardScript as OutpostCardScript);
-				temp.transform.SetParent(playerHand.transform, false);
+				temp.transform.SetParent(playerHand_1.transform, false);
 				temp.gameObject.SetActive(true);
 				Debug.Log("Card created!");
 			}
@@ -181,7 +194,7 @@ public class GameHandler : MonoBehaviour {
 
 		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
 			CardObject temp = GetCardObject(new OutpostCardScript(cardData));
-			temp.transform.SetParent(playerHand.transform, false);
+			temp.transform.SetParent(playerHand_1.transform, false);
 			temp.gameObject.SetActive(true);
 			Debug.Log("Card created!");
 		}

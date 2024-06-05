@@ -10,6 +10,11 @@ public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	[SerializeField][Range(0f,1.0f)] private float neutralAlpha = 0.35f;
 	[SerializeField][Range(0f, 1.0f)] private float highlightedAlpha = 1.0f;
 
+	//Testing out tweaking just the v here
+	private float neutralV = 50f;
+	private float applicableV = 100f;
+	private float unApplicableV = 0f;
+
 	public event Action<ZoneSelection> OnZoneSelection;
 
 	private Image image;
@@ -17,6 +22,7 @@ public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	private void Awake() {
 		image = GetComponentInChildren<Image>();
 		Debug.Assert(image != null);
+		//image.color = new Color(image.color.h)
 		image.color = new Color(image.color.r,image.color.g,image.color.b,neutralAlpha);
 	}
 

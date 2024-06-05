@@ -578,6 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1572098595282588139}
   - component: {fileID: 3065421034483107624}
+  - component: {fileID: 7766999317256746927}
   m_Layer: 5
   m_Name: SurfaceDiscard
   m_TagString: Untagged
@@ -615,6 +616,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4010980967201989964}
   m_CullTransparentMesh: 1
+--- !u!114 &7766999317256746927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010980967201989964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf50f49791d0044c8f7a4b2f01c5554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4028995065030954638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,18 +1991,18 @@ PrefabInstance:
     - target: {fileID: 1836773682326648633, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b4d6d14cda1dd9341bc9e571ef7a3ad1, type: 3}
+      objectReference: {fileID: 21300000, guid: c972e087aba8ad54d8fc9e1384e57d3d, type: 3}
     - target: {fileID: 1836773682326648633, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_Color.b
-      value: 0.24705884
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1836773682326648633, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_Color.g
-      value: 0.27058825
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1836773682326648633, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_Color.r
-      value: 0.1254902
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3783384423529410676, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: m_Size.x
