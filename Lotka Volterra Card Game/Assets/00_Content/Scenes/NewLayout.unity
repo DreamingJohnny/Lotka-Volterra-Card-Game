@@ -379,6 +379,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0450061adb7774abed7af393b4faac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &456359567 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7123272893281757939, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
+  m_PrefabInstance: {fileID: 1941605916}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6282fca362d2d4294324825070339e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &534124691
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +545,7 @@ PrefabInstance:
     - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: playerHand_2
       value: 
-      objectReference: {fileID: 1941605917}
+      objectReference: {fileID: 456359567}
     - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: equipmentZone
       value: 
@@ -985,17 +996,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
---- !u!114 &1941605917 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7123272893281757939, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}
-  m_PrefabInstance: {fileID: 1941605916}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba6282fca362d2d4294324825070339e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1941605918 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8459561395050974998, guid: 6f8e0bdbb093f9a4595c05b26fcec432, type: 3}

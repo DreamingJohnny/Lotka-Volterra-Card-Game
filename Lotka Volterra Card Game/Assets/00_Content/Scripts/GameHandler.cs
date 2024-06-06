@@ -118,8 +118,6 @@ public class GameHandler : MonoBehaviour {
 		Outpost.SetOutpostData(outpostData);
 		Outpost.InitGame();
 
-		SubscribeToZones();
-
 		uiHandler.OnNextButtonPressed += HandleOnNextButtonPressed;
 
 		Debug.Log("Setting up outpostDeck...");
@@ -136,17 +134,6 @@ public class GameHandler : MonoBehaviour {
 		GameStats.IncreaseTurnSegment();
 
 		DoNextTurnPhase();
-	}
-
-	private void SubscribeToZones() {
-
-		//outpostDiscardPile_1.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		//outpostDiscardPile_2.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		technologyZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		equipmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		personalityZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		outpostZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
-		underDevelopmentZone.GetComponent<ZoneSelection>().OnZoneSelection += HandleOnZoneSelected;
 	}
 
 	private void SetupFirstOutpostCardHand() {
@@ -228,7 +215,7 @@ public class GameHandler : MonoBehaviour {
 			Debug.Log("Creating a new outpostcard object");
 			OutpostCardObject outpostCard = Instantiate(outpostCardObject);
 			outpostCard.SetCardScript(outpostCardScript);
-			outpostCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
+			//outpostCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
 			return outpostCard;
 		}
 		else {
@@ -236,36 +223,6 @@ public class GameHandler : MonoBehaviour {
 			outpostCard.SetCardScript(outpostCardScript);
 			outpostCard.gameObject.SetActive(true);
 			return outpostCard;
-		}
-	}
-
-	private void HandleOnCardSelected(CardSelection card) {
-
-		if (card.TryGetComponent(out CardObject cardObject)) {
-			selectedCard = cardObject;
-		}
-		else {
-			Debug.Log("The GM just registered an event for a object that doesn't seem to be a CardObject");
-		}
-	}
-
-	private void HandleOnZoneSelected(ZoneSelection zone) {
-
-		if (selectedCard == null) {
-			Debug.Log("SelectedCard was null");
-			return;
-		}
-		else {
-			if (zone.TryGetComponent(out CardZone cardZone)) {
-				if (cardZone.IsCardAllowed(selectedCard)) {
-					//Later on, I want to have a think here, where I send the card of to a function, and I get it back if it isn't acceptable, what would that be like?
-					selectedCard.transform.SetParent(zone.transform, false);
-					selectedCard = null;
-				}
-			}
-			else if (zone.TryGetComponent(out DiscardPile discardPile)) {
-				discardPile.RecieveCard(selectedCard);
-			}
 		}
 	}
 
@@ -278,7 +235,7 @@ public class GameHandler : MonoBehaviour {
 		if (surfaceCards.Count <= 0) {
 			SurfaceCardObject surfaceCard = new();
 			surfaceCard.SetCardScript(surfaceCardScript);
-			surfaceCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
+			//surfaceCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
 			return surfaceCard;
 		}
 		else {

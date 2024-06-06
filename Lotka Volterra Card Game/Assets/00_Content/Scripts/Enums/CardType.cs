@@ -9,6 +9,7 @@ public enum CardType {
 	Equipment,
 	Location,
 	Outpost,
+	Personality,
 	Scavenge,
 	Technology,
 	Unit,

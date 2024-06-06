@@ -24,8 +24,9 @@ public static class GameStats {
 	#region"TurnSegment"
 	private static TurnSegment turnSegment;
 	public static TurnSegment TurnSegment {
-		get { return turnSegment; }
+		get => turnSegment;
 		private set {
+			if(turnSegment == value) return;
 			turnSegment = value;
 			OnTurnSegmentChanged?.Invoke(TurnSegment);
 		}
@@ -71,13 +72,17 @@ public static class GameStats {
 	}
 
 	public static void IncreaseSporeCount(int amount) {
+		
+		const int sporePerThreatLevel = 10;
+
 		if (amount <= 0) return;
 
 		sporeCount += amount;
-		while (sporeCount >= 10) {
-			ThreatLevel++;
-			sporeCount -= 10;
-		}
+
+		ThreatLevel += sporeCount / sporePerThreatLevel;
+
+		sporeCount %= sporePerThreatLevel;
+		
 		OnSporeCountChanged?.Invoke(SporeCount);
 	}
 	#endregion
