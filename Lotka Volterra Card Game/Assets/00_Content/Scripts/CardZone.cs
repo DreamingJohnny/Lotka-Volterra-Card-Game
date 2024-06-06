@@ -34,7 +34,7 @@ public class CardZone : MonoBehaviour {
 		else {
 			newCard.transform.SetParent(gameObject.transform, false);
 			//This feels like a bizzarre and unsafe way to handle this, might want to have more of a method for this somewhere maybe?
-			CardSelector.SelectedCard = null;
+			PlayerCursor.SelectedCard = null;
 		}
 	}
 

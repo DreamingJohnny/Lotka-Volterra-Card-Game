@@ -38,9 +38,6 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private List<SO_CardData> sO_SurfaceCardDatas;
 	[SerializeField] private List<SO_CardData> sO_OutpostCardDatas;
 
-	[Header("Interactions")]
-	private CardObject selectedCard;
-
 	[Header("UI")]
 	[SerializeField] private UIHandler uiHandler;
 
@@ -49,14 +46,12 @@ public class GameHandler : MonoBehaviour {
 		//This should be removed as soon as I've added back objectpooling into the game.
 		outpostCards = new Queue<OutpostCardObject>();
 
-		selectedCard = null;
-
 		SetUpFirstGame();
 
 	}
 
 	private void Update() {
-
+		if(Input.GetMouseButtonDown(1)) PlayerCursor.DeSelectCard();
 	}
 
 	private void DoNextTurnPhase() {

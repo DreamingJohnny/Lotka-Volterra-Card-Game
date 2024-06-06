@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
+public class ZoneHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
 	[SerializeField][Range(0f, 1.0f)] private float neutralAlpha = 0.35f;
 	[SerializeField][Range(0f, 1.0f)] private float highlightedAlpha = 1.0f;
@@ -19,15 +19,16 @@ public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	private void Awake() {
 		image = GetComponentInChildren<Image>();
 		Debug.Assert(image != null);
-		image.color = inActive;
+		image.color = unAvailable;
+		image.color = new Color(image.color.r, image.color.g, image.color.b, neutralAlpha);
 	}
 
 	private void OnEnable() {
-		CardSelector.OnCardSelected += HandleOnCardSelected;
+		PlayerCursor.OnCardSelected += HandleOnCardSelected;
 	}
 
 	private void OnDisable() {
-		CardSelector.OnCardSelected -= HandleOnCardSelected;
+		PlayerCursor.OnCardSelected -= HandleOnCardSelected;
 	}
 
 	public void OnPointerEnter(PointerEventData pointerEventData) {
@@ -36,9 +37,11 @@ public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	public void OnPointerClick(PointerEventData pointerEventData) {
 
+		if (pointerEventData.button != 0) return;
+
 		if (TryGetComponent(out CardZone zone)) {
-			if(zone.IsCardAllowed(CardSelector.SelectedCard)) {
-				zone.AddCard(CardSelector.SelectedCard);
+			if(zone.IsCardAllowed(PlayerCursor.SelectedCard)) {
+				zone.AddCard(PlayerCursor.SelectedCard);
 			}
 
 			Debug.Log("Now the card should move!");
@@ -53,10 +56,12 @@ public class ZoneSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		//Here it needs to check on what type of card it is then, like, if it should be available for that.
 		if (cardObject == null) {
 			image.color = unAvailable;
+			image.color = new Color(image.color.r, image.color.g, image.color.b, neutralAlpha);
 			return;
 		}
 		else if (GetComponent<CardZone>().IsCardAllowed(cardObject)) {
 			image.color = available;
+			image.color = new Color(image.color.r, image.color.g, image.color.b, neutralAlpha);
 		}
 
 	}
