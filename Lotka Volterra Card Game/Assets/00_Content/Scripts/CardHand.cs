@@ -5,42 +5,18 @@ using UnityEngine;
 
 public class CardHand : MonoBehaviour {
 
-	//So, this one will handle the cards.
-	//It will be in charge of moving them,
-	//creating them
-	//destroying them
-	//giving them their values
-	//This will most likely be a problem, figuring out how to move them, and who then tells them their values?
-	//But also sending them on.
 	//Also needs to know how many cards it has, and it max size, and if they are empty.
 
-	[SerializeField] private List<OutpostCardObject> outpostCards;
+	//Will hold cards,
+	//Will tell the cards when they should be allowed to be interacted with.
+	//Will receive cards, and send cards on.
 
-	[SerializeField] private int maxHandSize;
+	private List<OutpostCardObject> outpostCards = new();
 
-	public int MaxHandSize { get { return maxHandSize; } }
+	public int MaxHandSize { get; private set; }
 
-	public int HandSize {
-		get {
-			int temp = 0;
-			foreach (var card in outpostCards) {
-				if (card.HasCardScript()) temp++;
-			}
+	public int HandSize { get {	return outpostCards.Count; } }
 
-			return temp;
-		}
-	}
+	public bool IsFull { get { if (HandSize < MaxHandSize) return false; return true; } }
 
-	public bool IsFull { get { if (HandSize < MaxHandSize) return true; return false; } }
-
-	//public void TakeACard(CardScript cardInfo) {
-	//	foreach (var card in outpostCards) {
-	//		if (!card.HasOutpostCardInfo()) {
-	//			card.SetOutpostCardInfo(cardInfo);
-	//			return;
-	//		}
-	//	}
-
-	//add function here for if there was no room among the cards, maybe draw a new card?
-	//}
 }
