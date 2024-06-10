@@ -25,14 +25,12 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private CardZone equipmentZone;
 	[SerializeField] private OutpostCardObject outpostCardObject;
 	[SerializeField] private SO_OutpostData outpostData;
-	private Queue<OutpostCardObject> outpostCards;
 
 
 	[Header("Surface")]
 	[SerializeField] private CardDeck surfaceDeck;
 	[SerializeField] private DiscardPile surfaceDiscardPile;
 	[SerializeField] private CardZone surfaceZone;
-	private Queue<SurfaceCardObject> surfaceCards;
 
 	[Header("General")]
 	[SerializeField] private List<SO_CardData> sO_SurfaceCardDatas;
@@ -43,18 +41,70 @@ public class GameHandler : MonoBehaviour {
 
 	void Start() {
 
-		//This should be removed as soon as I've added back objectpooling into the game.
-		outpostCards = new Queue<OutpostCardObject>();
-
 		SetUpFirstGame();
 		DoNextTurnPhase();
 	}
 
 	private void Update() {
-		if(Input.GetMouseButtonDown(1)) PlayerCursor.DeSelectCard();
+		if (Input.GetMouseButtonDown(1)) PlayerCursor.DeSelectCard();
 	}
 
 	private void DoNextTurnPhase() {
+
+		switch (GameStats.TurnSegment) {
+			case TurnSegment.AtStartOfTurn:
+				Debug.Log("Turn starts,");
+				break;
+			case TurnSegment.AfterStartOfTurn:
+				break;
+			case TurnSegment.InitiativePhaseStart:
+				//Decide on which player to go first.
+				break;
+			case TurnSegment.AfterInitiativePhaseStart:
+				break;
+			case TurnSegment.BeforePlayerOrderSelected:
+				break;
+			case TurnSegment.WhenPlayerOrderSelected:
+				break;
+			case TurnSegment.AfterPlayerOrderSelected:
+				break;
+			case TurnSegment.BeforeSurfaceCardIsDrawn:
+				break;
+			case TurnSegment.WhenSurfaceCardIsDrawn:
+				break;
+			case TurnSegment.AfterSurfaceCardIsDrawn:
+				break;
+			case TurnSegment.BeforeSelectDayCycle:
+				break;
+			case TurnSegment.WhenSelectDayCycle:
+				break;
+			case TurnSegment.AfterSelectDayCycle:
+				break;
+			case TurnSegment.WhenPlanningPhaseStarts:
+				break;
+			case TurnSegment.AfterPlanningPhaseStarts:
+				break;
+			case TurnSegment.PlayCard:
+				break;
+			case TurnSegment.WhenDayPhaseStarts:
+				break;
+			case TurnSegment.AfterDayPhaseStarts:
+				break;
+			case TurnSegment.Initiative:
+				break;
+			case TurnSegment.Planning:
+				break;
+			case TurnSegment.Day:
+				break;
+			case TurnSegment.Night:
+				break;
+			case TurnSegment.Resolution:
+				break;
+			case TurnSegment.Upkeep:
+				break;
+			default:
+				break;
+		}
 
 		switch (GameStats.TurnSegment) {
 			case TurnSegment.Initiative:
@@ -100,7 +150,7 @@ public class GameHandler : MonoBehaviour {
 		//Player draws one card here...
 		if (!playerHand_1.IsFull) {
 			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
-				CardObject temp = GetCardObject(cardScript as OutpostCardScript);
+				CardObject temp = CardPool.Instance.GetCardObject(cardScript as OutpostCardScript);
 				temp.transform.SetParent(playerHand_1.transform, false);
 				temp.gameObject.SetActive(true);
 				Debug.Log("Card created!");
@@ -137,7 +187,7 @@ public class GameHandler : MonoBehaviour {
 		for (int i = 0; i < startingHandSize; i++) {
 
 			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
-				CardObject temp = GetCardObject(cardScript as OutpostCardScript);
+				CardObject temp = CardPool.Instance.GetCardObject(cardScript as OutpostCardScript);
 				temp.transform.SetParent(playerHand_1.transform, false);
 				temp.gameObject.SetActive(true);
 				Debug.Log("Card created!");
@@ -150,7 +200,7 @@ public class GameHandler : MonoBehaviour {
 
 	//Initiative
 	private void InitiativeStepSurfaceCards() {
-		
+
 		//Send threat level to surfacedeck?
 		for (int i = 0; i < GameStats.ThreatLevel; i++) {
 			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
@@ -171,73 +221,4 @@ public class GameHandler : MonoBehaviour {
 			}
 		}
 	}
-
-	private void FirstTestOfSelections() {
-
-		foreach (SO_OutpostCardData cardData in sO_OutpostCardDatas) {
-			CardObject temp = GetCardObject(new OutpostCardScript(cardData));
-			temp.transform.SetParent(playerHand_1.transform, false);
-			temp.gameObject.SetActive(true);
-			Debug.Log("Card created!");
-		}
-	}
-
-	/// <summary>
-	/// Adds the card to the queue of cards and sets the gameobject to inactive
-	/// </summary>
-	/// <param name="outpostCardObject"></param>
-	private void AddUnusedCard(OutpostCardObject outpostCardObject) {
-		outpostCards.Enqueue(outpostCardObject);
-		outpostCardObject.gameObject.SetActive(false);
-	}
-
-	/// <summary>
-	/// Adds the card to the queue of cards and sets the gameobject to inactive
-	/// </summary>
-	/// <param name="surfaceCardObject"></param>
-	private void AddUnusedCard(SurfaceCardObject surfaceCardObject) {
-		surfaceCards.Enqueue(surfaceCardObject);
-		surfaceCardObject.gameObject.SetActive(false);
-	}
-
-	/// <summary>
-	/// Returns an activated gameobject outpostCardObject populated with the script. Reuses gameobject when possible.
-	/// </summary>
-	/// <param name="outpostCardScript"></param>
-	/// <returns></returns>
-	private OutpostCardObject GetCardObject(OutpostCardScript outpostCardScript) {
-		if (outpostCards.Count <= 0) {
-			Debug.Log("Creating a new outpostcard object");
-			OutpostCardObject outpostCard = Instantiate(outpostCardObject);
-			outpostCard.SetCardScript(outpostCardScript);
-			//outpostCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
-			return outpostCard;
-		}
-		else {
-			OutpostCardObject outpostCard = outpostCards.Dequeue();
-			outpostCard.SetCardScript(outpostCardScript);
-			outpostCard.gameObject.SetActive(true);
-			return outpostCard;
-		}
-	}
-
-	/// <summary>
-	/// Returns an activated surfaceCardObject-gameobject populated with the script. Reuses gameobject when possible.
-	/// </summary>
-	/// <param name="surfaceCardScript"></param>
-	/// <returns></returns>
-	//private SurfaceCardObject GetCardObject(SurfaceCardScript surfaceCardScript) {
-	//	if (surfaceCards.Count <= 0) {
-	//		SurfaceCardObject surfaceCard = new();
-	//		surfaceCard.SetCardScript(surfaceCardScript);
-	//		//surfaceCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
-	//		return surfaceCard;
-	//	}
-	//	else {
-	//		SurfaceCardObject surfaceCard = surfaceCards.Dequeue();
-	//		surfaceCard.SetCardScript(surfaceCardScript);
-	//		surfaceCard.gameObject.SetActive(true);
-	//		return surfaceCard;
-	//	}
-	//}
 }
