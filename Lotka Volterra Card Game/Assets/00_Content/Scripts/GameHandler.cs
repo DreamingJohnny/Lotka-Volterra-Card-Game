@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour {
 
-	[Header("Player 1")]
+	[Header("Player shared")]
 	[SerializeField] private int startingHandSize = 2;
+
+	[Header("Player 1")]
 	[SerializeField] private CardDeck outpostDeck_1;
 	[SerializeField] private DiscardPile outpostDiscardPile_1;
 	[SerializeField] private CardHand playerHand_1;
@@ -23,9 +25,9 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private CardZone underDevelopmentZone;
 	[SerializeField] private CardZone technologyZone;
 	[SerializeField] private CardZone equipmentZone;
+	//I wonder if I could remove both of these actually...?
 	[SerializeField] private OutpostCardObject outpostCardObject;
 	[SerializeField] private SO_OutpostData outpostData;
-
 
 	[Header("Surface")]
 	[SerializeField] private CardDeck surfaceDeck;
@@ -53,12 +55,14 @@ public class GameHandler : MonoBehaviour {
 
 		switch (GameStats.TurnSegment) {
 			case TurnSegment.AtStartOfTurn:
-				Debug.Log("Turn starts,");
+				GameStats.IncreaseTurnSegment();
 				break;
 			case TurnSegment.AfterStartOfTurn:
+				GameStats.IncreaseTurnSegment();
 				break;
 			case TurnSegment.InitiativePhaseStart:
-				//Decide on which player to go first.
+				Debug.Log("For now I think it will be fine if we just decide that player one goes first.");
+				
 				break;
 			case TurnSegment.AfterInitiativePhaseStart:
 				break;
@@ -71,14 +75,17 @@ public class GameHandler : MonoBehaviour {
 			case TurnSegment.BeforeSurfaceCardIsDrawn:
 				break;
 			case TurnSegment.WhenSurfaceCardIsDrawn:
+				DoDrawSurfaceCards();
 				break;
 			case TurnSegment.AfterSurfaceCardIsDrawn:
 				break;
 			case TurnSegment.BeforeSelectDayCycle:
+				uiHandler.ActivateDayNightToggle(true);
 				break;
 			case TurnSegment.WhenSelectDayCycle:
 				break;
 			case TurnSegment.AfterSelectDayCycle:
+				uiHandler.ActivateDayNightToggle(false);
 				break;
 			case TurnSegment.WhenPlanningPhaseStarts:
 				break;
@@ -99,32 +106,7 @@ public class GameHandler : MonoBehaviour {
 			case TurnSegment.Night:
 				break;
 			case TurnSegment.Resolution:
-				break;
-			case TurnSegment.Upkeep:
-				break;
-			default:
-				break;
-		}
-
-		switch (GameStats.TurnSegment) {
-			case TurnSegment.Initiative:
-				InitiativeStepSurfaceCards();
-
-				break;
-			case TurnSegment.Planning:
-				Debug.Log("Here we will want button so that the play can go to the next step...");
-
-				break;
-			case TurnSegment.Day:
-				Debug.Log("Zones are selectable, and cards and movable.");
-				break;
-			case TurnSegment.Night:
-				Debug.Log("Zones are selectable, and cards and movable.");
-				break;
-			case TurnSegment.Resolution:
-
 				DoDevelopmentPhase();
-
 				break;
 			case TurnSegment.Upkeep:
 				DoUpkeepPhase();
@@ -134,6 +116,19 @@ public class GameHandler : MonoBehaviour {
 		}
 	}
 
+	private void DoDrawSurfaceCards() {
+
+		for (int i = 0; i < GameStats.ThreatLevel; i++) {
+			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
+				if (cardScript is SurfaceCardScript surfaceScript) surfaceZone.AddCard(CardPool.Instance.GetCardObject(surfaceScript));
+
+				else if (cardScript is OutpostCardScript outpostScript) surfaceZone.AddCard(CardPool.Instance.GetCardObject(outpostScript));
+
+				else Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast to either surfaceScript or CardScript");
+			}
+			else Debug.Log($"{name} asked for a card from the surfaceDeck {surfaceDeck.name} but received false back");
+		}
+	}
 	private void DoUpkeepPhase() {
 
 		//So, Gamestats produces...
@@ -176,6 +171,10 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void HandleOnNextButtonPressed() {
+		GoToNextTurnStage();
+	}
+
+	private void GoToNextTurnStage() {
 		GameStats.IncreaseTurnSegment();
 
 		DoNextTurnPhase();

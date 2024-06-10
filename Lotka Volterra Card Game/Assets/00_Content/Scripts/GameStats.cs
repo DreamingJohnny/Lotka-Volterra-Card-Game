@@ -33,7 +33,7 @@ public static class GameStats {
 	}
 
 	public static void IncreaseTurnSegment() {
-		if (TurnSegment == TurnSegment.Upkeep) TurnSegment = TurnSegment.Initiative;
+		if (TurnSegment == TurnSegment.Upkeep) TurnSegment = TurnSegment.AtStartOfTurn;
 		else TurnSegment++;
 		Debug.Log("Does the turn go up?");
 		//Like here, is there a reason why this shouldn't be placed inside the private setter above instead?
@@ -84,6 +84,15 @@ public static class GameStats {
 		sporeCount %= sporePerThreatLevel;
 		
 		OnSporeCountChanged?.Invoke(SporeCount);
+	}
+	#endregion
+
+	#region"DayNightCycle"
+
+	public static bool PlayByDay { get; private set; }
+
+	public static void HandleOnDayNightToggled(bool _playByDay) {
+		PlayByDay = _playByDay;
 	}
 	#endregion
 
