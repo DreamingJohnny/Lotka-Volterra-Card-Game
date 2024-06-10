@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955255577924352176}
   - component: {fileID: 3500509010547193062}
+  - component: {fileID: 3044469270444490869}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3500509010547193062
 MonoBehaviour:
@@ -44,15 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c1408c4ef9617429ae3b55f9f1da70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outpostDeck: {fileID: 0}
-  outpostDiscardPile: {fileID: 0}
-  playerHand: {fileID: 0}
+  startingHandSize: 2
+  outpostDeck_1: {fileID: 0}
+  outpostDiscardPile_1: {fileID: 0}
+  playerHand_1: {fileID: 0}
+  outpostDeck_2: {fileID: 0}
+  outpostDiscardPile_2: {fileID: 0}
+  playerHand_2: {fileID: 0}
   personalityZone: {fileID: 0}
   outpostZone: {fileID: 0}
-  developmentZone: {fileID: 0}
+  underDevelopmentZone: {fileID: 0}
+  technologyZone: {fileID: 0}
+  equipmentZone: {fileID: 0}
   outpostCardObject: {fileID: 1030217317533501852, guid: 2cb747c004ed5554f81bdc03fc91a13e, type: 3}
   outpostData: {fileID: 11400000, guid: 0b86e1dc7485e034786671064f0f2377, type: 2}
-  startingHandSize: 2
   surfaceDeck: {fileID: 0}
   surfaceDiscardPile: {fileID: 0}
   surfaceZone: {fileID: 0}
@@ -69,3 +75,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 041c637c575d1864ba140dbda65bc944, type: 2}
   - {fileID: 11400000, guid: 88d33f353404feb40a44f5fcd66eec9c, type: 2}
   uiHandler: {fileID: 0}
+--- !u!114 &3044469270444490869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450818112903900471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08674cb12254f64ea17ab7d27b56e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceCardPrefab: {fileID: 7193503214741249874, guid: 29881850f074f014d96b935cec3e11e6, type: 3}
+  outpostCardPrefab: {fileID: 1030217317533501852, guid: 2cb747c004ed5554f81bdc03fc91a13e, type: 3}

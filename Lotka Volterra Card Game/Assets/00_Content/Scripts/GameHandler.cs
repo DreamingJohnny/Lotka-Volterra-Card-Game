@@ -47,7 +47,7 @@ public class GameHandler : MonoBehaviour {
 		outpostCards = new Queue<OutpostCardObject>();
 
 		SetUpFirstGame();
-
+		DoNextTurnPhase();
 	}
 
 	private void Update() {
@@ -150,17 +150,17 @@ public class GameHandler : MonoBehaviour {
 
 	//Initiative
 	private void InitiativeStepSurfaceCards() {
+		
 		//Send threat level to surfacedeck?
-		int tempThreat = GameStats.ThreatLevel;
-
-		for (int i = 0; i < tempThreat; i++) {
+		for (int i = 0; i < GameStats.ThreatLevel; i++) {
 			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
 
 				if (cardScript is SurfaceCardScript surfaceScript) {
-					surfaceZone.AddCard(GetCardObject(surfaceScript));
+
+					surfaceZone.AddCard(CardPool.Instance.GetCardObject(surfaceScript));
 				}
 				else if (cardScript is OutpostCardScript outpostScript) {
-					surfaceZone.AddCard(GetCardObject(outpostScript));
+					surfaceZone.AddCard(CardPool.Instance.GetCardObject(outpostScript));
 				}
 				else {
 					Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast to either surfaceScript or CardScript");
@@ -226,18 +226,18 @@ public class GameHandler : MonoBehaviour {
 	/// </summary>
 	/// <param name="surfaceCardScript"></param>
 	/// <returns></returns>
-	private SurfaceCardObject GetCardObject(SurfaceCardScript surfaceCardScript) {
-		if (surfaceCards.Count <= 0) {
-			SurfaceCardObject surfaceCard = new();
-			surfaceCard.SetCardScript(surfaceCardScript);
-			//surfaceCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
-			return surfaceCard;
-		}
-		else {
-			SurfaceCardObject surfaceCard = surfaceCards.Dequeue();
-			surfaceCard.SetCardScript(surfaceCardScript);
-			surfaceCard.gameObject.SetActive(true);
-			return surfaceCard;
-		}
-	}
+	//private SurfaceCardObject GetCardObject(SurfaceCardScript surfaceCardScript) {
+	//	if (surfaceCards.Count <= 0) {
+	//		SurfaceCardObject surfaceCard = new();
+	//		surfaceCard.SetCardScript(surfaceCardScript);
+	//		//surfaceCard.GetComponent<CardSelection>().OnCardSelected += HandleOnCardSelected;
+	//		return surfaceCard;
+	//	}
+	//	else {
+	//		SurfaceCardObject surfaceCard = surfaceCards.Dequeue();
+	//		surfaceCard.SetCardScript(surfaceCardScript);
+	//		surfaceCard.gameObject.SetActive(true);
+	//		return surfaceCard;
+	//	}
+	//}
 }
