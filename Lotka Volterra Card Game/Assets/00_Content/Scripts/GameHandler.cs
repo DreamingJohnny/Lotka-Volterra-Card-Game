@@ -61,12 +61,12 @@ public class GameHandler : MonoBehaviour {
 				GameStats.IncreaseTurnSegment();
 				break;
 			case TurnSegment.InitiativePhaseStart:
-				Debug.Log("For now I think it will be fine if we just decide that player one goes first.");
 				
 				break;
 			case TurnSegment.AfterInitiativePhaseStart:
 				break;
 			case TurnSegment.BeforePlayerOrderSelected:
+				Debug.Log("For now I think it will be fine if we just decide that player one goes first.");
 				break;
 			case TurnSegment.WhenPlayerOrderSelected:
 				break;
@@ -92,6 +92,9 @@ public class GameHandler : MonoBehaviour {
 			case TurnSegment.AfterPlanningPhaseStarts:
 				break;
 			case TurnSegment.PlayCard:
+				//So here we need to have a button that says, first player is done then?
+				//So, activate first players areas and cards
+				//And the button for skipping.
 				break;
 			case TurnSegment.WhenDayPhaseStarts:
 				break;
@@ -162,12 +165,12 @@ public class GameHandler : MonoBehaviour {
 
 		Debug.Log("Setting up outpostDeck...");
 		outpostDeck_1.SetNewDeck(sO_OutpostCardDatas);
+		outpostDeck_2.SetNewDeck(sO_OutpostCardDatas);
 
 		Debug.Log("Setting up surfaceDeck...");
 		surfaceDeck.SetNewDeck(sO_SurfaceCardDatas);
 
-		SetupFirstOutpostCardHand();
-
+		//SetupFirstOutpostCardHand();
 	}
 
 	private void HandleOnNextButtonPressed() {

@@ -63,12 +63,12 @@ public class UIHandler : MonoBehaviour {
 	}
 
 	public void ActivateDayNightToggle(bool state) {
-		if (state) dayNightButton.gameObject.SetActive(false);
-		else {
+		if (state) {
 			dayNightButton.gameObject.SetActive(true);
-			if(GameStats.PlayByDay) { isDay = true; } else { isDay = false; }
+			if (GameStats.PlayByDay) { isDay = true; } else { isDay = false; }
 			UpdateDayNightButton();
 		}
+		else dayNightButton.gameObject.SetActive(false);
 	}
 
 	public void OnDayNightButtonClicked() {

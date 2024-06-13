@@ -35,9 +35,6 @@ public static class GameStats {
 	public static void IncreaseTurnSegment() {
 		if (TurnSegment == TurnSegment.Upkeep) TurnSegment = TurnSegment.AtStartOfTurn;
 		else TurnSegment++;
-		Debug.Log("Does the turn go up?");
-		//Like here, is there a reason why this shouldn't be placed inside the private setter above instead?
-		//OnTurnSegmentChanged?.Invoke(TurnSegment);
 	}
 
 	public static void SetTurnSegmentTo(TurnSegment _turnSegment) {
@@ -98,7 +95,7 @@ public static class GameStats {
 
 	public static void InitGame() {
 		Turn = 1;
-		TurnSegment = TurnSegment.Initiative;
+		TurnSegment = TurnSegment.AtStartOfTurn;
 		ThreatLevel = 1;
 		SporeCount = 0;
 	}
