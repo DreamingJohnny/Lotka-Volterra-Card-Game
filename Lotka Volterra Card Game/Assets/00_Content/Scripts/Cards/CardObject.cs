@@ -15,6 +15,29 @@ public abstract class CardObject : MonoBehaviour {
 	[SerializeField] protected Image cardBack;
 	#endregion
 
+	protected CardObject engagedCard;
+	public readonly Vector3 EngagedCardOffset = new(0, -20, 0);
+
+	public virtual Transform SetEngagedCard(CardObject _engagedCard) {
+		if(_engagedCard == engagedCard) {
+			Debug.Log($"{_engagedCard.name} just tried to set itself as the engaged card to {name}, where it was already set as the engaged card.");
+			return null;
+		}
+
+		if (_engagedCard == null) {
+			Debug.Log($"{name} was just asked to set its engaged card to be a null object.");
+		return null;
+		}
+
+		if(engagedCard == null) { engagedCard = _engagedCard;
+			return transform;
+		}
+        else
+        {
+            return engagedCard.SetEngagedCard(_engagedCard);
+        }
+    }
+
 	public abstract CardScript CardScript { get; }
 
 	public abstract void SetCardScriptBase(CardScript cardScript);

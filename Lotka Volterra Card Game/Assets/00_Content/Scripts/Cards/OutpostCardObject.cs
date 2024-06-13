@@ -20,6 +20,27 @@ public sealed class OutpostCardObject : CardObject {
 	private OutpostCardScript outpostCardScript;
 	public override CardScript CardScript => outpostCardScript;
 
+	private CardObject capturedCard;
+	public CardObject CardObject => capturedCard;
+	public readonly Vector3 captureOffset = new(25, 25, 0);
+	public readonly Quaternion captureRotation = Quaternion.Euler(0, 0, 90);
+
+	public Transform SetCapturedCard(CardObject card) {
+		if (card == capturedCard) {
+			Debug.Log($"{card.name} just tried to set itself as the captured card of {name}, where it was already set as the captured card.");
+			return null;
+		}
+
+		if (capturedCard == null) {
+			capturedCard = card;
+			return transform;
+		}
+		else {
+			//Note that this won't really work, seeing as the next card will also be twisted 90 degrees, and they won't keep other things in mind.
+			return capturedCard.SetEngagedCard(card);
+		}
+	}
+
 	public override void SetCardScriptBase(CardScript cardScript) => SetCardScript((OutpostCardScript)cardScript);
 
 	public void SetCardScript(OutpostCardScript newOutpostCardScript) {
