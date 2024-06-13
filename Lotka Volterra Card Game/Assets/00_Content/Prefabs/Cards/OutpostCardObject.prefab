@@ -953,6 +953,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3725032388834312487, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 47bf0cc9a5ca1554e84d523d004b16bb, type: 3}
     - target: {fileID: 5645319497109885653, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1082,6 +1086,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2585531660341069809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3725032388834312487, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
+  m_PrefabInstance: {fileID: 1175543269479450326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4895523598577140753 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6025880787836404423, guid: 8a0bc4935571dc44b83726125f568add, type: 3}
@@ -1142,6 +1157,7 @@ MonoBehaviour:
   illustration: {fileID: 7256179226409455137}
   traits: {fileID: 8622032189532829790}
   cardEffect: {fileID: 4895523598577140753}
+  cardBack: {fileID: 2585531660341069809}
   nullImage: {fileID: 21300000, guid: c502435e0beb5a046b731efa4252e5c2, type: 3}
   developmentCost: {fileID: 1660408704500555113}
   resourceCost: {fileID: 8001515254196947156}

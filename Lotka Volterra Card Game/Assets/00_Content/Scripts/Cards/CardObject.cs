@@ -12,6 +12,7 @@ public abstract class CardObject : MonoBehaviour {
 	[SerializeField] protected Image illustration;
 	[SerializeField] protected TextMeshProUGUI traits;
 	[SerializeField] protected TextMeshProUGUI cardEffect;
+	[SerializeField] protected Image cardBack;
 	#endregion
 
 	public abstract CardScript CardScript { get; }
