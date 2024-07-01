@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public sealed class SurfaceCardObject : CardObject {
 
-	#region"UI_components"
-	[SerializeField] private TextMeshProUGUI keywords;
-	[SerializeField] private TextMeshProUGUI scavengingValue;
-	[SerializeField] private TextMeshProUGUI threatLevel;
-	[SerializeField] private TextMeshProUGUI alertnessValue;
-	[SerializeField] private TextMeshProUGUI toughnessValue;
+	#region"TMP components"
+	[SerializeField] private TextMeshPro scavengingValue;
+	[SerializeField] private TextMeshPro keywords;
+	[SerializeField] private TextMeshPro threatLevel;
+	[SerializeField] private TextMeshPro toughnessValue;
+	[SerializeField] private TextMeshPro alertnessValue;
 	#endregion
 
 	private SurfaceCardScript surfaceCardScript;

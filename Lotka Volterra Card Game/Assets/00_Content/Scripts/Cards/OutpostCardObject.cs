@@ -7,14 +7,14 @@ using System;
 
 public sealed class OutpostCardObject : CardObject {
 
-	#region"UI_components"
-	[SerializeField] private TextMeshProUGUI developmentCost;
-	[SerializeField] private TextMeshProUGUI resourceCost;
-	[SerializeField] private TextMeshProUGUI hoursCost;
-	[SerializeField] private TextMeshProUGUI upkeepCost;
-	[SerializeField] private TextMeshProUGUI scavengeValue;
-	[SerializeField] private TextMeshProUGUI interveneValue;
-	[SerializeField] private TextMeshProUGUI developeValue;
+	#region"TMP components"
+	[SerializeField] private TextMeshPro developmentCost;
+	[SerializeField] private TextMeshPro resourceCost;
+	[SerializeField] private TextMeshPro hoursCost;
+	[SerializeField] private TextMeshPro upkeepCost;
+	[SerializeField] private TextMeshPro scavengeValue;
+	[SerializeField] private TextMeshPro interveneValue;
+	[SerializeField] private TextMeshPro developmentValue;
 	#endregion
 
 	private OutpostCardScript outpostCardScript;
@@ -52,6 +52,6 @@ public sealed class OutpostCardObject : CardObject {
 
 		interveneValue.text = outpostCardScript.GetInterveneValue(out temp) ? temp.ToString() : nA;
 
-		developeValue.text = outpostCardScript.GetDevelopmentValue(out temp) ? temp.ToString() : nA;
+		developmentValue.text = outpostCardScript.GetDevelopmentValue(out temp) ? temp.ToString() : nA;
 	}
 }

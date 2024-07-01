@@ -44,9 +44,6 @@ TagManager:
   - name: TableTop
     uniqueID: 2384081587
     locked: 0
-  - name: TableMat
-    uniqueID: 3148708179
-    locked: 0
   - name: OnTable
     uniqueID: 177309743
     locked: 0

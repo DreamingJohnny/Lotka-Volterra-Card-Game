@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public abstract class CardObject : MonoBehaviour {
 
-	#region"UI_components"
-	[SerializeField] protected TextMeshProUGUI cardName;
-	[SerializeField] protected TextMeshProUGUI cardType;
-	[SerializeField] protected Image illustration;
-	[SerializeField] protected TextMeshProUGUI traits;
-	[SerializeField] protected TextMeshProUGUI cardEffect;
+	#region"TMP components"
+	[SerializeField] protected TextMeshPro cardName;
+	[SerializeField] protected TextMeshPro cardType;
+	[SerializeField] protected SpriteRenderer illustration;
+	[SerializeField] protected TextMeshPro traits;
+	[SerializeField] protected TextMeshPro cardEffect;
 	#endregion
 
 	public abstract CardScript CardScript { get; }
