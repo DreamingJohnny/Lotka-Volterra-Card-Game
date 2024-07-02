@@ -685,8 +685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ce2fa2102e47e4a884c4d26fba0172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &5216011521488973380 stripped
-RectTransform:
+--- !u!4 &5216011521488973380 stripped
+Transform:
   m_CorrespondingSourceObject: {fileID: 2665270734951307292, guid: bf440f3de1ffa6b448bec28518cc5b22, type: 3}
   m_PrefabInstance: {fileID: 7826710018852763224}
   m_PrefabAsset: {fileID: 0}
