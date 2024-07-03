@@ -170,7 +170,7 @@ public class GameHandler : MonoBehaviour {
 		Debug.Log("Setting up surfaceDeck...");
 		surfaceDeck.SetNewDeck(sO_SurfaceCardDatas);
 
-		//SetupFirstOutpostCardHand();
+		SetupFirstOutpostCardHand();
 	}
 
 	private void HandleOnNextButtonPressed() {
@@ -189,7 +189,8 @@ public class GameHandler : MonoBehaviour {
 		for (int i = 0; i < startingHandSize; i++) {
 
 			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
-				CardObject temp = CardPool.Instance.GetCardObject(cardScript as OutpostCardScript);
+				OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
+				OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
 				temp.transform.SetParent(playerHand_1.transform, false);
 				temp.gameObject.SetActive(true);
 				Debug.Log("Card created!");

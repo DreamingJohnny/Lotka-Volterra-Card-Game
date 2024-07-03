@@ -78,7 +78,7 @@ public class CardDeck : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// If it can find any SO_OutpostCards in the queue it returns "true" and a POCO_OutpostCard with that data that is then dequeued from the list.
+	/// If it can find any CardDatas in the queue it returns "true" and a cardScript with that data that has then been dequeued from the list.
 	/// Otherwise it returns a null object and "false".
 	/// </summary>
 	/// <param name="cardScript"></param>
