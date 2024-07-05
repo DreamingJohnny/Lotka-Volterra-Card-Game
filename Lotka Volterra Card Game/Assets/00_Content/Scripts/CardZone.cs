@@ -8,21 +8,40 @@ public class CardZone : MonoBehaviour {
 
 	[SerializeField] private List<CardType> approvedCardTypes = new();
 
-	[SerializeField] private int cardSlotMax;
-	public int CardSlotMax { get { return cardSlotMax; } }
+	[SerializeField] private List<Transform> cardSlots = new();
 
-	public bool IsFull { get { if (cardSlotMax >= transform.childCount) return false; return true; } }
+	//[SerializeField] private int cardSlotsMax;
+	public int CardSlotMaxAmount { get { return cardSlots.Count; } }
+
+	public bool IsFull { get { if (CardSlotMaxAmount >= Cards.Count) return false; return true; } }
+
+	public readonly List<CardObject> Cards = new();
 
 	public bool IsCardAllowed(CardObject cardObject) {
 		if (cardObject == null) return false;
 		else if (IsFull) return false;
 		else {
-            foreach (CardType cardType in approvedCardTypes)
-            {
+			foreach (CardType cardType in approvedCardTypes) {
 				if (cardType == cardObject.CardScript.GetCardType) return true;
 			}
 			return false;
-        }
+		}
+	}
+
+	private void OnEnable() {
+
+		SortCardSlots();
+	}
+
+	private void SortCardSlots() {
+		cardSlots.Clear();
+
+		Transform[] temp = gameObject.GetComponentsInChildren<Transform>();
+
+		foreach (Transform transform in temp) cardSlots.Add(transform);
+
+		//Sorts the transforms so that the one furthest to the left, that is, with the lowest x value, is first in the index.
+		cardSlots.Sort((x, y) => x.position.x.CompareTo(y.position.x));
 	}
 
 	public void AddCard(CardObject newCard) {
@@ -32,7 +51,28 @@ public class CardZone : MonoBehaviour {
 			return;
 		}
 		else {
-			newCard.transform.SetParent(gameObject.transform, false);
+
+			//Will want to add an if else that checks if the card is already in the zone here as well I suppose.
+
+			//So, here we basically say... look at how many cards we have, then take the card and give it to the spot with an index that is one higher.
+			//Take that transform and send it back from here.
+			//We actually don't want to remove one from number of Cards.Count here, seeing as we want the first free one, right?
+
+			cardSlots[Cards.Count].transform.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
+			newCard.transform.SetPositionAndRotation(position, rotation);
+			Cards.Add(newCard);
+
+			//Remember that we need some way of reshuffling cards also, so that they have the correct position.
+			//And this must then be done before the card adds itself to the list then? Otherwise the card will never take the first spot.
+
+			//So, I think this is where I'd want to deal with the movement,
+			//so I should have this script return a transform for where I want this card to go.
+			//So, either the zone... the zone has a certain amount of child spots then. But those aren't the parent then? No, we should use the new movement system.
+			//So this one should send a Vector3 back in that case? And a true of false?
+
+
+			//newCard.transform.SetParent(gameObject.transform, false);
+
 			//This feels like a bizzarre and unsafe way to handle this, might want to have more of a method for this somewhere maybe?
 			PlayerCursor.SelectedCard = null;
 		}

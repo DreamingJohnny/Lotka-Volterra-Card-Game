@@ -34,7 +34,7 @@ public class CardPool : MonoBehaviour {
 		if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; }
 	}
 
-	public CardObject GetCardObject(SurfaceCardScript surfaceCardScript) {
+	public SurfaceCardObject GetCardObject(SurfaceCardScript surfaceCardScript) {
 		if (surfaceCards.Count == 0) {
 			SurfaceCardObject temp = Instantiate(surfaceCardPrefab);
 			temp.SetCardScript(surfaceCardScript);
@@ -49,7 +49,7 @@ public class CardPool : MonoBehaviour {
 		}
 	}
 
-	public CardObject GetCardObject(OutpostCardScript outpostCardScript) {
+	public OutpostCardObject GetCardObject(OutpostCardScript outpostCardScript) {
 		if (outpostCards.Count == 0) {
 			OutpostCardObject temp = Instantiate(outpostCardPrefab);
 			temp.SetCardScript(outpostCardScript);

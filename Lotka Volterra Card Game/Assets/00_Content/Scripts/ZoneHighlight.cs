@@ -14,13 +14,13 @@ public class ZoneHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	private Color unAvailable = Color.gray;
 	private Color inActive = Color.black;
 
-	private Image image;
+	private SpriteRenderer spriteRenderer;
 
 	private void Awake() {
-		image = GetComponentInChildren<Image>();
-		Debug.Assert(image != null);
-		image.color = unAvailable;
-		image.color = new Color(image.color.r, image.color.g, image.color.b, neutralAlpha);
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+		Debug.Assert(spriteRenderer != null);
+		spriteRenderer.color = unAvailable;
+		spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, neutralAlpha);
 	}
 
 	private void OnEnable() {
@@ -32,7 +32,7 @@ public class ZoneHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	}
 
 	public void OnPointerEnter(PointerEventData pointerEventData) {
-		image.color = new Color(image.color.r, image.color.g, image.color.b, highlightedAlpha);
+		spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, highlightedAlpha);
 	}
 
 	public void OnPointerClick(PointerEventData pointerEventData) {
@@ -48,20 +48,20 @@ public class ZoneHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		}
 	}
 	public void OnPointerExit(PointerEventData pointerEventData) {
-		image.color = new Color(image.color.r, image.color.g, image.color.b, neutralAlpha);
+		spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, neutralAlpha);
 	}
 
 	private void HandleOnCardSelected(CardObject cardObject) {
 
 		//Here it needs to check on what type of card it is then, like, if it should be available for that.
 		if (cardObject == null) {
-			image.color = unAvailable;
-			image.color = new Color(image.color.r, image.color.g, image.color.b, neutralAlpha);
+			spriteRenderer.color = unAvailable;
+			spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, neutralAlpha);
 			return;
 		}
 		else if (GetComponent<CardZone>().IsCardAllowed(cardObject)) {
-			image.color = available;
-			image.color = new Color(image.color.r, image.color.g, image.color.b, neutralAlpha);
+			spriteRenderer.color = available;
+			spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, neutralAlpha);
 		}
 
 	}
