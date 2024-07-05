@@ -11,12 +11,13 @@ public class CardHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	private Vector3 neutralScale = Vector3.one;
 	private Vector3 highlightedScale = new(1.2f, 1.2f, 1.2f);
 
-	[SerializeField] private Image selectedHalo;
+	[SerializeField] private Sprite selectedHalo;
 
 
 	private void OnEnable() {
 		transform.localScale = neutralScale;
-		selectedHalo.enabled = false;
+		GetComponent<SpriteRenderer>().sprite = selectedHalo;
+		GetComponent<SpriteRenderer>().enabled = false;
 	}
 
 	public void OnPointerEnter(PointerEventData pointerEventData) {
@@ -38,9 +39,9 @@ public class CardHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	}
 
 	public void OnSelect(BaseEventData eventData) {
-		selectedHalo.enabled = true;
+		GetComponent<SpriteRenderer>().enabled = true;
 	}
 	public void OnDeselect(BaseEventData eventData) {
-		selectedHalo.enabled = false;
+		GetComponent <SpriteRenderer>().enabled = false;
 	}
 }
