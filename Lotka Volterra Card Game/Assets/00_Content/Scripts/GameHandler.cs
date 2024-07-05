@@ -12,12 +12,12 @@ public class GameHandler : MonoBehaviour {
 	[Header("Player 1")]
 	[SerializeField] private CardDeck outpostDeck_1;
 	[SerializeField] private DiscardPile outpostDiscardPile_1;
-	[SerializeField] private CardHand playerHand_1;
+	[SerializeField] private CardZone playerHand_1;
 
 	[Header("Player 2")]
 	[SerializeField] private CardDeck outpostDeck_2;
 	[SerializeField] private DiscardPile outpostDiscardPile_2;
-	[SerializeField] private CardHand playerHand_2;
+	[SerializeField] private CardZone playerHand_2;
 
 	[Header("Outpost")]
 	[SerializeField] private CardZone personalityZone;
@@ -191,7 +191,18 @@ public class GameHandler : MonoBehaviour {
 			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
 				OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
 				OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
-				temp.transform.SetParent(playerHand_1.transform, false);
+				playerHand_1.AddCard(temp);
+				temp.gameObject.SetActive(true);
+				Debug.Log("Card created!");
+			}
+		}
+
+		for (int i = 0; i < startingHandSize; i++) {
+
+			if (outpostDeck_2.GetTopCard(out CardScript cardScript)) {
+				OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
+				OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
+				playerHand_2.AddCard(temp);
 				temp.gameObject.SetActive(true);
 				Debug.Log("Card created!");
 			}
