@@ -42,7 +42,6 @@ public class GameHandler : MonoBehaviour {
 	[SerializeField] private UIHandler uiHandler;
 
 	void Start() {
-
 		SetUpFirstGame();
 		DoNextTurnPhase();
 	}
@@ -145,19 +144,13 @@ public class GameHandler : MonoBehaviour {
 
 	private void DoDevelopmentPhase() {
 
-		//Player draws one card here...
-		if (!playerHand_1.IsFull) {
-			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
-				CardObject temp = CardPool.Instance.GetCardObject(cardScript as OutpostCardScript);
-				temp.transform.SetParent(playerHand_1.transform, false);
-				temp.gameObject.SetActive(true);
-				Debug.Log("Card created!");
-			}
-		}
+		PlayerOneHandDrawsOneCard();
+		PlayerTwoHandDrawsOneCard();
 	}
 
 	private void SetUpFirstGame() {
 		GameStats.InitGame();
+		
 		Outpost.SetOutpostData(outpostData);
 		Outpost.InitGame();
 
@@ -183,29 +176,33 @@ public class GameHandler : MonoBehaviour {
 		DoNextTurnPhase();
 	}
 
+	private void PlayerOneHandDrawsOneCard() {
+		if(outpostDeck_1.GetTopCard(out CardScript cardScript)) {
+			OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
+			OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
+			//This line below, it is actually probably in this method we want to check if they should receive the card.
+			playerHand_1.AddCard(temp);
+			temp.gameObject.SetActive(true);
+			Debug.Log("One card created!");
+		}
+	}
+
+	private void PlayerTwoHandDrawsOneCard() {
+		if (outpostDeck_2.GetTopCard(out CardScript cardScript)) {
+			OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
+			OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
+			playerHand_2.AddCard(temp);
+			temp.gameObject.SetActive(true);
+			Debug.Log("One card created!");
+		}
+	}
+
+
 	private void SetupFirstOutpostCardHand() {
-		Debug.Log("Setting up the players initial card hand...");
 		//Give the player their cards,
 		for (int i = 0; i < startingHandSize; i++) {
-
-			if (outpostDeck_1.GetTopCard(out CardScript cardScript)) {
-				OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
-				OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
-				playerHand_1.AddCard(temp);
-				temp.gameObject.SetActive(true);
-				Debug.Log("Card created!");
-			}
-		}
-
-		for (int i = 0; i < startingHandSize; i++) {
-
-			if (outpostDeck_2.GetTopCard(out CardScript cardScript)) {
-				OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
-				OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
-				playerHand_2.AddCard(temp);
-				temp.gameObject.SetActive(true);
-				Debug.Log("Card created!");
-			}
+			PlayerOneHandDrawsOneCard();
+			PlayerTwoHandDrawsOneCard();
 		}
 
 		//Later on, work on mulligan here
