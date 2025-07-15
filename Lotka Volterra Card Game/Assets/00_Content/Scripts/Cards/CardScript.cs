@@ -44,7 +44,7 @@ public abstract class CardScript {
 		}
 	}
 
-	public string GetCardEffect { get { return CardData.CardEffect ?? null; } }
+	public string GetCardEffect { get { return CardData.CardEffectDescription ?? null; } }
 
 	/// Carries out the calculations based on the modifier before returning the resulting value.
 	/// Rounds down to closest integer before returning.

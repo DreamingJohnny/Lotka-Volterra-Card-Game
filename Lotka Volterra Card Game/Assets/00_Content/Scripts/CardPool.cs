@@ -1,3 +1,12 @@
+/*
+ * CardPool.cs
+ * Summary: Handles the object pool for the card objects.
+ * Is called by scripts needing card objects, and retrieves them when they should no longer be in use.
+ * When receiving cards it will deactivate them and remove their carddata.
+ * When asked for a card, it creates a cardobject, but only if needed, assigns it the carddata is has been given,
+ * then it activates the card, and returns the cardobject 
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +23,7 @@ public class CardPool : MonoBehaviour {
 			instance = FindAnyObjectByType<CardPool>();
 			if (instance != null) return instance;
 
-			GameObject cardPoolObject = new GameObject();
+			GameObject cardPoolObject = new();
 			instance = cardPoolObject.AddComponent<CardPool>();
 			return instance;
 		}
@@ -26,7 +35,7 @@ public class CardPool : MonoBehaviour {
 	//Unsure how necessary these two actually are? Seeing as I cannot instantiate here...
 	[SerializeField] private SurfaceCardObject surfaceCardPrefab;
 	[SerializeField] private OutpostCardObject outpostCardPrefab;
-
+	
 	private List<SurfaceCardObject> surfaceCards = new();
 	private List<OutpostCardObject> outpostCards = new();
 

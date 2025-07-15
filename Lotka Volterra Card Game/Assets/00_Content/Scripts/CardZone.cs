@@ -1,7 +1,15 @@
+/*
+ * CardZone.cs
+ * Handles the movement and behavior of cards within their areas,
+ * Where the card should move,
+ * If it is allowed in this zone,
+ * If the cards are able to be interacted with at all
+ */
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CardZone : MonoBehaviour {

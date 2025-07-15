@@ -14,12 +14,15 @@ public abstract class SO_CardData : ScriptableObject {
 	[SerializeField] private List<Trait> traits;
 
 	[TextArea(15, 20)]
-	[SerializeField] private string cardEffect;
+	[SerializeField] private string cardEffectDescription;
+
+	[SerializeField] private List<SO_CardEffect> cardEffects;
 
 	public string CardID { get { return cardID; } }
 	public string CardName { get { return cardName; } }
 	public Sprite Illustration { get { return illustration; } }
 	public CardType CardType { get { return cardType; } }
 	public List<Trait> Traits { get { return traits; } }
-	public string CardEffect { get { return cardEffect; } }
+	public string CardEffectDescription { get { return cardEffectDescription; } }
+	public List<SO_CardEffect> SO_CardEffects { get { return cardEffects; } }
 }

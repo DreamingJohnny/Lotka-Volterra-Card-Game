@@ -1,15 +1,15 @@
+/*
+ * CardHand.cs
+ * Handles the behavior of a player's hand of cards, such as how they look, where they should be placed, and how they should move,
+ * Also tells the cards when they are allowed to be interacted with.
+ * Also handles general information about the hand of cards, such as max size, number of cards etc.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardHand : MonoBehaviour {
-
-	//Also needs to know how many cards it has, and it max size, and if they are empty.
-
-	//Will hold cards,
-	//Will tell the cards when they should be allowed to be interacted with.
-	//Will receive cards, and send cards on.
 
 	private List<OutpostCardObject> outpostCards = new();
 

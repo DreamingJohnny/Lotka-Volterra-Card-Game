@@ -1,28 +1,29 @@
+/*
+ * CardDeck.cs
+ * Acts as a deck of SO_CardData, keeps track of what order they are in,
+ * Is also able to be reshuffled, have card added to the top or bottom.
+ * Can search for a specific SO_CardData, and can either retrieve it or leave it.
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Android;
 
 public class CardDeck : MonoBehaviour {
 
-	/*To look for a specific SO in the queue.
-	 * Oh, and it needs to be able to look at them and then put them back... hm...
-	 * This one might actually need to be handled by someone else instead.
-	*/
-
-	private Queue<SO_CardData> cards = new();
+	private Queue<SO_CardData> cardDatas = new();
 
 	/// <summary>
-	/// Returns true and amount of cards in the deck, or false and amount 0 if there are not cards in the deck.
+	/// Returns true and amount of cardDatas in the deck, or false and amount 0 if there are no carddatas in the deck.
 	/// </summary>
 	/// <param name="amount"></param>
 	/// <returns></returns>
 	public bool GetCardAmount(out int amount) {
 
-		if (cards.Count > 0) {
-			amount = cards.Count;
+		if (cardDatas.Count > 0) {
+			amount = cardDatas.Count;
 			return true;
 		}
 		else {
@@ -36,8 +37,7 @@ public class CardDeck : MonoBehaviour {
 	/// </summary>
 	/// <param name="newDeck"></param>
 	public void SetNewDeck(List<SO_CardData> newDeck) {
-		Debug.Log("New deck of cards added");
-		cards = new Queue<SO_CardData>(ShuffleDeck(newDeck));
+		cardDatas = new Queue<SO_CardData>(ShuffleDeck(newDeck));
 	}
 
 	/// <summary>
@@ -46,9 +46,9 @@ public class CardDeck : MonoBehaviour {
 	/// <param name="additionalCards"></param>
 	public void AddToDeck(List<SO_CardData> additionalCards) {
 
-		foreach (SO_CardData card in additionalCards) cards.Enqueue(card);
+		foreach (SO_CardData card in additionalCards) cardDatas.Enqueue(card);
 
-		cards = new Queue<SO_CardData>(ShuffleDeck(cards.ToList()));
+		cardDatas = new Queue<SO_CardData>(ShuffleDeck(cardDatas.ToList()));
 	}
 
 	/// <summary>
@@ -57,7 +57,7 @@ public class CardDeck : MonoBehaviour {
 	public void ShuffleDeck() {
 		if (!GetCardAmount(out _)) return;
 
-		cards = new Queue<SO_CardData>(ShuffleDeck(cards.ToList()));
+		cardDatas = new Queue<SO_CardData>(ShuffleDeck(cardDatas.ToList()));
 	}
 
 	/// <summary>
@@ -85,12 +85,12 @@ public class CardDeck : MonoBehaviour {
 	/// <returns></returns>
 	public bool GetTopCard(out CardScript cardScript) {
 
-		if (cards.TryPeek(out SO_CardData result)) {
+		if (cardDatas.TryPeek(out SO_CardData result)) {
 			if(result is SO_OutpostCardData) {
-				cardScript = new OutpostCardScript(cards.Dequeue());
+				cardScript = new OutpostCardScript(cardDatas.Dequeue());
 				return true;
 			} else if (result is SO_SurfaceCardData) {
-				cardScript = new SurfaceCardScript(cards.Dequeue());
+				cardScript = new SurfaceCardScript(cardDatas.Dequeue());
 				return true;
 			} else {
 				cardScript = null;
@@ -110,7 +110,7 @@ public class CardDeck : MonoBehaviour {
 	/// <returns></returns>
 	public bool GetTopCardName(out string cardName) {
 
-		if (cards.TryPeek(out SO_CardData result)) {
+		if (cardDatas.TryPeek(out SO_CardData result)) {
 			cardName = result.CardName;
 			return true;
 		}
@@ -127,9 +127,9 @@ public class CardDeck : MonoBehaviour {
 	/// <param name="cardScript"></param>
 	public void PutOnTop(CardScript cardScript) {
 
-		cards = new Queue<SO_CardData>(cards.Reverse());
+		cardDatas = new Queue<SO_CardData>(cardDatas.Reverse());
 		
 		//cards.Enqueue(cardScript.CardData);
-		cards = new Queue<SO_CardData>(cards.Reverse());
+		cardDatas = new Queue<SO_CardData>(cardDatas.Reverse());
 	}
 }

@@ -1,7 +1,10 @@
+/*
+ * Central script that handles setup, teardown, and also calls on other functions to run when it is their turn-order.
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour {
@@ -44,6 +47,37 @@ public class GameHandler : MonoBehaviour {
 	void Start() {
 		SetUpFirstGame();
 		DoNextTurnPhase();
+
+		DoTestingCardDeck();
+	}
+
+	private void DoTestingCardDeck() {
+		Debug.Log("Testing CardDeck...");
+		Debug.Log(surfaceDeck.GetCardAmount(out int amount));
+		if (amount > 0) {
+			Debug.Log($"There are {amount} cards in the surfaceDeck");
+			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
+				Debug.Log($"The top card is {cardScript.GetCardName}");
+			}
+			else {
+				Debug.Log("There was no top card in the surfaceDeck");
+			}
+		}
+		else {
+			Debug.Log("There are no cards in the surfaceDeck");
+		}
+
+		for (int i = 0; i < 10; i++) {
+			Debug.Log("Shuffling surfaceDeck...");
+			surfaceDeck.ShuffleDeck();
+			Debug.Log("Topcard after shuffling:");
+			if (surfaceDeck.GetTopCardName(out string cardname)) {
+				Debug.Log(cardname);
+			}
+			else {
+				Debug.Log("There was no top card in the surfaceDeck");
+			}
+		}
 	}
 
 	private void Update() {
@@ -128,7 +162,7 @@ public class GameHandler : MonoBehaviour {
 
 				else Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast to either surfaceScript or CardScript");
 			}
-			else Debug.Log($"{name} asked for a card from the surfaceDeck {surfaceDeck.name} but received false back");
+			else Debug.Log($"{name} asked for a card from {surfaceDeck.name} but received false back");
 		}
 	}
 	private void DoUpkeepPhase() {
@@ -224,7 +258,7 @@ public class GameHandler : MonoBehaviour {
 					surfaceZone.AddCard(CardPool.Instance.GetCardObject(outpostScript));
 				}
 				else {
-					Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast to either surfaceScript or CardScript");
+					Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast it as either SurfaceCardScript or OutpostCardScript");
 				}
 			}
 			else {

@@ -1,3 +1,10 @@
+/*
+ * Outpost.cs
+ * Handles the stats and data for the outpost
+ * Triggers events when those stats changes, including relevanti information, allowing other scripts to be notified of the changes.
+ */
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

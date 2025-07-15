@@ -1,3 +1,8 @@
+/*
+ * Keeps track of the turn-segment, as well as the stats for how the game is going,
+ * also triggers events with the relevant information when the stats changes, allowing UI and others to subscribe to these events
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
