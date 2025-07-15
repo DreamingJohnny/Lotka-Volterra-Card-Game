@@ -18,10 +18,9 @@ public class CardZone : MonoBehaviour {
 
 	[SerializeField] private List<Transform> cardSlots = new();
 
-	//[SerializeField] private int cardSlotsMax;
-	public int CardSlotMaxAmount { get { return cardSlots.Count; } }
+	public int MaxCardSlots { get { return cardSlots.Count; } }
 
-	public bool IsFull { get { if (CardSlotMaxAmount >= Cards.Count) return false; return true; } }
+	public bool IsFull { get { if (Cards.Count >= MaxCardSlots) return true; return false; } }
 
 	public readonly List<CardObject> Cards = new();
 
@@ -41,6 +40,10 @@ public class CardZone : MonoBehaviour {
 		SortCardSlots();
 	}
 
+	/// <summary>
+	/// Clears the cardslots, then repopulates the list with all its current children transforms.
+	/// Then Sorts the transforms so that the one furthest to the left, that is, with the lowest x value, is first in the index.
+	/// </summary>
 	private void SortCardSlots() {
 		cardSlots.Clear();
 

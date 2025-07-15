@@ -48,7 +48,7 @@ public class GameHandler : MonoBehaviour {
 		SetUpFirstGame();
 		DoNextTurnPhase();
 
-		DoTestingCardDeck();
+		//DoTestingCardDeck();
 	}
 
 	private void DoTestingCardDeck() {
