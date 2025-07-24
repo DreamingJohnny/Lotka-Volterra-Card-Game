@@ -47,8 +47,7 @@ public class CardZone : MonoBehaviour {
 	private void SortCardSlots() {
 		cardSlots.Clear();
 
-		//Transform[] temp = gameObject.GetComponentsInChildren<Transform>();
-
+		//Populates the cardSlots list with all the immediate children transforms of this transform.
 		foreach (Transform child in transform) cardSlots.Add(child);
 
 		//Sorts the transforms so that the one furthest to the left, that is, with the lowest x value, is first in the index.
@@ -59,8 +58,20 @@ public class CardZone : MonoBehaviour {
 			slot.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
 			Debug.Log($"Position: {position}, Rotation: {rotation}");
 		}
+	}
 
+	private void ReAlignCards() { 
+		for (int i = 0; i < Cards.Count; i++) {
+			if (i < cardSlots.Count) {
+				//As long as there are enough slots for the cards, we align them to the slots. Going from left to right.
+				Cards[i].transform.SetPositionAndRotation(cardSlots[i].position, cardSlots[i].rotation);
+			}
+			else {
+				//If there are more cards than slots, we log a warning.
+				Debug.LogWarning($"{name} has more cards than slots, card {Cards[i].name} will not be aligned.");
+			}
 
+		} 
 	}
 
 	/// <summary>
@@ -95,6 +106,7 @@ public class CardZone : MonoBehaviour {
 	}
 
 	public CardObject GetCard(int cardSlot) {
+		//TODO: Look into if this method needs to be completely reworked, I think we'd want to use a different way of asking for cards.
 		CardObject[] cardObjects = GetComponentsInChildren<CardObject>();
 
 		if (cardObjects.Length == 0 || cardObjects.Length >= cardSlot) {
@@ -102,6 +114,18 @@ public class CardZone : MonoBehaviour {
 		}
 		else {
 			return cardObjects[cardSlot];
+		}
+	}
+
+	internal void RemoveCard(CardObject cardObject) {
+		if(Cards.Contains(cardObject)) {
+			Cards.Remove(cardObject);
+			Debug.Log($"{name} removed {cardObject.name} from its list of cards.");
+			// Realigns the remaining cards to their slots.
+			ReAlignCards();
+		}
+		else {
+			Debug.LogWarning($"{name} tried to remove {cardObject.name} but it was not in its list of cards.");
 		}
 	}
 }
