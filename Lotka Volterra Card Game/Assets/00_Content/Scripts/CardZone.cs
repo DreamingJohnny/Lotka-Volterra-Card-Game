@@ -1,6 +1,6 @@
 /*
  * CardZone.cs
- * Handles the movement and behavior of cards within their areas,
+ * Handles the movement of cardObjects to and within their areas,
  * Where the card should move,
  * If it is allowed in this zone,
  * If the cards are able to be interacted with at all
@@ -18,11 +18,11 @@ public class CardZone : MonoBehaviour {
 
 	[SerializeField] private List<Transform> cardSlots = new();
 
+	public readonly List<CardObject> Cards = new();
+
 	public int MaxCardSlots { get { return cardSlots.Count; } }
 
-	public bool IsFull { get { if (Cards.Count >= MaxCardSlots) return true; return false; } }
-
-	public readonly List<CardObject> Cards = new();
+	public bool IsFull { get { if (Cards.Count < cardSlots.Count) return false; return true; } }
 
 	public bool IsCardAllowed(CardObject cardObject) {
 		if (cardObject == null) return false;
@@ -47,45 +47,50 @@ public class CardZone : MonoBehaviour {
 	private void SortCardSlots() {
 		cardSlots.Clear();
 
-		Transform[] temp = gameObject.GetComponentsInChildren<Transform>();
+		//Transform[] temp = gameObject.GetComponentsInChildren<Transform>();
 
-		foreach (Transform transform in temp) cardSlots.Add(transform);
+		foreach (Transform child in transform) cardSlots.Add(child);
 
 		//Sorts the transforms so that the one furthest to the left, that is, with the lowest x value, is first in the index.
 		cardSlots.Sort((x, y) => x.position.x.CompareTo(y.position.x));
+
+		Debug.Log($"{name} has sorted its card slots, their positions are now:");
+		foreach (Transform slot in cardSlots) {
+			slot.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
+			Debug.Log($"Position: {position}, Rotation: {rotation}");
+		}
+
+
 	}
 
-	public void AddCard(CardObject newCard) {
+	/// <summary>
+	/// Receives a CardObject and checks if it is allowed in this zone. If so, it sets the position of the card to the first free slot in the zone,
+	/// </summary>
+	/// <param name="newCard"></param>
+	/// <returns></returns>
+	public bool TryAddCard(CardObject newCard) {
 
 		if (!IsCardAllowed(newCard)) {
 			Debug.Log($"{name} cannot receive the new card.");
-			return;
+			return false;
 		}
 		else {
 
-			//Will want to add an if else that checks if the card is already in the zone here as well I suppose.
-
-			//So, here we basically say... look at how many cards we have, then take the card and give it to the spot with an index that is one higher.
-			//Take that transform and send it back from here.
-			//We actually don't want to remove one from number of Cards.Count here, seeing as we want the first free one, right?
+			//TODO: Might need check for, if code is already inside the zone, esp so that it doesn't update its placement then.
 
 			cardSlots[Cards.Count].transform.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
 			newCard.transform.SetPositionAndRotation(position, rotation);
+
+			Debug.Log($"{name} received a new card and given it the position {position} with rotation {rotation}.");
 			Cards.Add(newCard);
 
-			//Remember that we need some way of reshuffling cards also, so that they have the correct position.
-			//And this must then be done before the card adds itself to the list then? Otherwise the card will never take the first spot.
+			foreach (CardObject card in Cards) {
+				Debug.Log($"{card.name} is now in position {card.transform.position}.");
+			}
 
-			//So, I think this is where I'd want to deal with the movement,
-			//so I should have this script return a transform for where I want this card to go.
-			//So, either the zone... the zone has a certain amount of child spots then. But those aren't the parent then? No, we should use the new movement system.
-			//So this one should send a Vector3 back in that case? And a true of false?
-
-
-			//newCard.transform.SetParent(gameObject.transform, false);
-
+			return true;
 			//This feels like a bizzarre and unsafe way to handle this, might want to have more of a method for this somewhere maybe?
-			PlayerCursor.SelectedCard = null;
+			//PlayerCursor.SelectedCard = null;
 		}
 	}
 

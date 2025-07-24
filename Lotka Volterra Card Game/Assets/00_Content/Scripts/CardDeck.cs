@@ -81,24 +81,24 @@ public class CardDeck : MonoBehaviour {
 	/// If it can find any CardDatas in the queue it returns "true" and a cardScript with that data that has then been dequeued from the list.
 	/// Otherwise it returns a null object and "false".
 	/// </summary>
-	/// <param name="cardScript"></param>
+	/// <param name="cardData"></param>
 	/// <returns></returns>
-	public bool GetTopCard(out CardScript cardScript) {
+	public bool GetTopCard(out SO_CardData cardData) {
 
 		if (cardDatas.TryPeek(out SO_CardData result)) {
 			if(result is SO_OutpostCardData) {
-				cardScript = new OutpostCardScript(cardDatas.Dequeue());
+				cardData = cardDatas.Dequeue();
 				return true;
 			} else if (result is SO_SurfaceCardData) {
-				cardScript = new SurfaceCardScript(cardDatas.Dequeue());
+				cardData = cardDatas.Dequeue();
 				return true;
 			} else {
-				cardScript = null;
+				cardData = null;
 				return false;
 			}
 		}
 		else {
-			cardScript = null;
+			cardData = null;
 			return false;
 		}
 	}
