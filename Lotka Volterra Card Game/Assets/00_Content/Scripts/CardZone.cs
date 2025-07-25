@@ -1,15 +1,14 @@
 /*
  * CardZone.cs
  * Handles the movement of cardObjects to and within their areas,
- * Where the card should move,
- * If it is allowed in this zone,
+ * Decides where the cards should move, as in to what slot, within the zone,
+ * If the cardObject is allowed in this zone,
  * If the cards are able to be interacted with at all
  */
 
-
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardZone : MonoBehaviour {
@@ -18,7 +17,7 @@ public class CardZone : MonoBehaviour {
 
 	[SerializeField] private List<Transform> cardSlots = new();
 
-	public readonly List<CardObject> Cards = new();
+	private readonly List<CardObject> Cards = new();
 
 	public int MaxCardSlots { get { return cardSlots.Count; } }
 
@@ -105,5 +104,9 @@ public class CardZone : MonoBehaviour {
 		else {
 			Debug.LogWarning($"{name} tried to remove {cardObject.name} but it was not in its list of cards.");
 		}
+	}
+
+	public List<CardObject> GetCardsMatching(Func<CardObject, bool> predicate) {
+		return Cards.Where(predicate).ToList();
 	}
 }

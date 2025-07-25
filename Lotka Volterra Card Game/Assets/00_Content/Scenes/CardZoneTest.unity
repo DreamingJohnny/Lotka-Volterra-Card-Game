@@ -1273,18 +1273,18 @@ MonoBehaviour:
   cardObject: {fileID: 6230602597230545512, guid: 29bda8bffb2496b42a735fc00dd92a18, type: 3}
   cardPool: {fileID: 451067709}
   cardDatas:
-  - {fileID: 11400000, guid: 4d04792a9a26daa4f8407718d68ed605, type: 2}
+  - {fileID: 11400000, guid: 041c637c575d1864ba140dbda65bc944, type: 2}
   - {fileID: 11400000, guid: d56113c3ef670e148a8e748e6b056bd4, type: 2}
   - {fileID: 11400000, guid: 2532764edf5dcdb4eba2d2b799834534, type: 2}
   - {fileID: 11400000, guid: 041c637c575d1864ba140dbda65bc944, type: 2}
   - {fileID: 11400000, guid: 88d33f353404feb40a44f5fcd66eec9c, type: 2}
   - {fileID: 11400000, guid: 0e6afe2defa056b4fba3a5c1e37ea0a4, type: 2}
-  - {fileID: 11400000, guid: 4d04792a9a26daa4f8407718d68ed605, type: 2}
+  - {fileID: 11400000, guid: 041c637c575d1864ba140dbda65bc944, type: 2}
   - {fileID: 11400000, guid: d56113c3ef670e148a8e748e6b056bd4, type: 2}
   - {fileID: 11400000, guid: 2532764edf5dcdb4eba2d2b799834534, type: 2}
   - {fileID: 11400000, guid: 041c637c575d1864ba140dbda65bc944, type: 2}
   - {fileID: 11400000, guid: 88d33f353404feb40a44f5fcd66eec9c, type: 2}
-  - {fileID: 11400000, guid: 0e6afe2defa056b4fba3a5c1e37ea0a4, type: 2}
+  - {fileID: 11400000, guid: 041c637c575d1864ba140dbda65bc944, type: 2}
 --- !u!4 &1018375276
 Transform:
   m_ObjectHideFlags: 0

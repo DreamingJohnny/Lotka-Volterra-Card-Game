@@ -15,12 +15,9 @@ MonoBehaviour:
   cardID: 
   cardName: Cmndr. Federica Adenauer
   illustration: {fileID: 21300000, guid: 1508d378c45ada94c80da62d74a57ab7, type: 3}
-  cardType: 0
-  keywords: 00000000
-  cardEffect: 'At the start of the Light Cycle, designate one Soldier Unit as the
-    Squad Leader. Any other Soldier Units Deployed together with it (Either with
-    SCA or INT) have their respective attribute increased by 50% (rounded up) of
-    the Squad Leader''s. Skip the Exhaust step for the Squad Leader. '
+  cardType: 9
+  traits: 1c0000000100000010000000
+  cardEffectDescription: 
   rarity: 0
   ideology: 0
   daycycle: 0

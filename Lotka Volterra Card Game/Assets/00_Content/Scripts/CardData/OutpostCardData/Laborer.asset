@@ -16,8 +16,8 @@ MonoBehaviour:
   cardName: Laborer
   illustration: {fileID: 21300000, guid: 6054952ea2ec07f42ae901470327bfae, type: 3}
   cardType: 8
-  traits: 
-  cardEffect: 'When Developing, produce 1 resource. '
+  traits: 00000000210000001f000000
+  cardEffectDescription: 
   rarity: 1
   ideology: 0
   daycycle: 0

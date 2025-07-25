@@ -29,7 +29,7 @@ public class GameTester : MonoBehaviour {
 			}
 			sending.TryAddCard(cardPool.GetCardObject(cardDatas[testInt]));
 
-			if (sending.Cards.Count <= 0) {
+			if (sending.CurrentCardCount <= 0) {
 				Debug.Log("No cards in zone.");
 			}
 		}
@@ -39,29 +39,40 @@ public class GameTester : MonoBehaviour {
 
 	void Update() {
 
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			//Get a card from a zone and and it to another zone.
-			if (sending.Cards.Count > 0) {
-				int randomIndex = UnityEngine.Random.Range(0, sending.Cards.Count);
-
-				CardObject cardToMove = sending.Cards[randomIndex];
-
-				if (!receiving.TryAddCard(cardToMove)) {
-					Debug.LogWarning($"Failed to move card {cardToMove.CardScript.GetCardName} from {sending.name} to {receiving.name}.");
-				}
-			}
-			else {
-				if (sending == secondaryCardZone) {
-					Debug.Log("No cards to move, switching sender and receiver.");
-					sending = triaryCardZone;
-					receiving = secondaryCardZone;
-				}
-				else if (sending == triaryCardZone) {
-					Debug.Log("No cards to move, switching sender and receiver.");
-					sending = secondaryCardZone;
-					receiving = triaryCardZone;
-				}
-			}
+		if(Input.GetKeyDown(KeyCode.Space)) {
+			
+			var matchingCards = mainCardZone.GetCardsMatching(card => card.CardScript.HasTrait(Trait.Soldier));
+			
+			Debug.Log($"The number of cards with the Soldier trait is: {matchingCards.Count}");
+			
+			matchingCards = mainCardZone.GetCardsMatching(card => card.CardScript.HasTrait(Trait.Soldier) && card.CardScript.GetCardType == CardType.Unit);
+			
+			Debug.Log($"The number of cards with the Soldier trait and Unit type is: {matchingCards.Count}");
 		}
+
+		//if (Input.GetKeyDown(KeyCode.Space)) {
+		//	//Get a card from a zone and and it to another zone.
+		//	if (sending.Cards.Count > 0) {
+		//		int randomIndex = UnityEngine.Random.Range(0, sending.Cards.Count);
+
+		//		CardObject cardToMove = sending.Cards[randomIndex];
+
+		//		if (!receiving.TryAddCard(cardToMove)) {
+		//			Debug.LogWarning($"Failed to move card {cardToMove.CardScript.GetCardName} from {sending.name} to {receiving.name}.");
+		//		}
+		//	}
+		//	else {
+		//		if (sending == secondaryCardZone) {
+		//			Debug.Log("No cards to move, switching sender and receiver.");
+		//			sending = triaryCardZone;
+		//			receiving = secondaryCardZone;
+		//		}
+		//		else if (sending == triaryCardZone) {
+		//			Debug.Log("No cards to move, switching sender and receiver.");
+		//			sending = secondaryCardZone;
+		//			receiving = triaryCardZone;
+		//		}
+		//	}
+		//}
 	}
 }
