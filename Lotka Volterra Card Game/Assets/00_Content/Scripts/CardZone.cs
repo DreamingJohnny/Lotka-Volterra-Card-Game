@@ -17,11 +17,13 @@ public class CardZone : MonoBehaviour {
 
 	[SerializeField] private List<Transform> cardSlots = new();
 
-	private readonly List<CardObject> Cards = new();
+	private readonly List<CardObject> cards = new();
 
 	public int MaxCardSlots { get { return cardSlots.Count; } }
 
-	public bool IsFull { get { if (Cards.Count < cardSlots.Count) return false; return true; } }
+	public int CurrentCardCount { get { return cards.Count; } }
+
+	public bool IsFull { get { if (cards.Count < cardSlots.Count) return false; return true; } }
 
 	public bool IsCardAllowed(CardObject cardObject) {
 		if (cardObject == null) return false;
@@ -56,13 +58,13 @@ public class CardZone : MonoBehaviour {
 	/// Re-aligns all cards in this zone to their respective slots.
 	/// </summary>
 	private void ReAlignCards() {
-		for (int i = 0; i < Cards.Count; i++) {
+		for (int i = 0; i < cards.Count; i++) {
 			if (i < cardSlots.Count) {
 				//As long as there are enough slots for the cards, we align them to the slots. Going from left to right.
-				Cards[i].transform.SetPositionAndRotation(cardSlots[i].position, cardSlots[i].rotation);
+				cards[i].transform.SetPositionAndRotation(cardSlots[i].position, cardSlots[i].rotation);
 			}
 			else {
-				Debug.LogWarning($"{name} has more cards than slots, card {Cards[i].name} will not be aligned.");
+				Debug.LogWarning($"{name} has more cards than slots, card {cards[i].name} will not be aligned.");
 			}
 
 		}
@@ -79,15 +81,15 @@ public class CardZone : MonoBehaviour {
 			Debug.Log($"{name} cannot receive the new card.");
 			return false;
 		}
-		else if (Cards.Contains(newCard)) {
+		else if (cards.Contains(newCard)) {
 			Debug.LogWarning($"{name} already contains the card {newCard.name}, so it will not be added again.");
 			return false;
 		}
 		else {
-			cardSlots[Cards.Count].transform.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
+			cardSlots[cards.Count].transform.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
 			newCard.transform.SetPositionAndRotation(position, rotation);
 
-			Cards.Add(newCard);
+			cards.Add(newCard);
 			newCard.CurrentZone = this;
 
 			return true;
@@ -96,8 +98,8 @@ public class CardZone : MonoBehaviour {
 
 	public void RemoveCard(CardObject cardObject) {
 
-		if (Cards.Contains(cardObject)) {
-			Cards.Remove(cardObject);
+		if (cards.Contains(cardObject)) {
+			cards.Remove(cardObject);
 
 			ReAlignCards();
 		}
@@ -107,6 +109,6 @@ public class CardZone : MonoBehaviour {
 	}
 
 	public List<CardObject> GetCardsMatching(Func<CardObject, bool> predicate) {
-		return Cards.Where(predicate).ToList();
+		return cards.Where(predicate).ToList();
 	}
 }
