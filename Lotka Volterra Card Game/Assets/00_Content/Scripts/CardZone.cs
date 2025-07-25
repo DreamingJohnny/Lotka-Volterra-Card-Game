@@ -36,7 +36,6 @@ public class CardZone : MonoBehaviour {
 	}
 
 	private void OnEnable() {
-
 		SortCardSlots();
 	}
 
@@ -52,26 +51,22 @@ public class CardZone : MonoBehaviour {
 
 		//Sorts the transforms so that the one furthest to the left, that is, with the lowest x value, is first in the index.
 		cardSlots.Sort((x, y) => x.position.x.CompareTo(y.position.x));
-
-		Debug.Log($"{name} has sorted its card slots, their positions are now:");
-		foreach (Transform slot in cardSlots) {
-			slot.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
-			Debug.Log($"Position: {position}, Rotation: {rotation}");
-		}
 	}
 
-	private void ReAlignCards() { 
+	/// <summary>
+	/// Re-aligns all cards in this zone to their respective slots.
+	/// </summary>
+	private void ReAlignCards() {
 		for (int i = 0; i < Cards.Count; i++) {
 			if (i < cardSlots.Count) {
 				//As long as there are enough slots for the cards, we align them to the slots. Going from left to right.
 				Cards[i].transform.SetPositionAndRotation(cardSlots[i].position, cardSlots[i].rotation);
 			}
 			else {
-				//If there are more cards than slots, we log a warning.
 				Debug.LogWarning($"{name} has more cards than slots, card {Cards[i].name} will not be aligned.");
 			}
 
-		} 
+		}
 	}
 
 	/// <summary>
@@ -85,43 +80,26 @@ public class CardZone : MonoBehaviour {
 			Debug.Log($"{name} cannot receive the new card.");
 			return false;
 		}
+		else if (Cards.Contains(newCard)) {
+			Debug.LogWarning($"{name} already contains the card {newCard.name}, so it will not be added again.");
+			return false;
+		}
 		else {
-
-			//TODO: Might need check for, if code is already inside the zone, esp so that it doesn't update its placement then.
-
 			cardSlots[Cards.Count].transform.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
 			newCard.transform.SetPositionAndRotation(position, rotation);
 
-			Debug.Log($"{name} received a new card and given it the position {position} with rotation {rotation}.");
 			Cards.Add(newCard);
-
-			foreach (CardObject card in Cards) {
-				Debug.Log($"{card.name} is now in position {card.transform.position}.");
-			}
+			newCard.CurrentZone = this;
 
 			return true;
-			//This feels like a bizzarre and unsafe way to handle this, might want to have more of a method for this somewhere maybe?
-			//PlayerCursor.SelectedCard = null;
 		}
 	}
 
-	public CardObject GetCard(int cardSlot) {
-		//TODO: Look into if this method needs to be completely reworked, I think we'd want to use a different way of asking for cards.
-		CardObject[] cardObjects = GetComponentsInChildren<CardObject>();
+	public void RemoveCard(CardObject cardObject) {
 
-		if (cardObjects.Length == 0 || cardObjects.Length >= cardSlot) {
-			return null;
-		}
-		else {
-			return cardObjects[cardSlot];
-		}
-	}
-
-	internal void RemoveCard(CardObject cardObject) {
-		if(Cards.Contains(cardObject)) {
+		if (Cards.Contains(cardObject)) {
 			Cards.Remove(cardObject);
-			Debug.Log($"{name} removed {cardObject.name} from its list of cards.");
-			// Realigns the remaining cards to their slots.
+
 			ReAlignCards();
 		}
 		else {

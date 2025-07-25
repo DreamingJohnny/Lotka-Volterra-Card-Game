@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,7 +36,12 @@ public abstract class CardObject : MonoBehaviour {
 			return currentZone;
 		}
 		set {
-			if (currentZone != value) {
+			if (currentZone == null) {
+				//It should only be null if the card has not been added to a zone yet.
+				Debug.Log("No zone to start with, setting currentZone to the new value.");
+				currentZone = value;
+			}
+			else if (currentZone != value) {
 				// If the card is being moved to a new zone, we remove it from the old zone first.
 				currentZone.RemoveCard(this);
 				currentZone = value;
