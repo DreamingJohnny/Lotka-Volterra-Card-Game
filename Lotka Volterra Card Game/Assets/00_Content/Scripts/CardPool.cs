@@ -3,8 +3,8 @@
  * Summary: Handles the object pool for the card objects.
  * Is called by scripts needing card objects, and retrieves them when they should no longer be in use.
  * When receiving cards it will deactivate them and remove their carddata.
- * When asked for a card, it creates a cardobject, but only if needed, assigns it the carddata is has been given,
- * then it activates the card, and returns the cardobject 
+ * When asked for a cardobject, it either activates one, or, if there are no inactive ones, it creates a new cardobject, assigns it the carddata is has been given,
+ * and then returns that cardobject.
  */
 
 using System;
@@ -54,12 +54,16 @@ public class CardPool : MonoBehaviour {
 
 			SurfaceCardObject card = (surfaceCards.Count > 0) ? surfaceCards.Dequeue() : Instantiate(surfaceCardPrefab);
 			card.SetCardScript(new SurfaceCardScript(surfaceCardData));
+			//TODO: Later on, I'll want to be more systematic with when I activate the card, but for now, this is fine.
+			card.gameObject.SetActive(true);
 			return card;
 		}
 		else if (cardData is SO_OutpostCardData outpostCardData) {
 
 			OutpostCardObject card = (outpostCards.Count > 0) ? outpostCards.Dequeue() : Instantiate(outpostCardPrefab);
 			card.SetCardScript(new OutpostCardScript(outpostCardData));
+			//TODO: Later on, I'll want to be more systematic with when I activate the card, but for now, this is fine.
+			card.gameObject.SetActive(true);
 			return card;
 		}
 		else {
@@ -75,6 +79,8 @@ public class CardPool : MonoBehaviour {
 	public void ReturnCardObject(CardObject cardObject) {
 		if (cardObject is SurfaceCardObject surfaceCardObject) {
 			if (!surfaceCards.Contains(surfaceCardObject)) {
+				//TODO: Check this, shouldn't be done by card, but instead by the zone?
+				surfaceCardObject.CurrentZone = null; // Clear the current zone reference
 				surfaceCardObject.gameObject.SetActive(false);
 				surfaceCards.Enqueue(surfaceCardObject);
 			}
@@ -94,5 +100,7 @@ public class CardPool : MonoBehaviour {
 		else {
 			Debug.LogError($"CardPool tried to return a CardObject that was not a SurfaceCardObject or OutpostCardObject. The cardobject was: {cardObject.name}");
 		}
+
+		Debug.Log($"CardPool returned a card object: {cardObject.name}. It now has {surfaceCards.Count} surface cards and {outpostCards.Count} outpost cards in the pool.");
 	}
 }

@@ -93,6 +93,7 @@ public class CardZone : MonoBehaviour {
 			cards.Add(newCard);
 			newCard.CurrentZone = this;
 
+			Debug.Log("Number of cards in zone: " + cards.Count);
 			return true;
 		}
 	}
@@ -101,7 +102,7 @@ public class CardZone : MonoBehaviour {
 
 		if (cards.Contains(cardObject)) {
 			cards.Remove(cardObject);
-
+			Debug.Log("Number of cards in zone: " + cards.Count);
 			ReAlignCards();
 		}
 		else {
