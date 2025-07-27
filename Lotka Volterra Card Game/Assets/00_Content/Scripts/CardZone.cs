@@ -4,6 +4,7 @@
  * Decides where the cards should move, as in to what slot, within the zone,
  * If the cardObject is allowed in this zone,
  * If the cards are able to be interacted with at all
+ * Also returns the cards in this zone that match a given predicate.
  */
 
 using System;

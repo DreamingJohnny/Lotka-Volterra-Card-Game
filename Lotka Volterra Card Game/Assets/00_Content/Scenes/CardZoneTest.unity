@@ -1634,7 +1634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1403914523277235761, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: approvedCardTypes.Array.data[3]
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1403914523277235761, guid: ea2742ed269d9e548809fc40c2e86765, type: 3}
       propertyPath: approvedCardTypes.Array.data[4]
