@@ -44,6 +44,14 @@ public abstract class CardScript {
 		}
 	}
 
+	public bool HasTrait(Trait trait) {
+		//Checks if the trait is in either the CardData.Traits or the addedTraits list.
+		if (CardData.Traits.Contains(trait) || addedTraits.Contains(trait)) {
+			return true;
+		}
+		return false;
+	}
+
 	public string GetCardEffect { get { return CardData.CardEffectDescription ?? null; } }
 
 	/// Carries out the calculations based on the modifier before returning the resulting value.

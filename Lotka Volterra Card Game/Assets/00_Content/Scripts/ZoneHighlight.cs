@@ -41,7 +41,7 @@ public class ZoneHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 		if (TryGetComponent(out CardZone zone)) {
 			if(zone.IsCardAllowed(PlayerCursor.SelectedCard)) {
-				zone.AddCard(PlayerCursor.SelectedCard);
+				zone.TryAddCard(PlayerCursor.SelectedCard);
 			}
 
 			Debug.Log("Now the card should move!");

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,30 @@ public abstract class CardObject : MonoBehaviour {
 	[Tooltip("Used when the CardScript does not have a image")]
 	[SerializeField] protected Sprite nullImage;
 
+	protected CardZone currentZone;
+
+	public CardZone CurrentZone {
+		get {
+			if (currentZone == null) {
+				Debug.Log($"{name} does not have a current zone assigned, returning null.");
+				return null;
+			}
+			return currentZone;
+		}
+		set {
+			if (currentZone == null) {
+				//It should only be null if the card has not been added to a zone yet.
+				Debug.Log("No zone to start with, setting currentZone to the new value.");
+				currentZone = value;
+			}
+			else if (currentZone != value) {
+				// If the card is being moved to a new zone, we remove it from the old zone first.
+				currentZone.RemoveCard(this);
+				currentZone = value;
+			}
+		}
+	}
+
 	private void OnEnable() {
 		Debug.Assert(nullImage != null);
 	}
@@ -34,7 +59,7 @@ public abstract class CardObject : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// If the object doesn't contain a outpostCardInfo it logs that and returns. Otherwise it sets all of the values from outpostCardInfo to its own UI.
+	/// If the object doesn't contain cardData it logs that and returns. Otherwise it sets all of the values from cardData to its own UI.
 	/// </summary>
 	public virtual void UpdateAllFields() {
 

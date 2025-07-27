@@ -30,64 +30,69 @@ public class CardPool : MonoBehaviour {
 		private set { instance = value; }
 	}
 
-	//And then receive them as well, and when receiving them, probably clean them out of things as well?
-
+	//TODO: Pretty sure that I don't need the serialized references here since I will just instantiate them when I need them?
 	//Unsure how necessary these two actually are? Seeing as I cannot instantiate here...
 	[SerializeField] private SurfaceCardObject surfaceCardPrefab;
 	[SerializeField] private OutpostCardObject outpostCardPrefab;
-	
-	private List<SurfaceCardObject> surfaceCards = new();
-	private List<OutpostCardObject> outpostCards = new();
+
+	private Queue<SurfaceCardObject> surfaceCards = new();
+	private Queue<OutpostCardObject> outpostCards = new();
 
 	private void Awake() {
 		if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; }
 	}
 
-	public SurfaceCardObject GetCardObject(SurfaceCardScript surfaceCardScript) {
-		if (surfaceCards.Count == 0) {
-			SurfaceCardObject temp = Instantiate(surfaceCardPrefab);
-			temp.SetCardScript(surfaceCardScript);
-			temp.gameObject.SetActive(true);
-			return temp;
+	/// <summary>
+	/// Gets a suitable card object from one of the two card queues pool (or instantiates a new one if the queue is empty),
+	/// assigns the given card data, and returns it, still deactivated.
+	/// </summary>
+	/// <param name="cardData"></param>
+	/// <returns></returns>
+	public CardObject GetCardObject(SO_CardData cardData) {
+		//If the cardScript is a SurfaceCardScript, then we get a SurfaceCardObject.
+		if (cardData is SO_SurfaceCardData surfaceCardData) {
+
+			SurfaceCardObject card = (surfaceCards.Count > 0) ? surfaceCards.Dequeue() : Instantiate(surfaceCardPrefab);
+			card.SetCardScript(new SurfaceCardScript(surfaceCardData));
+			return card;
+		}
+		else if (cardData is SO_OutpostCardData outpostCardData) {
+
+			OutpostCardObject card = (outpostCards.Count > 0) ? outpostCards.Dequeue() : Instantiate(outpostCardPrefab);
+			card.SetCardScript(new OutpostCardScript(outpostCardData));
+			return card;
 		}
 		else {
-			SurfaceCardObject temp = surfaceCards[0];
-			surfaceCards.RemoveAt(0);
-			temp.gameObject.SetActive(true);
-			return temp;
+			Debug.LogError($"CardPool tried to get a card object for a CardData that was not a SurfaceCardData or OutpostCardData. The carddata was: {cardData.name}");
+			return null;
 		}
 	}
 
-	public OutpostCardObject GetCardObject(OutpostCardScript outpostCardScript) {
-		if (outpostCards.Count == 0) {
-			OutpostCardObject temp = Instantiate(outpostCardPrefab);
-			temp.SetCardScript(outpostCardScript);
-			temp.gameObject.SetActive(true);
-			return temp;
+	/// <summary>
+	/// Receives CardObject, deactivates them and stores them in the appropriate queue.
+	/// </summary>
+	/// <param name="cardObject"></param>
+	public void ReturnCardObject(CardObject cardObject) {
+		if (cardObject is SurfaceCardObject surfaceCardObject) {
+			if (!surfaceCards.Contains(surfaceCardObject)) {
+				surfaceCardObject.gameObject.SetActive(false);
+				surfaceCards.Enqueue(surfaceCardObject);
+			}
+			else {
+				Debug.Log($"Cardpool received a SurfaceCardObject that was already in the pool. This shouldn't happen, the card returned was: {surfaceCardObject.name}");
+			}
+		}
+		else if (cardObject is OutpostCardObject outpostCardObject) {
+			if (!outpostCards.Contains(outpostCardObject)) {
+				outpostCardObject.gameObject.SetActive(false);
+				outpostCards.Enqueue(outpostCardObject);
+			}
+			else {
+				Debug.Log($"Cardpool received a OutpostCardObject that was already in the pool. This shouldn't happen, the card returned was: {outpostCardObject.name}");
+			}
 		}
 		else {
-			OutpostCardObject temp = outpostCards[0];
-			outpostCards.RemoveAt(0);
-			temp.gameObject.SetActive(true);
-			return temp;
+			Debug.LogError($"CardPool tried to return a CardObject that was not a SurfaceCardObject or OutpostCardObject. The cardobject was: {cardObject.name}");
 		}
-	}
-
-	public void ReceiveCardObject(SurfaceCardObject surfaceCardObject) {
-		if (surfaceCards.Contains(surfaceCardObject)) {
-			Debug.Log($"Cardpool just received a card that was already on its list of cards. This shouldn't happen, the card received was: {surfaceCardObject.name}");
-		}
-
-		surfaceCardObject.gameObject.SetActive(false);
-		surfaceCards.Add(surfaceCardObject);
-	}
-
-	public void ReceiveCardObject(OutpostCardObject outpostCardObject) {
-		if (outpostCards.Contains(outpostCardObject)) {
-			Debug.Log($"Cardpool just received a card that was already on its list of cards. This shouldn't happen, the card received was: {outpostCardObject.name}");
-		}
-
-		outpostCardObject.gameObject.SetActive(false);
-		outpostCards.Add(outpostCardObject);
 	}
 }

@@ -56,8 +56,8 @@ public class GameHandler : MonoBehaviour {
 		Debug.Log(surfaceDeck.GetCardAmount(out int amount));
 		if (amount > 0) {
 			Debug.Log($"There are {amount} cards in the surfaceDeck");
-			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
-				Debug.Log($"The top card is {cardScript.GetCardName}");
+			if (surfaceDeck.GetTopCard(out SO_CardData surfaceCardData)) {
+				Debug.Log($"The top card is {surfaceCardData.name}");
 			}
 			else {
 				Debug.Log("There was no top card in the surfaceDeck");
@@ -155,12 +155,12 @@ public class GameHandler : MonoBehaviour {
 	private void DoDrawSurfaceCards() {
 
 		for (int i = 0; i < GameStats.ThreatLevel; i++) {
-			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
-				if (cardScript is SurfaceCardScript surfaceScript) surfaceZone.AddCard(CardPool.Instance.GetCardObject(surfaceScript));
+			if (surfaceDeck.GetTopCard(out SO_CardData cardData)) {
+				if (cardData is SO_SurfaceCardData surfaceCardData) surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(surfaceCardData));
 
-				else if (cardScript is OutpostCardScript outpostScript) surfaceZone.AddCard(CardPool.Instance.GetCardObject(outpostScript));
+				else if (cardData is SO_OutpostCardData outpostCardData) surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(outpostCardData));
 
-				else Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast to either surfaceScript or CardScript");
+				else Debug.Log($"{name} retrieved a scriptable card data from {surfaceDeck.name} that it couldn't cast to either SO_surfaceCardData or SO_outpostCardData, instead it's name was {cardData.name}.");
 			}
 			else Debug.Log($"{name} asked for a card from {surfaceDeck.name} but received false back");
 		}
@@ -211,21 +211,22 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void PlayerOneHandDrawsOneCard() {
-		if(outpostDeck_1.GetTopCard(out CardScript cardScript)) {
-			OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
-			OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
+		if(outpostDeck_1.GetTopCard(out SO_CardData cardData)) {
+			//OutpostCardScript outpostCardScript = cardData as OutpostCardScript;
+			//TODO: I'll eiter need to change this to a more generic method, dealing or receiving cards, or I will have an explicit cast here or something.
+			OutpostCardObject temp = (OutpostCardObject)CardPool.Instance.GetCardObject(cardData);
 			//This line below, it is actually probably in this method we want to check if they should receive the card.
-			playerHand_1.AddCard(temp);
+			playerHand_1.TryAddCard(temp);
 			temp.gameObject.SetActive(true);
 			Debug.Log("One card created!");
 		}
 	}
 
 	private void PlayerTwoHandDrawsOneCard() {
-		if (outpostDeck_2.GetTopCard(out CardScript cardScript)) {
-			OutpostCardScript outpostCardScript = cardScript as OutpostCardScript;
-			OutpostCardObject temp = CardPool.Instance.GetCardObject(outpostCardScript);
-			playerHand_2.AddCard(temp);
+		if (outpostDeck_2.GetTopCard(out SO_CardData cardData)) {
+			SO_OutpostCardData outpostCardData = cardData as SO_OutpostCardData;
+			OutpostCardObject temp = (OutpostCardObject)CardPool.Instance.GetCardObject(outpostCardData);
+			playerHand_2.TryAddCard(temp);
 			temp.gameObject.SetActive(true);
 			Debug.Log("One card created!");
 		}
@@ -248,14 +249,14 @@ public class GameHandler : MonoBehaviour {
 
 		//Send threat level to surfacedeck?
 		for (int i = 0; i < GameStats.ThreatLevel; i++) {
-			if (surfaceDeck.GetTopCard(out CardScript cardScript)) {
+			if (surfaceDeck.GetTopCard(out SO_CardData cardData)) {
 
-				if (cardScript is SurfaceCardScript surfaceScript) {
+				if (cardData is SO_SurfaceCardData surfaceCardData) {
 
-					surfaceZone.AddCard(CardPool.Instance.GetCardObject(surfaceScript));
+					surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(surfaceCardData));
 				}
-				else if (cardScript is OutpostCardScript outpostScript) {
-					surfaceZone.AddCard(CardPool.Instance.GetCardObject(outpostScript));
+				else if (cardData is SO_OutpostCardData outpostCardData) {
+					surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(outpostCardData));
 				}
 				else {
 					Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast it as either SurfaceCardScript or OutpostCardScript");
