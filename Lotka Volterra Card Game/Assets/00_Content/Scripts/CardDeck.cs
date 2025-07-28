@@ -33,22 +33,11 @@ public class CardDeck : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Set the received list of cards to be the queue of cards in the deck after shuffling them.
+	/// Set the received list of cards to be the queue of cards in the deck. Does NOT shuffle them.
 	/// </summary>
 	/// <param name="newDeck"></param>
 	public void SetNewDeck(List<SO_CardData> newDeck) {
-		cardDatas = new Queue<SO_CardData>(ShuffleDeck(newDeck));
-	}
-
-	/// <summary>
-	/// Adds the listed cards to the deck before shuffling the whole deck.
-	/// </summary>
-	/// <param name="additionalCards"></param>
-	public void AddToDeck(List<SO_CardData> additionalCards) {
-
-		foreach (SO_CardData card in additionalCards) cardDatas.Enqueue(card);
-
-		cardDatas = new Queue<SO_CardData>(ShuffleDeck(cardDatas.ToList()));
+		cardDatas = new Queue<SO_CardData>(newDeck);
 	}
 
 	/// <summary>
@@ -77,59 +66,27 @@ public class CardDeck : MonoBehaviour {
 		return newDeck;
 	}
 
-	/// <summary>
-	/// If it can find any CardDatas in the queue it returns "true" and a cardScript with that data that has then been dequeued from the list.
-	/// Otherwise it returns a null object and "false".
-	/// </summary>
-	/// <param name="cardData"></param>
-	/// <returns></returns>
-	public bool GetTopCard(out SO_CardData cardData) {
+	public Queue<SO_CardData> GetTopCards(int amount) {
 
-		if (cardDatas.TryPeek(out SO_CardData result)) {
-			if(result is SO_OutpostCardData) {
-				cardData = cardDatas.Dequeue();
-				return true;
-			} else if (result is SO_SurfaceCardData) {
-				cardData = cardDatas.Dequeue();
-				return true;
-			} else {
-				cardData = null;
-				return false;
-			}
+		Queue<SO_CardData> topCards = new();
+
+		for (int i = 0; i < amount && cardDatas.Count > 0; i++) {
+			topCards.Enqueue(cardDatas.Dequeue());
 		}
-		else {
-			cardData = null;
-			return false;
-		}
+
+		if (topCards.Count < amount) Debug.LogWarning($"CardDeck tried to get {amount} cards, but there were not enough cards in the deck.");
+
+		return topCards;
 	}
 
-	/// <summary>
-	/// If it can find any SO_OutpostCards in the queue it returns "true" and the string of the top one. Does not dequeue. Otherwise an empty string and "false".
-	/// </summary>
-	/// <param name="cardName"></param>
-	/// <returns></returns>
-	public bool GetTopCardName(out string cardName) {
+	public void PutOnTop(Queue<SO_CardData> newCards) {
+		if (newCards == null || newCards.Count == 0) return;
 
-		if (cardDatas.TryPeek(out SO_CardData result)) {
-			cardName = result.CardName;
-			return true;
-		}
-		else {
-			Debug.Log("Could not find any card!");
-			cardName = string.Empty;
-			return false;
-		}
+		cardDatas = new(newCards.Concat(cardDatas));
 	}
 
-	/// <summary>
-	/// Reverses, Enqueues and Reverses the queue again so that the received card is on the top of the queue.
-	/// </summary>
-	/// <param name="cardScript"></param>
-	public void PutOnTop(CardScript cardScript) {
-
-		cardDatas = new Queue<SO_CardData>(cardDatas.Reverse());
-		
-		//cards.Enqueue(cardScript.CardData);
-		cardDatas = new Queue<SO_CardData>(cardDatas.Reverse());
+	public void PutOnBottom(Queue<SO_CardData> newCards) {
+		if (newCards == null || newCards.Count == 0) return;
+		foreach (SO_CardData card in newCards) cardDatas.Enqueue(card);
 	}
 }
