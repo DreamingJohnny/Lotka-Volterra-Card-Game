@@ -79,7 +79,7 @@ public class CardZone : MonoBehaviour {
 	public bool TryAddCard(CardObject newCard) {
 
 		if (!IsCardAllowed(newCard)) {
-			Debug.Log($"{name} cannot receive the new card.");
+			Debug.Log($"{name} isn't allowed to receive the new card.");
 			return false;
 		}
 		else if (cards.Contains(newCard)) {

@@ -5,8 +5,6 @@
  * Can search for a specific SO_CardData, and can either retrieve it or leave it.
  */
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;

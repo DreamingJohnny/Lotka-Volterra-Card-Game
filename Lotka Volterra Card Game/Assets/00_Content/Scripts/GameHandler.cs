@@ -51,34 +51,7 @@ public class GameHandler : MonoBehaviour {
 		//DoTestingCardDeck();
 	}
 
-	private void DoTestingCardDeck() {
-		Debug.Log("Testing CardDeck...");
-		Debug.Log(surfaceDeck.GetCardAmount(out int amount));
-		if (amount > 0) {
-			Debug.Log($"There are {amount} cards in the surfaceDeck");
-			if (surfaceDeck.GetTopCard(out SO_CardData surfaceCardData)) {
-				Debug.Log($"The top card is {surfaceCardData.name}");
-			}
-			else {
-				Debug.Log("There was no top card in the surfaceDeck");
-			}
-		}
-		else {
-			Debug.Log("There are no cards in the surfaceDeck");
-		}
 
-		for (int i = 0; i < 10; i++) {
-			Debug.Log("Shuffling surfaceDeck...");
-			surfaceDeck.ShuffleDeck();
-			Debug.Log("Topcard after shuffling:");
-			if (surfaceDeck.GetTopCardName(out string cardname)) {
-				Debug.Log(cardname);
-			}
-			else {
-				Debug.Log("There was no top card in the surfaceDeck");
-			}
-		}
-	}
 
 	private void Update() {
 		if (Input.GetMouseButtonDown(1)) PlayerCursor.DeSelectCard();
@@ -94,7 +67,7 @@ public class GameHandler : MonoBehaviour {
 				GameStats.IncreaseTurnSegment();
 				break;
 			case TurnSegment.InitiativePhaseStart:
-				
+
 				break;
 			case TurnSegment.AfterInitiativePhaseStart:
 				break;
@@ -155,7 +128,9 @@ public class GameHandler : MonoBehaviour {
 	private void DoDrawSurfaceCards() {
 
 		for (int i = 0; i < GameStats.ThreatLevel; i++) {
-			if (surfaceDeck.GetTopCard(out SO_CardData cardData)) {
+			var cardDatas = surfaceDeck.GetTopCards(1);
+			if (cardDatas.Count < 0 && cardDatas.TryPeek(out _)) {
+				SO_CardData cardData = cardDatas.Dequeue();
 				if (cardData is SO_SurfaceCardData surfaceCardData) surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(surfaceCardData));
 
 				else if (cardData is SO_OutpostCardData outpostCardData) surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(outpostCardData));
@@ -184,7 +159,7 @@ public class GameHandler : MonoBehaviour {
 
 	private void SetUpFirstGame() {
 		GameStats.InitGame();
-		
+
 		Outpost.SetOutpostData(outpostData);
 		Outpost.InitGame();
 
@@ -211,25 +186,23 @@ public class GameHandler : MonoBehaviour {
 	}
 
 	private void PlayerOneHandDrawsOneCard() {
-		if(outpostDeck_1.GetTopCard(out SO_CardData cardData)) {
-			//OutpostCardScript outpostCardScript = cardData as OutpostCardScript;
-			//TODO: I'll eiter need to change this to a more generic method, dealing or receiving cards, or I will have an explicit cast here or something.
-			OutpostCardObject temp = (OutpostCardObject)CardPool.Instance.GetCardObject(cardData);
-			//This line below, it is actually probably in this method we want to check if they should receive the card.
-			playerHand_1.TryAddCard(temp);
-			temp.gameObject.SetActive(true);
-			Debug.Log("One card created!");
-		}
+		var cardDatas = outpostDeck_1.GetTopCards(1);
+		//OutpostCardScript outpostCardScript = cardData as OutpostCardScript;
+		//TODO: I'll eiter need to change this to a more generic method, dealing or receiving cards, or I will have an explicit cast here or something.
+		OutpostCardObject temp = (OutpostCardObject)CardPool.Instance.GetCardObject(cardDatas.Dequeue());
+		//This line below, it is actually probably in this method we want to check if they should receive the card.
+		playerHand_1.TryAddCard(temp);
+		temp.gameObject.SetActive(true);
+		Debug.Log("One card created!");
 	}
 
 	private void PlayerTwoHandDrawsOneCard() {
-		if (outpostDeck_2.GetTopCard(out SO_CardData cardData)) {
-			SO_OutpostCardData outpostCardData = cardData as SO_OutpostCardData;
-			OutpostCardObject temp = (OutpostCardObject)CardPool.Instance.GetCardObject(outpostCardData);
-			playerHand_2.TryAddCard(temp);
-			temp.gameObject.SetActive(true);
-			Debug.Log("One card created!");
-		}
+		var cardDatas = outpostDeck_2.GetTopCards(1);
+
+		OutpostCardObject temp = (OutpostCardObject)CardPool.Instance.GetCardObject(cardDatas.Dequeue());
+		playerHand_2.TryAddCard(temp);
+		temp.gameObject.SetActive(true);
+		Debug.Log("One card created!");
 	}
 
 
@@ -249,22 +222,19 @@ public class GameHandler : MonoBehaviour {
 
 		//Send threat level to surfacedeck?
 		for (int i = 0; i < GameStats.ThreatLevel; i++) {
-			if (surfaceDeck.GetTopCard(out SO_CardData cardData)) {
+			var cardDatas = surfaceDeck.GetTopCards(1);
 
-				if (cardData is SO_SurfaceCardData surfaceCardData) {
+			if (cardDatas.Dequeue() is SO_SurfaceCardData surfaceCardData) {
 
-					surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(surfaceCardData));
-				}
-				else if (cardData is SO_OutpostCardData outpostCardData) {
-					surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(outpostCardData));
-				}
-				else {
-					Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast it as either SurfaceCardScript or OutpostCardScript");
-				}
+				surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(surfaceCardData));
+			}
+			else if (cardDatas.Dequeue() is SO_OutpostCardData outpostCardData) {
+				surfaceZone.TryAddCard(CardPool.Instance.GetCardObject(outpostCardData));
 			}
 			else {
-				Debug.Log($"{name} asked for a card from the surfaceDeck {surfaceDeck.name} but received false back");
+				Debug.Log($"{name} retrieved a script from {surfaceDeck.name} that it couldn't cast it as either SurfaceCardScript or OutpostCardScript");
 			}
 		}
 	}
 }
+

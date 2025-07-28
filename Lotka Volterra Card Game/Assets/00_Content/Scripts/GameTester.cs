@@ -42,4 +42,33 @@ public class GameTester : MonoBehaviour {
 		}
 
 	}
+
+	//private void DoTestingCardDeck() {
+	//	Debug.Log("Testing CardDeck...");
+	//	Debug.Log(surfaceDeck.GetCardAmount(out int amount));
+	//	if (amount > 0) {
+	//		Debug.Log($"There are {amount} cards in the surfaceDeck");
+	//		if (surfaceDeck.GetTopCard(out SO_CardData surfaceCardData)) {
+	//			Debug.Log($"The top card is {surfaceCardData.name}");
+	//		}
+	//		else {
+	//			Debug.Log("There was no top card in the surfaceDeck");
+	//		}
+	//	}
+	//	else {
+	//		Debug.Log("There are no cards in the surfaceDeck");
+	//	}
+
+	//	for (int i = 0; i < 10; i++) {
+	//		Debug.Log("Shuffling surfaceDeck...");
+	//		surfaceDeck.ShuffleDeck();
+	//		Debug.Log("Topcard after shuffling:");
+	//		if (surfaceDeck.GetTopCardName(out string cardname)) {
+	//			Debug.Log(cardname);
+	//		}
+	//		else {
+	//			Debug.Log("There was no top card in the surfaceDeck");
+	//		}
+	//	}
+	//}
 }
