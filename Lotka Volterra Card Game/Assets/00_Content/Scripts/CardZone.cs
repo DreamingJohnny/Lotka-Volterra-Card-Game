@@ -16,6 +16,10 @@ public class CardZone : MonoBehaviour {
 
 	[SerializeField] private List<CardType> approvedCardTypes = new();
 
+	internal List<CardType> GetApprovedCardTypes() {
+		return approvedCardTypes;
+	}
+
 	[SerializeField] private List<Transform> cardSlots = new();
 
 	private readonly List<CardObject> cards = new();
