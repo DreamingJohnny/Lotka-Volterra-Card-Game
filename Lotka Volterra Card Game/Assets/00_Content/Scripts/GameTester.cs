@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class GameTester : MonoBehaviour {
 
-	[SerializeField] private CardZone receivingCardZone;
-	[SerializeField] private CardZone secondaryCardZone;
-	[SerializeField] private CardZone triaryCardZone;
-	//[SerializeField] private CardObject cardObject;
 	[SerializeField] private CardPool cardPool;
 
 	[SerializeField] private List<SO_CardData> cardDatas;
 
-	private int alternateIndex = 0;
+	[SerializeField] private CardObject cardObject;
+	[SerializeField] private CardObject cardToEquip;
+	[SerializeField] private CardObject cardToEquipCardWithEquipment;
+
+	private int index = 0;
 
 	void Start() {
 
@@ -21,54 +21,47 @@ public class GameTester : MonoBehaviour {
 
 	void Update() {
 
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			if (alternateIndex <= 5) {
-				receivingCardZone.TryAddCard(cardPool.GetCardObject(cardDatas[alternateIndex]));
-			}
-			else if (alternateIndex <= 10) {
-				var receivingCard = receivingCardZone.GetCardsMatching(card => card.CardScript.HasTrait(Trait.Soldier));
+		//Next step now is to, get this to work with cards from a card pool.
+		//Then, get it to work with three cards, one card equipping another card, and then being equipped by a third card, and moving correctly.
+		//Then, get it to work with unequipping cards.
+		//Then, get it to work with cards being moved while equipped, and see if that causes any issues.
+		//Then, make sure they update the values correctly when equipped. This needs to handle both traits, values and multiplied values.
+		//Then make sure that can work with multiple cards being equipped to one card.
+		//Then, make sure that they update the values correctly when unequipped.
+		//Then, get it to work with cards being destroyed while equipped, and see if that causes any issues.
+		//Then, overload in children to make sure that only suitable cards can be equipped, based on their own cardtype, or type of card attached.
+		//Then, ensure the same behavior can then be used with Enemy cards as well, in attacks.
 
-				if (receivingCard.Count > 0) {
-					Debug.Log($"Returning card {receivingCard[0].name} to the card pool.");
-					//TODO: Decide if you really want to remove and returns cards to the card pool like this.
-					receivingCardZone.RemoveCard(receivingCard[0]);
-					cardPool.ReturnCardObject(receivingCard[0]);
-				}
+
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			if(index == 0) {
+				cardObject = cardPool.GetCardObject(cardDatas[index]);
+				cardObject.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.identity);
+				Debug.Log(cardObject.CardScript.GetCardName);
+				index++;
+			} else if(index == 1) {
+				cardToEquip = cardPool.GetCardObject(cardDatas[index]);
+				cardToEquip.transform.SetPositionAndRotation(new Vector3(8, 0, 0), Quaternion.identity);
+				Debug.Log(cardToEquip.CardScript.GetCardName);
+				index++;
+			} else if(index == 2) {
+				cardToEquipCardWithEquipment = cardPool.GetCardObject(cardDatas[index]);
+				cardToEquipCardWithEquipment.transform.SetPositionAndRotation(new Vector3(16, 0, 0), Quaternion.identity);
+				Debug.Log(cardToEquipCardWithEquipment.CardScript.GetCardName);
+				index++;
+			} else if(index == 3){
+				cardObject.TryAttachCard(cardToEquip);
+				index++;
+			} else if (index == 4) {
+				cardToEquipCardWithEquipment.TryAttachCard(cardObject);
+				index++;
+			} else if (index == 5) {
+				cardToEquipCardWithEquipment.TryDetachCard(out CardObject unAttachedCard);
+				unAttachedCard.transform.SetPositionAndRotation(new Vector3(0, -5, 0), Quaternion.identity);
+				index++;
 			}
-			else if(alternateIndex <= 15) {
-				receivingCardZone.TryAddCard(cardPool.GetCardObject(cardDatas[alternateIndex]));
-			}
-			alternateIndex++;
+			
 		}
 
 	}
-
-	//private void DoTestingCardDeck() {
-	//	Debug.Log("Testing CardDeck...");
-	//	Debug.Log(surfaceDeck.GetCardAmount(out int amount));
-	//	if (amount > 0) {
-	//		Debug.Log($"There are {amount} cards in the surfaceDeck");
-	//		if (surfaceDeck.GetTopCard(out SO_CardData surfaceCardData)) {
-	//			Debug.Log($"The top card is {surfaceCardData.name}");
-	//		}
-	//		else {
-	//			Debug.Log("There was no top card in the surfaceDeck");
-	//		}
-	//	}
-	//	else {
-	//		Debug.Log("There are no cards in the surfaceDeck");
-	//	}
-
-	//	for (int i = 0; i < 10; i++) {
-	//		Debug.Log("Shuffling surfaceDeck...");
-	//		surfaceDeck.ShuffleDeck();
-	//		Debug.Log("Topcard after shuffling:");
-	//		if (surfaceDeck.GetTopCardName(out string cardname)) {
-	//			Debug.Log(cardname);
-	//		}
-	//		else {
-	//			Debug.Log("There was no top card in the surfaceDeck");
-	//		}
-	//	}
-	//}
 }

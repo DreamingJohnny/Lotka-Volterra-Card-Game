@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public abstract class CardObject : MonoBehaviour {
@@ -46,6 +47,51 @@ public abstract class CardObject : MonoBehaviour {
 				currentZone.RemoveCard(this);
 				currentZone = value;
 			}
+		}
+	}
+
+	/*
+	 * So, this will want the offset value, 
+	 * and it will need reference to the card that it might contain as well, so that it can check for that.
+	 * And it will need a reference to get or send the sorting layer.
+	 * So, equip card, check cardtype of card that it receives.
+	 * Set offset, set parent, set sortinglayer,
+	 */
+
+	private CardObject attachedCard;
+	[SerializeField] private float equippedCardOffset = -1.4f;
+	private const int equippedCardSortingOrderOffset = -1;
+
+	public bool TryAttachCard(CardObject card) {
+		if(attachedCard != null) {
+			Debug.LogWarning($"{name} already has a card equipped, cannot equip another.");
+			return false;
+		}
+		else if(card == null) {
+			Debug.LogWarning($"Was asked to equip a card that was null, and so cannot do it.");
+			return false;
+		}
+		else {
+			attachedCard = card;
+			card.transform.SetParent(transform);
+			card.transform.SetLocalPositionAndRotation(new Vector3(0,equippedCardOffset,0), Quaternion.identity);
+			card.GetComponent<SortingGroup>().sortingOrder = GetComponent<SortingGroup>().sortingOrder + equippedCardSortingOrderOffset;
+			return true;
+		}
+	}
+
+	public bool TryDetachCard(out CardObject unAttachedCard) {
+		if(attachedCard == null) {
+			Debug.LogWarning($"{name} was asked to detach an equipped card, but it doesn't have one.");
+			unAttachedCard = null;
+			return false;
+		}
+		else {
+			attachedCard.transform.SetParent(null);
+			attachedCard.GetComponent<SortingGroup>().sortingOrder = 0;
+			unAttachedCard = attachedCard;
+			attachedCard = null;
+			return true;
 		}
 	}
 

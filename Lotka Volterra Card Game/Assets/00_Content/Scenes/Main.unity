@@ -494,18 +494,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 87150463528550958, guid: f964be2e41721dd4aadbb49ead090adb, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 87150463528550958, guid: f964be2e41721dd4aadbb49ead090adb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 87150463528550958, guid: f964be2e41721dd4aadbb49ead090adb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 87150463528550958, guid: f964be2e41721dd4aadbb49ead090adb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -545,10 +533,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5946305813195259887, guid: f964be2e41721dd4aadbb49ead090adb, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 6713415560539589268, guid: fc06cf6a2e4cd0f49b68fc88244bf259, type: 3}
     - target: {fileID: 9191788110714605072, guid: f964be2e41721dd4aadbb49ead090adb, type: 3}
       propertyPath: m_Name
       value: ZonesBackground
@@ -952,10 +936,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1955255577924352176, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1955255577924352176, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -999,14 +979,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameHandler
       objectReference: {fileID: 0}
-    - target: {fileID: 3044469270444490869, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
-      propertyPath: outpostCardPrefab
-      value: 
-      objectReference: {fileID: 6230602597230545512, guid: 29bda8bffb2496b42a735fc00dd92a18, type: 3}
-    - target: {fileID: 3044469270444490869, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
-      propertyPath: surfaceCardPrefab
-      value: 
-      objectReference: {fileID: 4923621512246153301, guid: 01fa87468e62d2e4c9348cffa9e2d7a3, type: 3}
     - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: uiHandler
       value: 
@@ -1047,18 +1019,6 @@ PrefabInstance:
       propertyPath: technologyZone
       value: 
       objectReference: {fileID: 2092080157}
-    - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
-      propertyPath: personalityZone
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
-      propertyPath: startingHandSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
-      propertyPath: outpostCardObject
-      value: 
-      objectReference: {fileID: 6230602597230545512, guid: 29bda8bffb2496b42a735fc00dd92a18, type: 3}
     - target: {fileID: 3500509010547193062, guid: f2059d7fabc6a2c4dabf1b0de3b8e7e8, type: 3}
       propertyPath: surfaceDiscardPile
       value: 

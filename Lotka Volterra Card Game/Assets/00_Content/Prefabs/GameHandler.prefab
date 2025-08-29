@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2450818112903900471}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3500509010547193062
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c1408c4ef9617429ae3b55f9f1da70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHandSize: 2
+  startingHandSize: 4
   outpostDeck_1: {fileID: 0}
   outpostDiscardPile_1: {fileID: 0}
   playerHand_1: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
   underDevelopmentZone: {fileID: 0}
   technologyZone: {fileID: 0}
   equipmentZone: {fileID: 0}
-  outpostCardObject: {fileID: 1030217317533501852, guid: 2cb747c004ed5554f81bdc03fc91a13e, type: 3}
+  outpostCardObject: {fileID: 6230602597230545512, guid: 29bda8bffb2496b42a735fc00dd92a18, type: 3}
   outpostData: {fileID: 11400000, guid: 0b86e1dc7485e034786671064f0f2377, type: 2}
   surfaceDeck: {fileID: 0}
   surfaceDiscardPile: {fileID: 0}
@@ -87,5 +87,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08674cb12254f64ea17ab7d27b56e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceCardPrefab: {fileID: 7193503214741249874, guid: 29881850f074f014d96b935cec3e11e6, type: 3}
-  outpostCardPrefab: {fileID: 1030217317533501852, guid: 2cb747c004ed5554f81bdc03fc91a13e, type: 3}
+  surfaceCardPrefab: {fileID: 4923621512246153301, guid: 01fa87468e62d2e4c9348cffa9e2d7a3, type: 3}
+  outpostCardPrefab: {fileID: 6230602597230545512, guid: 29bda8bffb2496b42a735fc00dd92a18, type: 3}
