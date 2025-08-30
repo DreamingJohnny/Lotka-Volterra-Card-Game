@@ -62,13 +62,17 @@ public abstract class CardObject : MonoBehaviour {
 	[SerializeField] private float equippedCardOffset = -1.4f;
 	private const int equippedCardSortingOrderOffset = -1;
 
-	public bool TryAttachCard(CardObject card) {
-		if(attachedCard != null) {
-			Debug.LogWarning($"{name} already has a card equipped, cannot equip another.");
+	public virtual bool TryAttachCard(CardObject card) {
+		//So, I'm thinking that I'll want to overload this in the children now, and have them check type etc.
+		//Then, if it passes the checks, it can call base.TryAttachCard(card)
+		//We'll also want to update the values on the card it is attaching to here
+		//So, when a card is attached, it updates the values on the card it is attaching to. So, all cards knows the card above and below them?
+		if (attachedCard != null) {
+			Debug.LogWarning($"{name} already has a card attached, cannot attach another.");
 			return false;
 		}
 		else if(card == null) {
-			Debug.LogWarning($"Was asked to equip a card that was null, and so cannot do it.");
+			Debug.LogWarning($"Was asked to attach a card that was null, and so cannot do it.");
 			return false;
 		}
 		else {
@@ -80,16 +84,16 @@ public abstract class CardObject : MonoBehaviour {
 		}
 	}
 
-	public bool TryDetachCard(out CardObject unAttachedCard) {
+	public bool TryDetachCard(out CardObject detachedCard) {
 		if(attachedCard == null) {
-			Debug.LogWarning($"{name} was asked to detach an equipped card, but it doesn't have one.");
-			unAttachedCard = null;
+			Debug.LogWarning($"{name} was asked to detach an attached card, but it doesn't have one.");
+			detachedCard = null;
 			return false;
 		}
 		else {
 			attachedCard.transform.SetParent(null);
 			attachedCard.GetComponent<SortingGroup>().sortingOrder = 0;
-			unAttachedCard = attachedCard;
+			detachedCard = attachedCard;
 			attachedCard = null;
 			return true;
 		}

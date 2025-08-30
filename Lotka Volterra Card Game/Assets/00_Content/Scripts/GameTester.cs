@@ -9,9 +9,9 @@ public class GameTester : MonoBehaviour {
 
 	[SerializeField] private List<SO_CardData> cardDatas;
 
-	[SerializeField] private CardObject cardObject;
-	[SerializeField] private CardObject cardToEquip;
-	[SerializeField] private CardObject cardToEquipCardWithEquipment;
+	private CardObject cardUnit;
+	private CardObject cardToEquip;
+	private CardObject cardToAlsoEquip;
 
 	private int index = 0;
 
@@ -26,7 +26,7 @@ public class GameTester : MonoBehaviour {
 		//Then, get it to work with unequipping cards.
 		//Then, get it to work with cards being moved while equipped, and see if that causes any issues.
 		//Then, make sure they update the values correctly when equipped. This needs to handle both traits, values and multiplied values.
-		//Then make sure that can work with multiple cards being equipped to one card.
+		//Then make sure that the values work correctly with multiple cards being equipped to one card.
 		//Then, make sure that they update the values correctly when unequipped.
 		//Then, get it to work with cards being destroyed while equipped, and see if that causes any issues.
 		//Then, overload in children to make sure that only suitable cards can be equipped, based on their own cardtype, or type of card attached.
@@ -35,28 +35,34 @@ public class GameTester : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			if(index == 0) {
-				cardObject = cardPool.GetCardObject(cardDatas[index]);
-				cardObject.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.identity);
-				Debug.Log(cardObject.CardScript.GetCardName);
+				cardUnit = cardPool.GetCardObject(cardDatas[index]);
+				cardUnit.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.identity);
+				Debug.Log(cardUnit.CardScript.GetCardName);
 				index++;
-			} else if(index == 1) {
 				cardToEquip = cardPool.GetCardObject(cardDatas[index]);
 				cardToEquip.transform.SetPositionAndRotation(new Vector3(8, 0, 0), Quaternion.identity);
 				Debug.Log(cardToEquip.CardScript.GetCardName);
 				index++;
-			} else if(index == 2) {
-				cardToEquipCardWithEquipment = cardPool.GetCardObject(cardDatas[index]);
-				cardToEquipCardWithEquipment.transform.SetPositionAndRotation(new Vector3(16, 0, 0), Quaternion.identity);
-				Debug.Log(cardToEquipCardWithEquipment.CardScript.GetCardName);
+				cardToAlsoEquip = cardPool.GetCardObject(cardDatas[index]);
+				cardToAlsoEquip.transform.SetPositionAndRotation(new Vector3(16, 0, 0), Quaternion.identity);
+				Debug.Log(cardToAlsoEquip.CardScript.GetCardName);
 				index++;
-			} else if(index == 3){
-				cardObject.TryAttachCard(cardToEquip);
+			} else if(index == 3) {
+				cardUnit.TryAttachCard(cardToEquip);
+				cardToEquip.TryAttachCard(cardToAlsoEquip);
 				index++;
-			} else if (index == 4) {
-				cardToEquipCardWithEquipment.TryAttachCard(cardObject);
+			} else if(index == 4) {
+				cardUnit.transform.SetPositionAndRotation(new Vector3(0, 5, 0), Quaternion.identity);
+				Debug.Log("Cards were moved.");
 				index++;
-			} else if (index == 5) {
-				cardToEquipCardWithEquipment.TryDetachCard(out CardObject unAttachedCard);
+			} else if(index == 5){
+
+				//Here we will want to test if the values are updating correctly.
+				index++;
+			} else if (index == 6) {
+				index++;
+			} else if (index == 7) {
+				cardToAlsoEquip.TryDetachCard(out CardObject unAttachedCard);
 				unAttachedCard.transform.SetPositionAndRotation(new Vector3(0, -5, 0), Quaternion.identity);
 				index++;
 			}
