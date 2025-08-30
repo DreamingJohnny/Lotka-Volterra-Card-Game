@@ -394,6 +394,18 @@ PrefabInstance:
       propertyPath: cardToEquip
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3298903026374687758, guid: c341d4c22c2b22f4fa84c1660b83c579, type: 3}
+      propertyPath: cardDatas.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298903026374687758, guid: c341d4c22c2b22f4fa84c1660b83c579, type: 3}
+      propertyPath: 'cardDatas.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2970cffb9fbe6594892ba433b6235b38, type: 2}
+    - target: {fileID: 3298903026374687758, guid: c341d4c22c2b22f4fa84c1660b83c579, type: 3}
+      propertyPath: 'cardDatas.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f475b13b0135af4a949c1a0e94cabf4, type: 2}
     - target: {fileID: 5328213150680925665, guid: c341d4c22c2b22f4fa84c1660b83c579, type: 3}
       propertyPath: m_Name
       value: GameTester

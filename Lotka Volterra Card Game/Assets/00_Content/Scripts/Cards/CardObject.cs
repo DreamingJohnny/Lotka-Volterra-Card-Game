@@ -50,57 +50,9 @@ public abstract class CardObject : MonoBehaviour {
 		}
 	}
 
-	/*
-	 * So, this will want the offset value, 
-	 * and it will need reference to the card that it might contain as well, so that it can check for that.
-	 * And it will need a reference to get or send the sorting layer.
-	 * So, equip card, check cardtype of card that it receives.
-	 * Set offset, set parent, set sortinglayer,
-	 */
-
-	private CardObject attachedCard;
-	[SerializeField] private float equippedCardOffset = -1.4f;
-	private const int equippedCardSortingOrderOffset = -1;
-
-	public virtual bool TryAttachCard(CardObject card) {
-		//So, I'm thinking that I'll want to overload this in the children now, and have them check type etc.
-		//Then, if it passes the checks, it can call base.TryAttachCard(card)
-		//We'll also want to update the values on the card it is attaching to here
-		//So, when a card is attached, it updates the values on the card it is attaching to. So, all cards knows the card above and below them?
-		if (attachedCard != null) {
-			Debug.LogWarning($"{name} already has a card attached, cannot attach another.");
-			return false;
-		}
-		else if(card == null) {
-			Debug.LogWarning($"Was asked to attach a card that was null, and so cannot do it.");
-			return false;
-		}
-		else {
-			attachedCard = card;
-			card.transform.SetParent(transform);
-			card.transform.SetLocalPositionAndRotation(new Vector3(0,equippedCardOffset,0), Quaternion.identity);
-			card.GetComponent<SortingGroup>().sortingOrder = GetComponent<SortingGroup>().sortingOrder + equippedCardSortingOrderOffset;
-			return true;
-		}
-	}
-
-	public bool TryDetachCard(out CardObject detachedCard) {
-		if(attachedCard == null) {
-			Debug.LogWarning($"{name} was asked to detach an attached card, but it doesn't have one.");
-			detachedCard = null;
-			return false;
-		}
-		else {
-			attachedCard.transform.SetParent(null);
-			attachedCard.GetComponent<SortingGroup>().sortingOrder = 0;
-			detachedCard = attachedCard;
-			attachedCard = null;
-			return true;
-		}
-	}
-
 	private void OnEnable() {
 		Debug.Assert(nullImage != null);
+		//CardScript.CardSlotter = GetComponent<CardSlotter>();
 	}
 
 	public bool HasCardScript() {

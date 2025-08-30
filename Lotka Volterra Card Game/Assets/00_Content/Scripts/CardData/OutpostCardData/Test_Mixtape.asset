@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Test_Mixtape
   m_EditorClassIdentifier: Assembly-CSharp::SO_OutpostCardData
   cardID: 
-  cardName: 
-  illustration: {fileID: 0}
-  cardType: 0
-  traits: 
-  cardEffectDescription: 
-  rarity: 0
+  cardName: Test Mixtape
+  illustration: {fileID: -4167080813067352605, guid: 6ac65d60278e12646990335e97756ff2, type: 3}
+  cardType: 3
+  traits: 10000000
+  cardEffectDescription: When this Unit becomes Exhausted you may reattach PSR Mixtape
+    to another Unit.
+  rarity: 3
   ideology: 0
   daycycle: 0
   developmentCost: 0
-  resourceCost: 0
+  resourceCost: 2
   hourCost: 0
   upkeepCost: 0
-  scavengeValue: 0
-  interveneValue: 0
-  developmentValue: 0
+  scavengeValue: 1
+  interveneValue: 1
+  developmentValue: 1

@@ -24,32 +24,8 @@ public sealed class OutpostCardObject : CardObject {
 
 	public void SetCardScript(OutpostCardScript newOutpostCardScript) {
 		outpostCardScript = newOutpostCardScript;
+		outpostCardScript.CardSlotter = GetComponent<CardSlotter>();
 		UpdateAllFields();
-	}
-
-	public override bool TryAttachCard(CardObject card) {
-		// Need to check type of the card
-		// Need to get the cardtype of this card
-		if(outpostCardScript.GetCardType != CardType.Unit) {
-			//This need to be added with Equipment, or have it sent or something.
-			Debug.Log($"{name} is not a Unit card, and cannot have cards attached to it.");
-			return false;
-		} else if(card.CardScript.GetCardType != CardType.Equipment) {
-			Debug.Log($"{name} can only have Equipment cards attached to it, and {card.name} is a {card.CardScript.GetCardType} card.");
-			return false;
-		} else {
-			//If it passes the checks, we can call the base function to do the actual attaching.
-			return base.TryAttachCard(card);
-			//However, we also need to update the values on this card now.
-			//Actually, lets do that without the chain first. Because we might be able to just have an array of all children of the same card here.
-			//So, in that case we need to let the script know about this new script then, so that it can ask them for all of their values? So yeah, do we just set that value here, and then the CardScript needs to ask for it?
-
-			//So, we need to update the values of the top card in this chain. This card should always be the top card.
-			//How do I do that?
-			//So, when the top card asks for values, it asks the card below, that asks the card below that, and so forth, until it reaches the bottom card, which returns its own values.
-			//However, this means that the bottom card needs to know if it has a card attached to it or not.
-			//Which might not be a big thing, each card will then need to know both cards?
-		}
 	}
 
 	/// <summary>
@@ -79,6 +55,7 @@ public sealed class OutpostCardObject : CardObject {
 
 		interveneValue.text = outpostCardScript.GetInterveneValue(out temp) ? temp.ToString() : nA;
 
+		Debug.Log($"OutpostCardObject: Updating development value for card {name}");
 		developmentValue.text = outpostCardScript.GetDevelopmentValue(out temp) ? temp.ToString() : nA;
 	}
 }

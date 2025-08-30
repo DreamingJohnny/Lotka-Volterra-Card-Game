@@ -15,7 +15,23 @@ public sealed class OutpostCardScript : CardScript {
 
 	#region"DevelopmentCost"
 	private int developmentCostAddition = 0;
-	public int DevelopmentCostAddition { get { return developmentCostAddition; } set { developmentCostAddition = value; } }
+	public int DevelopmentCostAddition {
+		get {
+			if (CardSlotter.SlottedCards.Count > 0) {
+				int totalAddition = developmentCostAddition;
+				foreach (CardObject card in CardSlotter.SlottedCards) {
+					if (card.CardScript is OutpostCardScript outpostCardScript) {
+						if (outpostCardScript.GetDevelopmentCost(out int devCost)) {
+							totalAddition += devCost;
+						}
+					}
+				}
+				return totalAddition;
+			}
+			return developmentCostAddition;
+		}
+		set { developmentCostAddition = value; }
+	}
 
 	private float developmentCostMultiplier = 1;
 	public float DevelopmentCostMultiplier {
@@ -108,7 +124,7 @@ public sealed class OutpostCardScript : CardScript {
 		}
 	}
 	#endregion
-	
+
 	#region"ScavengeValue"
 	private int scavengeValueAddition = 0;
 	public int ScavengeValueAddition { get { return scavengeValueAddition; } set { scavengeValueAddition = value; } }
@@ -157,7 +173,25 @@ public sealed class OutpostCardScript : CardScript {
 
 	#region"Development
 	private int developmentValueAddition = 0;
-	public int DevelopementValueAddition { get { return developmentValueAddition; } set { developmentValueAddition = value; } }
+	public int DevelopementValueAddition {
+		get {
+			if (CardSlotter.SlottedCards.Count > 0) {
+				int totalAddition = developmentValueAddition;
+				foreach (CardObject card in CardSlotter.SlottedCards) {
+					if (card.CardScript is OutpostCardScript outpostCardScript) {
+						if (outpostCardScript.GetDevelopmentValue(out int devValue)) {
+							Debug.Log($"Adding {devValue} to development value from {card.name}");
+							totalAddition += devValue;
+						}
+					}
+				}
+				return totalAddition;
+			}
+			return developmentCostAddition;
+		}
+		set { developmentValueAddition = value; }
+	}
+
 	private float developmentValueMultiplier = 1;
 	public float DevelopmentValueMultiplier {
 		get { return developmentValueMultiplier; }
@@ -166,13 +200,17 @@ public sealed class OutpostCardScript : CardScript {
 			if (developmentValueMultiplier < 0) developmentValueMultiplier = 0;
 		}
 	}
+
 	public bool GetDevelopmentValue(out int developmentValue) {
+
 		if (m_SO_OutpostCardData == null || m_SO_OutpostCardData.DevelopmentValue < 0) {
 			developmentValue = -1;
 			return false;
 		}
 		else {
-			developmentValue = GetModifiedValue(m_SO_OutpostCardData.DevelopmentValue, developmentValueAddition, developmentValueMultiplier);
+			//TODO: if this works, I need to look through add check so that it asks for the correct, capital lettered, values in all of these.
+			developmentValue = GetModifiedValue(m_SO_OutpostCardData.DevelopmentValue, DevelopementValueAddition, DevelopmentValueMultiplier);
+			Debug.Log($"Development value for {GetCardName} calculated to be {developmentValue}");
 			return true;
 		}
 	}

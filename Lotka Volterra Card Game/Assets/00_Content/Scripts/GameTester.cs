@@ -48,8 +48,8 @@ public class GameTester : MonoBehaviour {
 				Debug.Log(cardToAlsoEquip.CardScript.GetCardName);
 				index++;
 			} else if(index == 3) {
-				cardUnit.TryAttachCard(cardToEquip);
-				cardToEquip.TryAttachCard(cardToAlsoEquip);
+				cardUnit.GetComponent<CardSlotter>().TryAttachCard(cardToEquip);
+				cardUnit.GetComponent<CardSlotter>().TryAttachCard(cardToAlsoEquip);
 				index++;
 			} else if(index == 4) {
 				cardUnit.transform.SetPositionAndRotation(new Vector3(0, 5, 0), Quaternion.identity);
@@ -62,8 +62,8 @@ public class GameTester : MonoBehaviour {
 			} else if (index == 6) {
 				index++;
 			} else if (index == 7) {
-				cardToAlsoEquip.TryDetachCard(out CardObject unAttachedCard);
-				unAttachedCard.transform.SetPositionAndRotation(new Vector3(0, -5, 0), Quaternion.identity);
+				cardUnit.GetComponent<CardSlotter>().TryDetachCard(cardToAlsoEquip);
+				cardToAlsoEquip.transform.SetPositionAndRotation(new Vector3(0, -8, 0), Quaternion.identity);
 				index++;
 			}
 			

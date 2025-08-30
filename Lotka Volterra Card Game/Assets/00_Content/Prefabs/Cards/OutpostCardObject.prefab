@@ -1428,6 +1428,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8003156741525835240, guid: 512c8fe1929d14544a1c483a45b21461, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6230602597230545512}
+    - targetCorrespondingSourceObject: {fileID: 8003156741525835240, guid: 512c8fe1929d14544a1c483a45b21461, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7702239004822581076}
   m_SourcePrefab: {fileID: 100100000, guid: 512c8fe1929d14544a1c483a45b21461, type: 3}
 --- !u!1 &2379764668484613396 stripped
 GameObject:
@@ -1452,7 +1455,6 @@ MonoBehaviour:
   traits: {fileID: 2468944205490779851}
   cardEffect: {fileID: 4224771767247166383}
   nullImage: {fileID: 21300000, guid: c502435e0beb5a046b731efa4252e5c2, type: 3}
-  equippedCardOffset: -1.4
   developmentCost: {fileID: 3406109374444616124}
   resourceCost: {fileID: 1877069759507650817}
   hoursCost: {fileID: 5311168762538204117}
@@ -1460,6 +1462,20 @@ MonoBehaviour:
   scavengeValue: {fileID: 3559799858884608236}
   interveneValue: {fileID: 2033229923691651982}
   developmentValue: {fileID: 6528397239749361269}
+--- !u!114 &-7702239004822581076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379764668484613396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: facee66b6371ae24f8e8d62801c9e0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSlotter
+  sortingLayerOffset: -1
+  positionOffset: {x: 0, y: -1.4, z: 0}
 --- !u!114 &2468944205490779851 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7806145874407329335, guid: 512c8fe1929d14544a1c483a45b21461, type: 3}
