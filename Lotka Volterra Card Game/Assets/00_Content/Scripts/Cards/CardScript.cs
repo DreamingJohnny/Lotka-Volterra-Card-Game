@@ -65,6 +65,7 @@ public abstract class CardScript {
 	/// <param name="multiplier"></param>
 	/// <returns></returns>
 	protected int GetModifiedValue(int sO_value, int addition, float multiplier) {
+		//TODO: So, the multiplier should be based on the base value, not on base value + addition, right?
 		float temp = (sO_value + addition) * multiplier;
 		//Ensures the value isn't below 0
 		temp = (temp < 0) ? 0 : temp;

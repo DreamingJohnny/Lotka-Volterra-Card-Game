@@ -21,17 +21,9 @@ public class GameTester : MonoBehaviour {
 
 	void Update() {
 
-		//Next step now is to, get this to work with cards from a card pool.
-		//Then, get it to work with three cards, one card equipping another card, and then being equipped by a third card, and moving correctly.
-		//Then, get it to work with unequipping cards.
-		//Then, get it to work with cards being moved while equipped, and see if that causes any issues.
-		//Then, make sure they update the values correctly when equipped. This needs to handle both traits, values and multiplied values.
-		//Then make sure that the values work correctly with multiple cards being equipped to one card.
-		//Then, make sure that they update the values correctly when unequipped.
 		//Then, get it to work with cards being destroyed while equipped, and see if that causes any issues.
-		//Then, overload in children to make sure that only suitable cards can be equipped, based on their own cardtype, or type of card attached.
+		//Add so that CardSlotter checks type of own card, and of card being asked to slot, and rejects.
 		//Then, ensure the same behavior can then be used with Enemy cards as well, in attacks.
-
 
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			if(index == 0) {
@@ -56,15 +48,12 @@ public class GameTester : MonoBehaviour {
 				Debug.Log("Cards were moved.");
 				index++;
 			} else if(index == 5){
-
-				//Here we will want to test if the values are updating correctly.
+				cardUnit.GetComponent<CardSlotter>().TryDetachCard(cardToAlsoEquip);
+				cardToAlsoEquip.transform.SetPositionAndRotation(new Vector3(0, -8, 0), Quaternion.identity);
 				index++;
 			} else if (index == 6) {
 				index++;
 			} else if (index == 7) {
-				cardUnit.GetComponent<CardSlotter>().TryDetachCard(cardToAlsoEquip);
-				cardToAlsoEquip.transform.SetPositionAndRotation(new Vector3(0, -8, 0), Quaternion.identity);
-				index++;
 			}
 			
 		}

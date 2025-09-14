@@ -47,7 +47,7 @@ public sealed class OutpostCardScript : CardScript {
 			return false;
 		}
 		else {
-			developmentCost = GetModifiedValue(m_SO_OutpostCardData.DevelopmentCost, developmentCostAddition, developmentCostMultiplier);
+			developmentCost = GetModifiedValue(m_SO_OutpostCardData.DevelopmentCost, DevelopmentCostAddition, developmentCostMultiplier);
 			return true;
 		}
 	}
@@ -55,7 +55,21 @@ public sealed class OutpostCardScript : CardScript {
 
 	#region"ResourceCost"
 	private int resourceCostAddition = 0;
-	public int ResourceCostAddition { get { return resourceCostAddition; } set { resourceCostAddition = value; } }
+	public int ResourceCostAddition { get {
+			if (CardSlotter.SlottedCards.Count > 0) {
+				int totalAddition = resourceCostAddition;
+				foreach (CardObject card in CardSlotter.SlottedCards) {
+					if (card.CardScript is OutpostCardScript outpostCardScript) {
+						if (outpostCardScript.GetResourceCost(out int resourceCostValue)) {
+							Debug.Log($"Adding {resourceCostValue} to resource cost from {card.name}");
+							totalAddition += resourceCostValue;
+						}
+					}
+				}
+				return totalAddition;
+			}
+			return resourceCostAddition;
+		} set { resourceCostAddition = value; } }
 
 	private float resourceCostMultiplier = 1;
 	public float ResourceCostMultiplier {
@@ -71,7 +85,7 @@ public sealed class OutpostCardScript : CardScript {
 			return false;
 		}
 		else {
-			resourceCost = GetModifiedValue(m_SO_OutpostCardData.ResourceCost, resourceCostAddition, resourceCostMultiplier);
+			resourceCost = GetModifiedValue(m_SO_OutpostCardData.ResourceCost, ResourceCostAddition, resourceCostMultiplier);
 			return true;
 		}
 	}
@@ -79,7 +93,21 @@ public sealed class OutpostCardScript : CardScript {
 
 	#region"HourCost"
 	private int hourCostAddition = 0;
-	public int HourCostAddition { get { return hourCostAddition; } set { hourCostAddition = value; } }
+	public int HourCostAddition { get {
+			if (CardSlotter.SlottedCards.Count > 0) {
+				int totalAddition = hourCostAddition;
+				foreach (CardObject card in CardSlotter.SlottedCards) {
+					if (card.CardScript is OutpostCardScript outpostCardScript) {
+						if (outpostCardScript.GetHourCost(out int hourCostAdditionValue)) {
+							Debug.Log($"Adding {hourCostAdditionValue} to hour cost addition value from {card.name}");
+							totalAddition += hourCostAdditionValue;
+						}
+					}
+				}
+				return totalAddition;
+			}
+			return hourCostAddition;
+		} set { hourCostAddition = value; } }
 
 	private float hourCostMultiplier = 1;
 	public float HourCostMultiplier {
@@ -95,7 +123,7 @@ public sealed class OutpostCardScript : CardScript {
 			return false;
 		}
 		else {
-			hourCost = GetModifiedValue(m_SO_OutpostCardData.HourCost, hourCostAddition, hourCostMultiplier);
+			hourCost = GetModifiedValue(m_SO_OutpostCardData.HourCost, HourCostAddition, hourCostMultiplier);
 			return true;
 		}
 	}
@@ -103,7 +131,24 @@ public sealed class OutpostCardScript : CardScript {
 
 	#region"UpkeepCost"
 	private int upkeepCostAddition = 0;
-	public int UpkeepCostAddition { get { return upkeepCostAddition; } set { upkeepCostAddition = value; } }
+	public int UpkeepCostAddition {
+		get {
+			if (CardSlotter.SlottedCards.Count > 0) {
+				int totalAddition = upkeepCostAddition;
+				foreach (CardObject card in CardSlotter.SlottedCards) {
+					if (card.CardScript is OutpostCardScript outpostCardScript) {
+						if (outpostCardScript.GetUpkeepCost(out int upkeepCost)) {
+							Debug.Log($"Adding {upkeepCost} to upkeep cost addition from {card.name}");
+							totalAddition += upkeepCost;
+						}
+					}
+				}
+				return totalAddition;
+			}
+			return upkeepCostAddition;
+		}
+		set { upkeepCostAddition = value; }
+	}
 
 	private float upkeepCostMultiplier = 1;
 	public float UpkeepCostMultiplier {
@@ -119,7 +164,7 @@ public sealed class OutpostCardScript : CardScript {
 			return false;
 		}
 		else {
-			upkeepCost = GetModifiedValue(m_SO_OutpostCardData.UpkeepCost, upkeepCostAddition, upkeepCostMultiplier);
+			upkeepCost = GetModifiedValue(m_SO_OutpostCardData.UpkeepCost, UpkeepCostAddition, upkeepCostMultiplier);
 			return true;
 		}
 	}
@@ -127,7 +172,24 @@ public sealed class OutpostCardScript : CardScript {
 
 	#region"ScavengeValue"
 	private int scavengeValueAddition = 0;
-	public int ScavengeValueAddition { get { return scavengeValueAddition; } set { scavengeValueAddition = value; } }
+	public int ScavengeValueAddition {
+		get {
+			if (CardSlotter.SlottedCards.Count > 0) {
+				int totalAddition = scavengeValueAddition;
+				foreach (CardObject card in CardSlotter.SlottedCards) {
+					if (card.CardScript is OutpostCardScript outpostCardScript) {
+						if (outpostCardScript.GetScavengeValue(out int scavValue)) {
+							Debug.Log($"Adding {scavValue} to development value from {card.name}");
+							totalAddition += scavValue;
+						}
+					}
+				}
+				return totalAddition;
+			}
+			return scavengeValueAddition;
+		}
+		set { scavengeValueAddition = value; }
+	}
 	private float scavengeValueMultiplier = 1;
 	public float ScavengeValueMultiplier {
 		get { return scavengeValueMultiplier; }
@@ -142,7 +204,7 @@ public sealed class OutpostCardScript : CardScript {
 			return false;
 		}
 		else {
-			scavengeValue = GetModifiedValue(m_SO_OutpostCardData.ScavengeValue, scavengeValueAddition, scavengeValueMultiplier);
+			scavengeValue = GetModifiedValue(m_SO_OutpostCardData.ScavengeValue, ScavengeValueAddition, scavengeValueMultiplier);
 			return true;
 		}
 	}
@@ -150,7 +212,24 @@ public sealed class OutpostCardScript : CardScript {
 
 	#region"InterveneValue"
 	private int interveneValueAddition = 0;
-	public int InterveneValueAddition { get { return interveneValueAddition; } set { interveneValueAddition = value; } }
+	public int InterveneValueAddition {
+		get {
+			if (CardSlotter.SlottedCards.Count > 0) {
+				int totalAddition = interveneValueAddition;
+				foreach (CardObject card in CardSlotter.SlottedCards) {
+					if (card.CardScript is OutpostCardScript outpostCardScript) {
+						if (outpostCardScript.GetInterveneValue(out int intervValue)) {
+							Debug.Log($"Adding {intervValue} to intervene value from {card.name}");
+							totalAddition += intervValue;
+						}
+					}
+				}
+				return totalAddition;
+			}
+			return interveneValueAddition;
+		}
+		set { interveneValueAddition = value; }
+	}
 	private float interveneValueMultiplier = 1;
 	public float InterveneValueMultiplier {
 		get { return interveneValueMultiplier; }
@@ -165,7 +244,7 @@ public sealed class OutpostCardScript : CardScript {
 			return false;
 		}
 		else {
-			scavengeValue = GetModifiedValue(m_SO_OutpostCardData.InterveneValue, interveneValueAddition, interveneValueMultiplier);
+			scavengeValue = GetModifiedValue(m_SO_OutpostCardData.InterveneValue, InterveneValueAddition, interveneValueMultiplier);
 			return true;
 		}
 	}

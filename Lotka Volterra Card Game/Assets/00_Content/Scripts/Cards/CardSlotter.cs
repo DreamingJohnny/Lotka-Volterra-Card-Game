@@ -9,37 +9,42 @@ using UnityEngine.Rendering;
 public class CardSlotter : MonoBehaviour {
 
 	//TODO: Both when cards are attached and detached, the CardScript on the parent card will need to be notified so that it can update its values.
-	//TODO: Need to add a check for card type, so that only certain types of cards can be slotted into this slotter.
 	//TODO: Card positioning and sorting will need to be updated when a card is removed.
 
-	[SerializeField] private int sortingLayerOffset = -1;
-	[SerializeField] private Vector3 positionOffset = new(0, -1.4f, 0);
+	private readonly int sortingLayerOffset = -1;
+	private Vector3 positionOffset = new(0, -1.4f, 0);
 
 	private List<CardObject> slottedCards = new();
 	public List<CardObject> SlottedCards => slottedCards;
 
 	public bool TryAttachCard(CardObject cardToSlot) {
-		
+
 		Debug.Log($"{name} was asked to attach {cardToSlot.name}.");
 
 		if (cardToSlot == null) {
 			Debug.LogWarning($"Was asked to attach a card that was null, and so cannot do it.");
 			return false;
 		}
-		// Need to add check for card type here.
-		else if (!slottedCards.Contains(cardToSlot)) {
+		else if (slottedCards.Contains(cardToSlot)) {
+			Debug.LogWarning($"{name} was asked to attach {cardToSlot.name}, but it is already attached.");
+			return false;
+		}
+		else if (GetComponent<CardObject>().CardScript.GetCardType == CardType.Unit && cardToSlot.CardScript.GetCardType == CardType.Equipment) {
 			slottedCards.Add(cardToSlot);
+
 			// Set parent, position and sorting order.
 			cardToSlot.transform.SetParent(transform);
 			cardToSlot.transform.SetLocalPositionAndRotation(positionOffset * slottedCards.Count, Quaternion.identity);
 			cardToSlot.GetComponent<SortingGroup>().sortingOrder = GetComponent<SortingGroup>().sortingOrder + slottedCards.Count * sortingLayerOffset;
+			
 			// Alert the CardScript on the parent card that a new card has been attached, so that it can update its values.
 			GetComponent<CardObject>().UpdateAllFields();
+			
 			Debug.Log($"{name} successfully attached {cardToSlot.name}, and should've updated all of the values by now.");
+			
 			return true;
 		}
 		else {
-			Debug.LogWarning($"{name} was asked to attach {cardToSlot.name}, but it is already attached.");
 			return false;
 		}
 	}
