@@ -115,6 +115,7 @@ public class GameHandler : MonoBehaviour {
 			case TurnSegment.Night:
 				break;
 			case TurnSegment.Resolution:
+				DoInterventionStep();
 				DoDevelopmentPhase();
 				break;
 			case TurnSegment.Upkeep:
@@ -123,6 +124,10 @@ public class GameHandler : MonoBehaviour {
 			default:
 				break;
 		}
+	}
+
+	private void DoInterventionStep() {
+		throw new NotImplementedException();
 	}
 
 	private void DoDrawSurfaceCards() {

@@ -158,6 +158,7 @@ public sealed class OutpostCardScript : CardScript {
 	#region"Development
 	private int developmentValueAddition = 0;
 	public int DevelopementValueAddition { get { return developmentValueAddition; } set { developmentValueAddition = value; } }
+
 	private float developmentValueMultiplier = 1;
 	public float DevelopmentValueMultiplier {
 		get { return developmentValueMultiplier; }

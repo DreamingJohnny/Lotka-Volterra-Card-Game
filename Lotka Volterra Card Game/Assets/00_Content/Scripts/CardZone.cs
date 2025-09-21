@@ -114,12 +114,14 @@ public class CardZone : MonoBehaviour {
 		return cards.Where(predicate).ToList();
 	}
 
-	public T GetTotalValue<T>(Func<CardScript, T> selector) where T : struct, IComparable<T> {
-		dynamic total = default(T);
+	public int GetTotalValue(Func<CardScript, int> selector) {
+		int total = 0;
 
 		foreach(CardObject cardObject in cards) {
-			CardScript cardScript = cardObject.GetComponent<CardScript>();
-			total += (dynamic)selector(cardScript);
+			
+			if (cardObject.HasCardScript()) {
+				total += selector(cardObject.CardScript);
+			}
 		}
 		return total;
 	}
